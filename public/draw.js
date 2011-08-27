@@ -1,11 +1,11 @@
-function Draw(element, socket) {
+function Draw(element) {
 	if (! (this instanceof arguments.callee)) {
 		return new arguments.callee(arguments);
 	}
 	var self = this;
 
 	self.element = element;
-	self.socket = socket;
+	self.socket = false;
 	self.isDown = false;
 	self.line = [];
 
@@ -18,6 +18,12 @@ Draw.prototype.init = function() {
 	self.ctx = self.element.getContext("2d");
 	self.ctx.canvas.width  = window.innerWidth;
 	self.ctx.canvas.height = window.innerHeight;
+}
+
+Draw.prototype.setSocket = function(socket) {
+	var self = this;
+
+	self.socket = socket;
 
 	self.socket.on('add', function (data) {
 		data.lines.forEach(function(line) {
@@ -65,7 +71,7 @@ Draw.prototype.mouseMove = function(event) {
 Draw.prototype.mouseUp = function(event) {
 	var self = this;
 
-	if (self.line.length) {
+	if (self.line.length && self.socket) {
 		self.socket.emit('add', {lines:[{points: self.line}]});
 	}
 
@@ -74,19 +80,23 @@ Draw.prototype.mouseUp = function(event) {
 }
 
 $(function(){
-	var socket = io.connect('http://localhost:8000');
-	var draw = new Draw(document.getElementById("canvas"), socket);
+		var draw = new Draw(document.getElementById("canvas"));
 
-	$('#canvas').mousedown(function(event){
-		draw.mouseDown(event);
-	});
-	$('#canvas').mousemove(function(event){
-		draw.mouseMove(event);
-	});
-	$('#canvas').mouseup(function(event){
-		draw.mouseUp(event);
-	});
-	$('#canvas').mouseout(function(event){
-		draw.mouseUp(event);
-	});
+		$('#canvas').mousedown(function(event){
+			draw.mouseDown(event);
+		});
+		$('#canvas').mousemove(function(event){
+			draw.mouseMove(event);
+		});
+		$('#canvas').mouseup(function(event){
+			draw.mouseUp(event);
+		});
+		$('#canvas').mouseout(function(event){
+			draw.mouseUp(event);
+		});
+
+		$.getJSON("./config.json", function (config) {
+			var socket = io.connect("http://" + window.location.hostname + ':' + config.port);
+			draw.setSocket(socket);
+		});
 });

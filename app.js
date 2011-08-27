@@ -33,7 +33,6 @@ io.sockets.on('connection', function (socket) {
 						console.warn(err.message);
 					}
 					if (err && err.message.indexOf('E11000 ') !== -1) {
-						// this _id was already inserted in the database
 					}
 				}
 			);
