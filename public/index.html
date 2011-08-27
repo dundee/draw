@@ -1,9 +1,27 @@
 <html>
 <head>
+	<title>Draw!</title>
+	<link rel="stylesheet" href="./style.css" type="text/css" media="all"/>
+	<link rel="stylesheet" href="./jquery-ui.css" type="text/css" media="all"/>
 </head>
 <body>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script type="text/javascript" src="./jquery-ui.js"></script>
 	<script type="text/javascript" src="http://localhost:8000/socket.io/socket.io.js"></script>
 	<script type="application/javascript" src="./draw.js"></script>
 	<canvas id="canvas"></canvas>
+	<div id="help">?
+	<span title="Help">
+		<strong>Draw!</strong> is HTML5 application which gives you the ability to share your drawing skills with the world.
+		Whatever your draw on the screen is in realtime displayed in browsers of all other connected users.
+	</span></div>
+	<div id="footer">
+		Powered by
+		<a href="http://nodejs.org/">Node.js</a>,
+		<a href="http://socket.io/">Socket.IO</a>,
+		<a href="http://jquery.com/">jQuery</a>,
+		<a href="http://mongodb.org/">MongoDB</a> and
+		<a href="http://en.wikipedia.org/wiki/Canvas_element">Canvas</a> <br />
+		&copy; Daniel Milde 2011
+	</div>
 </html>

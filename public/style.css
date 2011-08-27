@@ -1,0 +1,37 @@
+body, html {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font: normal 1em sans-serif;
+}
+
+a {
+	color: #326600;
+	font-weight: bold;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0px;
+	height: 45px;
+	width: 100%;
+	text-align: center;
+	background: #aaa;
+	border-top: 1px dashed #555;
+	padding-top: 5px;
+}
+
+#help {
+	position: fixed;
+	top: 10px;
+	right: 5px;
+	color: #99000B;
+	font-weight: bold;
+	font-size: 4em;
+	cursor: help;
+}
+
+#help span {
+	display: none;
+}

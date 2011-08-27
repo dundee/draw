@@ -95,6 +95,10 @@ $(function(){
 			draw.mouseUp(event);
 		});
 
+		$('#help').click(function() {
+			$('#help span').dialog();
+		});
+
 		$.getJSON("./config.json", function (config) {
 			var socket = io.connect("http://" + window.location.hostname + ':' + config.port);
 			draw.setSocket(socket);
