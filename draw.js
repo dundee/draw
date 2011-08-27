@@ -19,12 +19,14 @@ Draw.prototype.init = function() {
 	self.ctx.canvas.width  = window.innerWidth;
 	self.ctx.canvas.height = window.innerHeight;
 
-	self.socket.on('line', function (data) {
-		self.ctx.beginPath();
-		data.line.forEach(function(item) {
-			self.ctx.lineTo(item.x, item.y);
+	self.socket.on('add', function (data) {
+		data.lines.forEach(function(line) {
+			self.ctx.beginPath();
+			line.points.forEach(function(item) {
+				self.ctx.lineTo(item.x, item.y);
+			});
+			self.ctx.stroke();
 		});
-		self.ctx.stroke();
 	});
 }
 
@@ -64,7 +66,7 @@ Draw.prototype.mouseUp = function(event) {
 	var self = this;
 
 	if (self.line.length) {
-		self.socket.emit('line', {line: self.line});
+		self.socket.emit('add', {lines:[{points: self.line}]});
 	}
 
 	self.isDown = false;
