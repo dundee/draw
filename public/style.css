@@ -11,6 +11,10 @@ a {
 	font-weight: bold;
 }
 
+#canvas {
+	cursor: crosshair;
+}
+
 #footer {
 	position: fixed;
 	bottom: 0px;
