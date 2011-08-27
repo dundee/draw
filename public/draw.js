@@ -20,6 +20,18 @@ Draw.prototype.init = function() {
 	self.ctx.canvas.height = window.innerHeight;
 }
 
+Draw.prototype.getX = function(event) {
+	var self = this;
+
+	return event.pageX - self.element.offsetLeft;
+}
+
+Draw.prototype.getY = function(event) {
+	var self = this;
+
+	return event.pageY - self.element.offsetTop;
+}
+
 Draw.prototype.setSocket = function(socket) {
 	var self = this;
 
@@ -41,8 +53,8 @@ Draw.prototype.mouseDown = function(event) {
 
 	self.isDown = true;
 
-	x = event.offsetX;
-	y = event.offsetY;
+	x = self.getX(event);
+	y = self.getY(event);
 
 	self.ctx.fillStyle = "rgb(0,0,0)";
 	self.ctx.beginPath();
@@ -58,8 +70,8 @@ Draw.prototype.mouseMove = function(event) {
 		return;
 	}
 
-	x = event.offsetX;
-	y = event.offsetY;
+	x = self.getX(event);
+	y = self.getY(event);
 
 	self.ctx.fillStyle = "rgb(0,0,0)";
 	self.ctx.lineTo(x, y);
