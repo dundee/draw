@@ -22,5 +22,5 @@ Install
 Run
 ---
 
-   cd draw
-   node app.js
+    cd draw
+    node app.js
