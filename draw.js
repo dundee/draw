@@ -1,11 +1,11 @@
-function Draw(element, client) {
+function Draw(element, socket) {
 	if (! (this instanceof arguments.callee)) {
 		return new arguments.callee(arguments);
 	}
 	var self = this;
 
 	self.element = element;
-	self.client = client;
+	self.socket = socket;
 	self.isDown = false;
 	self.line = [];
 
@@ -16,9 +16,15 @@ Draw.prototype.init = function() {
 	var self = this;
 
 	self.ctx = self.element.getContext("2d");
+	self.ctx.canvas.width  = window.innerWidth;
+	self.ctx.canvas.height = window.innerHeight;
 
-	client.subscribe('/line', function (message) {
-		console.log("Msg:", message);
+	self.socket.on('line', function (data) {
+		self.ctx.beginPath();
+		data.line.forEach(function(item) {
+			self.ctx.lineTo(item.x, item.y);
+		});
+		self.ctx.stroke();
 	});
 }
 
@@ -58,7 +64,7 @@ Draw.prototype.mouseUp = function(event) {
 	var self = this;
 
 	if (self.line.length) {
-		client.publish('/line', {line: self.line});
+		self.socket.emit('line', {line: self.line});
 	}
 
 	self.isDown = false;
@@ -66,10 +72,8 @@ Draw.prototype.mouseUp = function(event) {
 }
 
 $(function(){
-	client = new Faye.Client("http://localhost:8000/faye", {
-		timeout: 120
-	});
-	var draw = new Draw(document.getElementById("canvas"), client);
+	var socket = io.connect('http://localhost:8000');
+	var draw = new Draw(document.getElementById("canvas"), socket);
 
 	$('#canvas').mousedown(function(event){
 		draw.mouseDown(event);
