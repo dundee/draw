@@ -1,7 +1,5 @@
 function Draw(element) {
-	if (! (this instanceof arguments.callee)) {
-		return new arguments.callee(arguments);
-	}
+	"use strict";
 	var self = this;
 
 	self.element = element;
@@ -12,44 +10,49 @@ function Draw(element) {
 	self.init();
 }
 
-Draw.prototype.init = function() {
+Draw.prototype.init = function () {
+	"use strict";
 	var self = this;
 
 	self.ctx = self.element.getContext("2d");
 	self.ctx.canvas.width  = window.innerWidth;
 	self.ctx.canvas.height = window.innerHeight;
-}
+};
 
-Draw.prototype.getX = function(event) {
+Draw.prototype.getX = function (event) {
+	"use strict";
 	var self = this;
 
 	return event.pageX - self.element.offsetLeft;
-}
+};
 
-Draw.prototype.getY = function(event) {
+Draw.prototype.getY = function (event) {
+	"use strict";
 	var self = this;
 
 	return event.pageY - self.element.offsetTop;
-}
+};
 
-Draw.prototype.setSocket = function(socket) {
+Draw.prototype.setSocket = function (socket) {
+	"use strict";
 	var self = this;
 
 	self.socket = socket;
 
 	self.socket.on('add', function (data) {
-		data.lines.forEach(function(line) {
+		data.lines.forEach(function (line) {
 			self.ctx.beginPath();
-			line.points.forEach(function(item) {
+			line.points.forEach(function (item) {
 				self.ctx.lineTo(item.x, item.y);
 			});
 			self.ctx.stroke();
 		});
 	});
-}
+};
 
-Draw.prototype.mouseDown = function(event) {
-	var self = this;
+Draw.prototype.mouseDown = function (event) {
+	"use strict";
+	var self = this, x, y;
 
 	self.isDown = true;
 
@@ -61,10 +64,11 @@ Draw.prototype.mouseDown = function(event) {
 	self.ctx.moveTo(x, y);
 
 	self.line = [{x: x, y: y}];
-}
+};
 
-Draw.prototype.mouseMove = function(event) {
-	var self = this;
+Draw.prototype.mouseMove = function (event) {
+	"use strict";
+	var self = this, x, y;
 
 	if (!self.isDown) {
 		return;
@@ -78,41 +82,43 @@ Draw.prototype.mouseMove = function(event) {
 	self.ctx.stroke();
 
 	self.line.push({x: x, y: y});
-}
+};
 
-Draw.prototype.mouseUp = function(event) {
+Draw.prototype.mouseUp = function (event) {
+	"use strict";
 	var self = this;
 
 	if (self.line.length && self.socket) {
-		self.socket.emit('add', {lines:[{points: self.line}]});
+		self.socket.emit('add', {lines: [{points: self.line}]});
 	}
 
 	self.isDown = false;
 	self.line = [];
-}
+};
 
-$(function(){
-		var draw = new Draw(document.getElementById("canvas"));
+$(function () {
+	"use strict";
+	var draw = new Draw(document.getElementById("canvas"));
 
-		$('#canvas').mousedown(function(event){
-			draw.mouseDown(event);
-		});
-		$('#canvas').mousemove(function(event){
-			draw.mouseMove(event);
-		});
-		$('#canvas').mouseup(function(event){
-			draw.mouseUp(event);
-		});
-		$('#canvas').mouseout(function(event){
-			draw.mouseUp(event);
-		});
+	$('#canvas').mousedown(function (event) {
+		draw.mouseDown(event);
+	});
+	$('#canvas').mousemove(function (event) {
+		draw.mouseMove(event);
+	});
+	$('#canvas').mouseup(function (event) {
+		draw.mouseUp(event);
+	});
+	$('#canvas').mouseout(function (event) {
+		draw.mouseUp(event);
+	});
 
-		$('#help').click(function() {
-			$('#help span').dialog();
-		});
+	$('#help').click(function () {
+		$('#help span').dialog();
+	});
 
-		$.getJSON("./config.json", function (config) {
-			var socket = io.connect("http://" + window.location.hostname + ':' + config.port);
-			draw.setSocket(socket);
-		});
+	$.getJSON("./config.json", function (config) {
+		var socket = io.connect("http://" + window.location.hostname + ':' + config.port);
+		draw.setSocket(socket);
+	});
 });
