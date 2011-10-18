@@ -13,29 +13,29 @@ new mongodb.Db('draw', server, {}).open(function (error, client) {
 	}
 
 	collection = new mongodb.Collection(client, 'lines');
-});
 
+	io.sockets.on('connection', function (socket) {
 
-io.sockets.on('connection', function (socket) {
+		var cursor = collection.find();
+		cursor.toArray(function (err, docs) {
+			socket.emit('add', {lines: docs});
+		});
 
-	var cursor = collection.find();
-	cursor.toArray(function (err, docs) {
-		socket.emit('add', {lines: docs});
-	});
+		socket.on('add', function (data) {
+			socket.broadcast.emit('add', data);
 
-	socket.on('add', function (data) {
-		socket.broadcast.emit('add', data);
-
-		data.lines.forEach(function (line) {
-			collection.insert(
-				line,
-				{safe: true},
-				function (err, objects) {
-					if (err) {
-						console.warn(err.message);
+			data.lines.forEach(function (line) {
+				collection.insert(
+					line,
+					{safe: true},
+					function (err, objects) {
+						if (err) {
+							console.warn(err.message);
+						}
 					}
-				}
-			);
+				);
+			});
 		});
 	});
+
 });
