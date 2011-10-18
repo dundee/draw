@@ -1,9 +1,9 @@
 {
     "name": "draw"
-  , "version": "0.0.2"
+  , "version": "0.0.3"
   , "private": true
   , "dependencies": {
-      "socket.io": ">= 0.7",
+      "socket.io": ">= 0.8",
       "mongodb": ">= 0.9.6"
   }
 }
