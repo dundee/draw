@@ -17,6 +17,7 @@ Draw.prototype.init = function () {
 	self.ctx = self.element.getContext("2d");
 	self.ctx.canvas.width  = window.innerWidth;
 	self.ctx.canvas.height = window.innerHeight;
+	self.lastPoint = {};
 };
 
 Draw.prototype.getX = function (event) {
@@ -45,6 +46,7 @@ Draw.prototype.setSocket = function (socket) {
 			line.points.forEach(function (item) {
 				self.ctx.lineTo(item.x, item.y);
 			});
+			self.ctx.strokeStyle = "#555";
 			self.ctx.stroke();
 		});
 	});
@@ -59,9 +61,7 @@ Draw.prototype.mouseDown = function (event) {
 	x = self.getX(event);
 	y = self.getY(event);
 
-	self.ctx.fillStyle = "rgb(0,0,0)";
-	self.ctx.beginPath();
-	self.ctx.moveTo(x, y);
+	self.lastPoint = {x: x, y: y};
 
 	self.line = [{x: x, y: y}];
 };
@@ -77,9 +77,13 @@ Draw.prototype.mouseMove = function (event) {
 	x = self.getX(event);
 	y = self.getY(event);
 
-	self.ctx.fillStyle = "rgb(0,0,0)";
+	self.ctx.beginPath();
+	self.ctx.moveTo(self.lastPoint.x, self.lastPoint.y);
 	self.ctx.lineTo(x, y);
+	self.ctx.strokeStyle = "#000";
 	self.ctx.stroke();
+
+	self.lastPoint = {x: x, y: y};
 
 	self.line.push({x: x, y: y});
 };
@@ -94,6 +98,7 @@ Draw.prototype.mouseUp = function (event) {
 
 	self.isDown = false;
 	self.line = [];
+	self.lastPoint = {};
 };
 
 $(function () {
