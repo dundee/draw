@@ -27,14 +27,14 @@ Draw.prototype.getX = function (event) {
 	"use strict";
 	var self = this;
 
-	return event.pageX - self.element.offsetLeft;
+	return event.offsetX;
 };
 
 Draw.prototype.getY = function (event) {
 	"use strict";
 	var self = this;
 
-	return event.pageY - self.element.offsetTop;
+	return event.offsetY;
 };
 
 Draw.prototype.setSocket = function (socket) {
