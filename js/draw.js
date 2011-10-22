@@ -1,5 +1,6 @@
 goog.require('goog.events.EventType');
 goog.require('goog.events');
+goog.require('goog.net.XhrLite');
 
 function Draw(element) {
 	"use strict";
@@ -118,7 +119,8 @@ function main() {
 		$('#help span').dialog();
 	}, true, this);
 
-	$.getJSON("./config.json", function (config) {
+	goog.net.XhrLite.send("./config.json", function (event) {
+		var config = event.target.getResponseJson();
 		var socket = io.connect("http://" + window.location.hostname + ':' + config.port);
 		draw.setSocket(socket);
 	});
