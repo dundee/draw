@@ -1,3 +1,6 @@
+goog.require('goog.events.EventType');
+goog.require('goog.events');
+
 function Draw(element) {
 	"use strict";
 	var self = this;
@@ -101,29 +104,22 @@ Draw.prototype.mouseUp = function (event) {
 	self.lastPoint = {};
 };
 
-$(function () {
+function main() {
 	"use strict";
-	var draw = new Draw(document.getElementById("canvas"));
+	var canvas = document.getElementById("canvas");
+	var draw = new Draw(canvas);
 
-	$('#canvas').mousedown(function (event) {
-		draw.mouseDown(event);
-	});
-	$('#canvas').mousemove(function (event) {
-		draw.mouseMove(event);
-	});
-	$('#canvas').mouseup(function (event) {
-		draw.mouseUp(event);
-	});
-	$('#canvas').mouseout(function (event) {
-		draw.mouseUp(event);
-	});
+	goog.events.listen(canvas, goog.events.EventType.MOUSEDOWN, draw.mouseDown, true, draw);
+	goog.events.listen(canvas, goog.events.EventType.MOUSEMOVE, draw.mouseMove, true, draw);
+	goog.events.listen(canvas, goog.events.EventType.MOUSEUP, draw.mouseUp, true, draw);
+	goog.events.listen(canvas, goog.events.EventType.MOUSEOUT, draw.mouseUp, true, draw);
 
-	$('#help').click(function () {
+	goog.events.listen(document.getElementById("help"), goog.events.EventType.CLICK, function () {
 		$('#help span').dialog();
-	});
+	}, true, this);
 
 	$.getJSON("./config.json", function (config) {
 		var socket = io.connect("http://" + window.location.hostname + ':' + config.port);
 		draw.setSocket(socket);
 	});
-});
+};
