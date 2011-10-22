@@ -16170,9 +16170,11997 @@ goog.net.XhrLite.FORM_CONTENT_TYPE = goog.net.XhrIo.FORM_CONTENT_TYPE;
 goog.net.XhrLite.sendInstances_ = goog.net.XhrIo.sendInstances_;
 
 // Input 44
+// Copyright 2010 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Browser capability checks for the dom package.
+ *
+ */
+
+
+goog.provide('goog.dom.BrowserFeature');
+
+goog.require('goog.userAgent');
+
+
+/**
+ * Enum of browser capabilities.
+ * @enum {boolean}
+ */
+goog.dom.BrowserFeature = {
+  /**
+   * Whether attributes 'name' and 'type' can be added to an element after it's
+   * created. False in Internet Explorer prior to version 9.
+   */
+  CAN_ADD_NAME_OR_TYPE_ATTRIBUTES: !goog.userAgent.IE ||
+      goog.userAgent.isDocumentMode(9),
+
+  /**
+   * Whether we can use element.children to access an element's Element
+   * children. Available since Gecko 1.9.1, IE 9. (IE<9 also includes comment
+   * nodes in the collection.)
+   */
+  CAN_USE_CHILDREN_ATTRIBUTE: !goog.userAgent.GECKO && !goog.userAgent.IE ||
+      goog.userAgent.IE && goog.userAgent.isDocumentMode(9) ||
+      goog.userAgent.GECKO && goog.userAgent.isVersion('1.9.1'),
+
+  /**
+   * Opera, Safari 3, and Internet Explorer 9 all support innerText but they
+   * include text nodes in script and style tags. Not document-mode-dependent.
+   */
+  CAN_USE_INNER_TEXT: goog.userAgent.IE && !goog.userAgent.isVersion('9'),
+
+  /**
+   * Whether NoScope elements need a scoped element written before them in
+   * innerHTML.
+   * MSDN: http://msdn.microsoft.com/en-us/library/ms533897(VS.85).aspx#1
+   */
+  INNER_HTML_NEEDS_SCOPED_ELEMENT: goog.userAgent.IE
+};
+
+// Input 45
+// Copyright 2007 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Defines the goog.dom.TagName enum.  This enumerates
+ * all html tag names specified by the W3C HTML 4.01 Specification.
+ * Reference http://www.w3.org/TR/html401/index/elements.html.
+ */
+goog.provide('goog.dom.TagName');
+
+
+/**
+ * Enum of all html tag names specified by the W3C HTML 4.01 Specification.
+ * Reference http://www.w3.org/TR/html401/index/elements.html
+ * @enum {string}
+ */
+goog.dom.TagName = {
+  A: 'A',
+  ABBR: 'ABBR',
+  ACRONYM: 'ACRONYM',
+  ADDRESS: 'ADDRESS',
+  APPLET: 'APPLET',
+  AREA: 'AREA',
+  B: 'B',
+  BASE: 'BASE',
+  BASEFONT: 'BASEFONT',
+  BDO: 'BDO',
+  BIG: 'BIG',
+  BLOCKQUOTE: 'BLOCKQUOTE',
+  BODY: 'BODY',
+  BR: 'BR',
+  BUTTON: 'BUTTON',
+  CANVAS: 'CANVAS',
+  CAPTION: 'CAPTION',
+  CENTER: 'CENTER',
+  CITE: 'CITE',
+  CODE: 'CODE',
+  COL: 'COL',
+  COLGROUP: 'COLGROUP',
+  DD: 'DD',
+  DEL: 'DEL',
+  DFN: 'DFN',
+  DIR: 'DIR',
+  DIV: 'DIV',
+  DL: 'DL',
+  DT: 'DT',
+  EM: 'EM',
+  FIELDSET: 'FIELDSET',
+  FONT: 'FONT',
+  FORM: 'FORM',
+  FRAME: 'FRAME',
+  FRAMESET: 'FRAMESET',
+  H1: 'H1',
+  H2: 'H2',
+  H3: 'H3',
+  H4: 'H4',
+  H5: 'H5',
+  H6: 'H6',
+  HEAD: 'HEAD',
+  HR: 'HR',
+  HTML: 'HTML',
+  I: 'I',
+  IFRAME: 'IFRAME',
+  IMG: 'IMG',
+  INPUT: 'INPUT',
+  INS: 'INS',
+  ISINDEX: 'ISINDEX',
+  KBD: 'KBD',
+  LABEL: 'LABEL',
+  LEGEND: 'LEGEND',
+  LI: 'LI',
+  LINK: 'LINK',
+  MAP: 'MAP',
+  MENU: 'MENU',
+  META: 'META',
+  NOFRAMES: 'NOFRAMES',
+  NOSCRIPT: 'NOSCRIPT',
+  OBJECT: 'OBJECT',
+  OL: 'OL',
+  OPTGROUP: 'OPTGROUP',
+  OPTION: 'OPTION',
+  P: 'P',
+  PARAM: 'PARAM',
+  PRE: 'PRE',
+  Q: 'Q',
+  S: 'S',
+  SAMP: 'SAMP',
+  SCRIPT: 'SCRIPT',
+  SELECT: 'SELECT',
+  SMALL: 'SMALL',
+  SPAN: 'SPAN',
+  STRIKE: 'STRIKE',
+  STRONG: 'STRONG',
+  STYLE: 'STYLE',
+  SUB: 'SUB',
+  SUP: 'SUP',
+  TABLE: 'TABLE',
+  TBODY: 'TBODY',
+  TD: 'TD',
+  TEXTAREA: 'TEXTAREA',
+  TFOOT: 'TFOOT',
+  TH: 'TH',
+  THEAD: 'THEAD',
+  TITLE: 'TITLE',
+  TR: 'TR',
+  TT: 'TT',
+  U: 'U',
+  UL: 'UL',
+  VAR: 'VAR'
+};
+
+// Input 46
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Utilities for adding, removing and setting classes.
+ *
+ */
+
+
+goog.provide('goog.dom.classes');
+
+goog.require('goog.array');
+
+
+/**
+ * Sets the entire class name of an element.
+ * @param {Node} element DOM node to set class of.
+ * @param {string} className Class name(s) to apply to element.
+ */
+goog.dom.classes.set = function(element, className) {
+  element.className = className;
+};
+
+
+/**
+ * Gets an array of class names on an element
+ * @param {Node} element DOM node to get class of.
+ * @return {Array} Class names on {@code element}.
+ */
+goog.dom.classes.get = function(element) {
+  var className = element.className;
+  // Some types of elements don't have a className in IE (e.g. iframes).
+  // Furthermore, in Firefox, className is not a string when the element is
+  // an SVG element.
+  return className && typeof className.split == 'function' ?
+      className.split(/\s+/) : [];
+};
+
+
+/**
+ * Adds a class or classes to an element. Does not add multiples of class names.
+ * @param {Node} element DOM node to add class to.
+ * @param {...string} var_args Class names to add.
+ * @return {boolean} Whether class was added (or all classes were added).
+ */
+goog.dom.classes.add = function(element, var_args) {
+  var classes = goog.dom.classes.get(element);
+  var args = goog.array.slice(arguments, 1);
+
+  var b = goog.dom.classes.add_(classes, args);
+  element.className = classes.join(' ');
+
+  return b;
+};
+
+
+/**
+ * Removes a class or classes from an element.
+ * @param {Node} element DOM node to remove class from.
+ * @param {...string} var_args Class name(s) to remove.
+ * @return {boolean} Whether all classes in {@code var_args} were found and
+ *     removed.
+ */
+goog.dom.classes.remove = function(element, var_args) {
+  var classes = goog.dom.classes.get(element);
+  var args = goog.array.slice(arguments, 1);
+
+  var b = goog.dom.classes.remove_(classes, args);
+  element.className = classes.join(' ');
+
+  return b;
+};
+
+
+/**
+ * Helper method for {@link goog.dom.classes.add} and
+ * {@link goog.dom.classes.addRemove}. Adds one or more classes to the supplied
+ * classes array.
+ * @param {Array.<string>} classes All class names for the element, will be
+ *     updated to have the classes supplied in {@code args} added.
+ * @param {Array.<string>} args Class names to add.
+ * @return {boolean} Whether all classes in were added.
+ * @private
+ */
+goog.dom.classes.add_ = function(classes, args) {
+  var rv = 0;
+  for (var i = 0; i < args.length; i++) {
+    if (!goog.array.contains(classes, args[i])) {
+      classes.push(args[i]);
+      rv++;
+    }
+  }
+  return rv == args.length;
+};
+
+
+/**
+ * Helper method for {@link goog.dom.classes.remove} and
+ * {@link goog.dom.classes.addRemove}. Removes one or more classes from the
+ * supplied classes array.
+ * @param {Array.<string>} classes All class names for the element, will be
+ *     updated to have the classes supplied in {@code args} removed.
+ * @param {Array.<string>} args Class names to remove.
+ * @return {boolean} Whether all classes in were found and removed.
+ * @private
+ */
+goog.dom.classes.remove_ = function(classes, args) {
+  var rv = 0;
+  for (var i = 0; i < classes.length; i++) {
+    if (goog.array.contains(args, classes[i])) {
+      goog.array.splice(classes, i--, 1);
+      rv++;
+    }
+  }
+  return rv == args.length;
+};
+
+
+/**
+ * Switches a class on an element from one to another without disturbing other
+ * classes. If the fromClass isn't removed, the toClass won't be added.
+ * @param {Node} element DOM node to swap classes on.
+ * @param {string} fromClass Class to remove.
+ * @param {string} toClass Class to add.
+ * @return {boolean} Whether classes were switched.
+ */
+goog.dom.classes.swap = function(element, fromClass, toClass) {
+  var classes = goog.dom.classes.get(element);
+
+  var removed = false;
+  for (var i = 0; i < classes.length; i++) {
+    if (classes[i] == fromClass) {
+      goog.array.splice(classes, i--, 1);
+      removed = true;
+    }
+  }
+
+  if (removed) {
+    classes.push(toClass);
+    element.className = classes.join(' ');
+  }
+
+  return removed;
+};
+
+
+/**
+ * Adds zero or more classes to an element and removes zero or more as a single
+ * operation. Unlike calling {@link goog.dom.classes.add} and
+ * {@link goog.dom.classes.remove} separately, this is more efficient as it only
+ * parses the class property once.
+ *
+ * If a class is in both the remove and add lists, it will be added. Thus,
+ * you can use this instead of {@link goog.dom.classes.swap} when you have
+ * more than two class names that you want to swap.
+ *
+ * @param {Node} element DOM node to swap classes on.
+ * @param {string|Array.<string>|null} classesToRemove Class or classes to
+ *     remove, if null no classes are removed.
+ * @param {string|Array.<string>|null} classesToAdd Class or classes to add, if
+ *     null no classes are added.
+ */
+goog.dom.classes.addRemove = function(element, classesToRemove, classesToAdd) {
+  var classes = goog.dom.classes.get(element);
+  if (goog.isString(classesToRemove)) {
+    goog.array.remove(classes, classesToRemove);
+  } else if (goog.isArray(classesToRemove)) {
+    goog.dom.classes.remove_(classes, classesToRemove);
+  }
+
+  if (goog.isString(classesToAdd) &&
+      !goog.array.contains(classes, classesToAdd)) {
+    classes.push(classesToAdd);
+  } else if (goog.isArray(classesToAdd)) {
+    goog.dom.classes.add_(classes, classesToAdd);
+  }
+
+  element.className = classes.join(' ');
+};
+
+
+/**
+ * Returns true if an element has a class.
+ * @param {Node} element DOM node to test.
+ * @param {string} className Class name to test for.
+ * @return {boolean} Whether element has the class.
+ */
+goog.dom.classes.has = function(element, className) {
+  return goog.array.contains(goog.dom.classes.get(element), className);
+};
+
+
+/**
+ * Adds or removes a class depending on the enabled argument.
+ * @param {Node} element DOM node to add or remove the class on.
+ * @param {string} className Class name to add or remove.
+ * @param {boolean} enabled Whether to add or remove the class (true adds,
+ *     false removes).
+ */
+goog.dom.classes.enable = function(element, className, enabled) {
+  if (enabled) {
+    goog.dom.classes.add(element, className);
+  } else {
+    goog.dom.classes.remove(element, className);
+  }
+};
+
+
+/**
+ * Removes a class if an element has it, and adds it the element doesn't have
+ * it.  Won't affect other classes on the node.
+ * @param {Node} element DOM node to toggle class on.
+ * @param {string} className Class to toggle.
+ * @return {boolean} True if class was added, false if it was removed
+ *     (in other words, whether element has the class after this function has
+ *     been called).
+ */
+goog.dom.classes.toggle = function(element, className) {
+  var add = !goog.dom.classes.has(element, className);
+  goog.dom.classes.enable(element, className, add);
+  return add;
+};
+
+// Input 47
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview A utility class for representing two-dimensional positions.
+ */
+
+
+goog.provide('goog.math.Coordinate');
+
+
+
+/**
+ * Class for representing coordinates and positions.
+ * @param {number=} opt_x Left, defaults to 0.
+ * @param {number=} opt_y Top, defaults to 0.
+ * @constructor
+ */
+goog.math.Coordinate = function(opt_x, opt_y) {
+  /**
+   * X-value
+   * @type {number}
+   */
+  this.x = goog.isDef(opt_x) ? opt_x : 0;
+
+  /**
+   * Y-value
+   * @type {number}
+   */
+  this.y = goog.isDef(opt_y) ? opt_y : 0;
+};
+
+
+/**
+ * Returns a new copy of the coordinate.
+ * @return {!goog.math.Coordinate} A clone of this coordinate.
+ */
+goog.math.Coordinate.prototype.clone = function() {
+  return new goog.math.Coordinate(this.x, this.y);
+};
+
+
+if (goog.DEBUG) {
+  /**
+   * Returns a nice string representing the coordinate.
+   * @return {string} In the form (50, 73).
+   */
+  goog.math.Coordinate.prototype.toString = function() {
+    return '(' + this.x + ', ' + this.y + ')';
+  };
+}
+
+
+/**
+ * Compares coordinates for equality.
+ * @param {goog.math.Coordinate} a A Coordinate.
+ * @param {goog.math.Coordinate} b A Coordinate.
+ * @return {boolean} True iff the coordinates are equal, or if both are null.
+ */
+goog.math.Coordinate.equals = function(a, b) {
+  if (a == b) {
+    return true;
+  }
+  if (!a || !b) {
+    return false;
+  }
+  return a.x == b.x && a.y == b.y;
+};
+
+
+/**
+ * Returns the distance between two coordinates.
+ * @param {!goog.math.Coordinate} a A Coordinate.
+ * @param {!goog.math.Coordinate} b A Coordinate.
+ * @return {number} The distance between {@code a} and {@code b}.
+ */
+goog.math.Coordinate.distance = function(a, b) {
+  var dx = a.x - b.x;
+  var dy = a.y - b.y;
+  return Math.sqrt(dx * dx + dy * dy);
+};
+
+
+/**
+ * Returns the squared distance between two coordinates. Squared distances can
+ * be used for comparisons when the actual value is not required.
+ *
+ * Performance note: eliminating the square root is an optimization often used
+ * in lower-level languages, but the speed difference is not nearly as
+ * pronounced in JavaScript (only a few percent.)
+ *
+ * @param {!goog.math.Coordinate} a A Coordinate.
+ * @param {!goog.math.Coordinate} b A Coordinate.
+ * @return {number} The squared distance between {@code a} and {@code b}.
+ */
+goog.math.Coordinate.squaredDistance = function(a, b) {
+  var dx = a.x - b.x;
+  var dy = a.y - b.y;
+  return dx * dx + dy * dy;
+};
+
+
+/**
+ * Returns the difference between two coordinates as a new
+ * goog.math.Coordinate.
+ * @param {!goog.math.Coordinate} a A Coordinate.
+ * @param {!goog.math.Coordinate} b A Coordinate.
+ * @return {!goog.math.Coordinate} A Coordinate representing the difference
+ *     between {@code a} and {@code b}.
+ */
+goog.math.Coordinate.difference = function(a, b) {
+  return new goog.math.Coordinate(a.x - b.x, a.y - b.y);
+};
+
+
+/**
+ * Returns the sum of two coordinates as a new goog.math.Coordinate.
+ * @param {!goog.math.Coordinate} a A Coordinate.
+ * @param {!goog.math.Coordinate} b A Coordinate.
+ * @return {!goog.math.Coordinate} A Coordinate representing the sum of the two
+ *     coordinates.
+ */
+goog.math.Coordinate.sum = function(a, b) {
+  return new goog.math.Coordinate(a.x + b.x, a.y + b.y);
+};
+
+// Input 48
+// Copyright 2007 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview A utility class for representing two-dimensional sizes.
+ */
+
+
+goog.provide('goog.math.Size');
+
+
+
+/**
+ * Class for representing sizes consisting of a width and height. Undefined
+ * width and height support is deprecated and results in compiler warning.
+ * @param {number} width Width.
+ * @param {number} height Height.
+ * @constructor
+ */
+goog.math.Size = function(width, height) {
+  /**
+   * Width
+   * @type {number}
+   */
+  this.width = width;
+
+  /**
+   * Height
+   * @type {number}
+   */
+  this.height = height;
+};
+
+
+/**
+ * Compares sizes for equality.
+ * @param {goog.math.Size} a A Size.
+ * @param {goog.math.Size} b A Size.
+ * @return {boolean} True iff the sizes have equal widths and equal
+ *     heights, or if both are null.
+ */
+goog.math.Size.equals = function(a, b) {
+  if (a == b) {
+    return true;
+  }
+  if (!a || !b) {
+    return false;
+  }
+  return a.width == b.width && a.height == b.height;
+};
+
+
+/**
+ * @return {!goog.math.Size} A new copy of the Size.
+ */
+goog.math.Size.prototype.clone = function() {
+  return new goog.math.Size(this.width, this.height);
+};
+
+
+if (goog.DEBUG) {
+  /**
+   * Returns a nice string representing size.
+   * @return {string} In the form (50 x 73).
+   */
+  goog.math.Size.prototype.toString = function() {
+    return '(' + this.width + ' x ' + this.height + ')';
+  };
+}
+
+
+/**
+ * @return {number} The longer of the two dimensions in the size.
+ */
+goog.math.Size.prototype.getLongest = function() {
+  return Math.max(this.width, this.height);
+};
+
+
+/**
+ * @return {number} The shorter of the two dimensions in the size.
+ */
+goog.math.Size.prototype.getShortest = function() {
+  return Math.min(this.width, this.height);
+};
+
+
+/**
+ * @return {number} The area of the size (width * height).
+ */
+goog.math.Size.prototype.area = function() {
+  return this.width * this.height;
+};
+
+
+/**
+ * @return {number} The perimeter of the size (width + height) * 2.
+ */
+goog.math.Size.prototype.perimeter = function() {
+  return (this.width + this.height) * 2;
+};
+
+
+/**
+ * @return {number} The ratio of the size's width to its height.
+ */
+goog.math.Size.prototype.aspectRatio = function() {
+  return this.width / this.height;
+};
+
+
+/**
+ * @return {boolean} True if the size has zero area, false if both dimensions
+ *     are non-zero numbers.
+ */
+goog.math.Size.prototype.isEmpty = function() {
+  return !this.area();
+};
+
+
+/**
+ * Clamps the width and height parameters upward to integer values.
+ * @return {!goog.math.Size} This size with ceil'd components.
+ */
+goog.math.Size.prototype.ceil = function() {
+  this.width = Math.ceil(this.width);
+  this.height = Math.ceil(this.height);
+  return this;
+};
+
+
+/**
+ * @param {!goog.math.Size} target The target size.
+ * @return {boolean} True if this Size is the same size or smaller than the
+ *     target size in both dimensions.
+ */
+goog.math.Size.prototype.fitsInside = function(target) {
+  return this.width <= target.width && this.height <= target.height;
+};
+
+
+/**
+ * Clamps the width and height parameters downward to integer values.
+ * @return {!goog.math.Size} This size with floored components.
+ */
+goog.math.Size.prototype.floor = function() {
+  this.width = Math.floor(this.width);
+  this.height = Math.floor(this.height);
+  return this;
+};
+
+
+/**
+ * Rounds the width and height parameters to integer values.
+ * @return {!goog.math.Size} This size with rounded components.
+ */
+goog.math.Size.prototype.round = function() {
+  this.width = Math.round(this.width);
+  this.height = Math.round(this.height);
+  return this;
+};
+
+
+/**
+ * Scales the size uniformly by a factor.
+ * @param {number} s The scale factor.
+ * @return {!goog.math.Size} This Size object after scaling.
+ */
+goog.math.Size.prototype.scale = function(s) {
+  this.width *= s;
+  this.height *= s;
+  return this;
+};
+
+
+/**
+ * Uniformly scales the size to fit inside the dimensions of a given size. The
+ * original aspect ratio will be preserved.
+ *
+ * This function assumes that both Sizes contain strictly positive dimensions.
+ * @param {!goog.math.Size} target The target size.
+ * @return {!goog.math.Size} This Size object, after optional scaling.
+ */
+goog.math.Size.prototype.scaleToFit = function(target) {
+  var s = this.aspectRatio() > target.aspectRatio() ?
+      target.width / this.width :
+      target.height / this.height;
+
+  return this.scale(s);
+};
+
+// Input 49
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Utilities for manipulating the browser's Document Object Model
+ * Inspiration taken *heavily* from mochikit (http://mochikit.com/).
+ *
+ * You can use {@link goog.dom.DomHelper} to create new dom helpers that refer
+ * to a different document object.  This is useful if you are working with
+ * frames or multiple windows.
+ *
+ */
+
+
+// TODO(user): Rename/refactor getTextContent and getRawTextContent. The problem
+// is that getTextContent should mimic the DOM3 textContent. We should add a
+// getInnerText (or getText) which tries to return the visible text, innerText.
+
+
+goog.provide('goog.dom');
+goog.provide('goog.dom.DomHelper');
+goog.provide('goog.dom.NodeType');
+
+goog.require('goog.array');
+goog.require('goog.dom.BrowserFeature');
+goog.require('goog.dom.TagName');
+goog.require('goog.dom.classes');
+goog.require('goog.math.Coordinate');
+goog.require('goog.math.Size');
+goog.require('goog.object');
+goog.require('goog.string');
+goog.require('goog.userAgent');
+
+
+/**
+ * @define {boolean} Whether we know at compile time that the browser is in
+ * quirks mode.
+ */
+goog.dom.ASSUME_QUIRKS_MODE = false;
+
+
+/**
+ * @define {boolean} Whether we know at compile time that the browser is in
+ * standards compliance mode.
+ */
+goog.dom.ASSUME_STANDARDS_MODE = false;
+
+
+/**
+ * Whether we know the compatibility mode at compile time.
+ * @type {boolean}
+ * @private
+ */
+goog.dom.COMPAT_MODE_KNOWN_ =
+    goog.dom.ASSUME_QUIRKS_MODE || goog.dom.ASSUME_STANDARDS_MODE;
+
+
+/**
+ * Enumeration for DOM node types (for reference)
+ * @enum {number}
+ */
+goog.dom.NodeType = {
+  ELEMENT: 1,
+  ATTRIBUTE: 2,
+  TEXT: 3,
+  CDATA_SECTION: 4,
+  ENTITY_REFERENCE: 5,
+  ENTITY: 6,
+  PROCESSING_INSTRUCTION: 7,
+  COMMENT: 8,
+  DOCUMENT: 9,
+  DOCUMENT_TYPE: 10,
+  DOCUMENT_FRAGMENT: 11,
+  NOTATION: 12
+};
+
+
+/**
+ * Gets the DomHelper object for the document where the element resides.
+ * @param {Node|Window=} opt_element If present, gets the DomHelper for this
+ *     element.
+ * @return {!goog.dom.DomHelper} The DomHelper.
+ */
+goog.dom.getDomHelper = function(opt_element) {
+  return opt_element ?
+      new goog.dom.DomHelper(goog.dom.getOwnerDocument(opt_element)) :
+      (goog.dom.defaultDomHelper_ ||
+          (goog.dom.defaultDomHelper_ = new goog.dom.DomHelper()));
+};
+
+
+/**
+ * Cached default DOM helper.
+ * @type {goog.dom.DomHelper}
+ * @private
+ */
+goog.dom.defaultDomHelper_;
+
+
+/**
+ * Gets the document object being used by the dom library.
+ * @return {!Document} Document object.
+ */
+goog.dom.getDocument = function() {
+  return document;
+};
+
+
+/**
+ * Alias for getElementById. If a DOM node is passed in then we just return
+ * that.
+ * @param {string|Element} element Element ID or a DOM node.
+ * @return {Element} The element with the given ID, or the node passed in.
+ */
+goog.dom.getElement = function(element) {
+  return goog.isString(element) ?
+      document.getElementById(element) : element;
+};
+
+
+/**
+ * Alias for getElement.
+ * @param {string|Element} element Element ID or a DOM node.
+ * @return {Element} The element with the given ID, or the node passed in.
+ * @deprecated Use {@link goog.dom.getElement} instead.
+ */
+goog.dom.$ = goog.dom.getElement;
+
+
+/**
+ * Looks up elements by both tag and class name, using browser native functions
+ * ({@code querySelectorAll}, {@code getElementsByTagName} or
+ * {@code getElementsByClassName}) where possible. This function
+ * is a useful, if limited, way of collecting a list of DOM elements
+ * with certain characteristics.  {@code goog.dom.query} offers a
+ * more powerful and general solution which allows matching on CSS3
+ * selector expressions, but at increased cost in code size. If all you
+ * need is particular tags belonging to a single class, this function
+ * is fast and sleek.
+ *
+ * @see {goog.dom.query}
+ *
+ * @param {?string=} opt_tag Element tag name.
+ * @param {?string=} opt_class Optional class name.
+ * @param {Document|Element=} opt_el Optional element to look in.
+ * @return { {length: number} } Array-like list of elements (only a length
+ *     property and numerical indices are guaranteed to exist).
+ */
+goog.dom.getElementsByTagNameAndClass = function(opt_tag, opt_class, opt_el) {
+  return goog.dom.getElementsByTagNameAndClass_(document, opt_tag, opt_class,
+                                                opt_el);
+};
+
+
+/**
+ * Returns an array of all the elements with the provided className.
+ * @see {goog.dom.query}
+ * @param {string} className the name of the class to look for.
+ * @param {Document|Element=} opt_el Optional element to look in.
+ * @return { {length: number} } The items found with the class name provided.
+ */
+goog.dom.getElementsByClass = function(className, opt_el) {
+  var parent = opt_el || document;
+  if (goog.dom.canUseQuerySelector_(parent)) {
+    return parent.querySelectorAll('.' + className);
+  } else if (parent.getElementsByClassName) {
+    return parent.getElementsByClassName(className);
+  }
+  return goog.dom.getElementsByTagNameAndClass_(
+      document, '*', className, opt_el);
+};
+
+
+/**
+ * Returns the first element with the provided className.
+ * @see {goog.dom.query}
+ * @param {string} className the name of the class to look for.
+ * @param {Element|Document=} opt_el Optional element to look in.
+ * @return {Element} The first item with the class name provided.
+ */
+goog.dom.getElementByClass = function(className, opt_el) {
+  var parent = opt_el || document;
+  var retVal = null;
+  if (goog.dom.canUseQuerySelector_(parent)) {
+    retVal = parent.querySelector('.' + className);
+  } else {
+    retVal = goog.dom.getElementsByClass(className, opt_el)[0];
+  }
+  return retVal || null;
+};
+
+
+/**
+ * Prefer the standardized (http://www.w3.org/TR/selectors-api/), native and
+ * fast W3C Selectors API. However, the version of WebKit that shipped with
+ * Safari 3.1 and Chrome has a bug where it will not correctly match mixed-
+ * case class name selectors in quirks mode.
+ * @param {!Element|Document} parent The parent document object.
+ * @return {boolean} whether or not we can use parent.querySelector* APIs.
+ * @private
+ */
+goog.dom.canUseQuerySelector_ = function(parent) {
+  return parent.querySelectorAll &&
+         parent.querySelector &&
+         (!goog.userAgent.WEBKIT || goog.dom.isCss1CompatMode_(document) ||
+          goog.userAgent.isVersion('528'));
+};
+
+
+/**
+ * Helper for {@code getElementsByTagNameAndClass}.
+ * @param {!Document} doc The document to get the elements in.
+ * @param {?string=} opt_tag Element tag name.
+ * @param {?string=} opt_class Optional class name.
+ * @param {Document|Element=} opt_el Optional element to look in.
+ * @return { {length: number} } Array-like list of elements (only a length
+ *     property and numerical indices are guaranteed to exist).
+ * @private
+ */
+goog.dom.getElementsByTagNameAndClass_ = function(doc, opt_tag, opt_class,
+                                                  opt_el) {
+  var parent = opt_el || doc;
+  var tagName = (opt_tag && opt_tag != '*') ? opt_tag.toUpperCase() : '';
+
+  if (goog.dom.canUseQuerySelector_(parent) &&
+      (tagName || opt_class)) {
+    var query = tagName + (opt_class ? '.' + opt_class : '');
+    return parent.querySelectorAll(query);
+  }
+
+  // Use the native getElementsByClassName if available, under the assumption
+  // that even when the tag name is specified, there will be fewer elements to
+  // filter through when going by class than by tag name
+  if (opt_class && parent.getElementsByClassName) {
+    var els = parent.getElementsByClassName(opt_class);
+
+    if (tagName) {
+      var arrayLike = {};
+      var len = 0;
+
+      // Filter for specific tags if requested.
+      for (var i = 0, el; el = els[i]; i++) {
+        if (tagName == el.nodeName) {
+          arrayLike[len++] = el;
+        }
+      }
+      arrayLike.length = len;
+
+      return arrayLike;
+    } else {
+      return els;
+    }
+  }
+
+  var els = parent.getElementsByTagName(tagName || '*');
+
+  if (opt_class) {
+    var arrayLike = {};
+    var len = 0;
+    for (var i = 0, el; el = els[i]; i++) {
+      var className = el.className;
+      // Check if className has a split function since SVG className does not.
+      if (typeof className.split == 'function' &&
+          goog.array.contains(className.split(/\s+/), opt_class)) {
+        arrayLike[len++] = el;
+      }
+    }
+    arrayLike.length = len;
+    return arrayLike;
+  } else {
+    return els;
+  }
+};
+
+
+/**
+ * Alias for {@code getElementsByTagNameAndClass}.
+ * @param {?string=} opt_tag Element tag name.
+ * @param {?string=} opt_class Optional class name.
+ * @param {Element=} opt_el Optional element to look in.
+ * @return { {length: number} } Array-like list of elements (only a length
+ *     property and numerical indices are guaranteed to exist).
+ * @deprecated Use {@link goog.dom.getElementsByTagNameAndClass} instead.
+ */
+goog.dom.$$ = goog.dom.getElementsByTagNameAndClass;
+
+
+/**
+ * Sets multiple properties on a node.
+ * @param {Element} element DOM node to set properties on.
+ * @param {Object} properties Hash of property:value pairs.
+ */
+goog.dom.setProperties = function(element, properties) {
+  goog.object.forEach(properties, function(val, key) {
+    if (key == 'style') {
+      element.style.cssText = val;
+    } else if (key == 'class') {
+      element.className = val;
+    } else if (key == 'for') {
+      element.htmlFor = val;
+    } else if (key in goog.dom.DIRECT_ATTRIBUTE_MAP_) {
+      element.setAttribute(goog.dom.DIRECT_ATTRIBUTE_MAP_[key], val);
+    } else if (goog.string.startsWith(key, 'aria-')) {
+      element.setAttribute(key, val);
+    } else {
+      element[key] = val;
+    }
+  });
+};
+
+
+/**
+ * Map of attributes that should be set using
+ * element.setAttribute(key, val) instead of element[key] = val.  Used
+ * by goog.dom.setProperties.
+ *
+ * @type {Object}
+ * @private
+ */
+goog.dom.DIRECT_ATTRIBUTE_MAP_ = {
+  'cellpadding': 'cellPadding',
+  'cellspacing': 'cellSpacing',
+  'colspan': 'colSpan',
+  'rowspan': 'rowSpan',
+  'valign': 'vAlign',
+  'height': 'height',
+  'width': 'width',
+  'usemap': 'useMap',
+  'frameborder': 'frameBorder',
+  'maxlength': 'maxLength',
+  'type': 'type'
+};
+
+
+/**
+ * Gets the dimensions of the viewport.
+ *
+ * Gecko Standards mode:
+ * docEl.clientWidth  Width of viewport excluding scrollbar.
+ * win.innerWidth     Width of viewport including scrollbar.
+ * body.clientWidth   Width of body element.
+ *
+ * docEl.clientHeight Height of viewport excluding scrollbar.
+ * win.innerHeight    Height of viewport including scrollbar.
+ * body.clientHeight  Height of document.
+ *
+ * Gecko Backwards compatible mode:
+ * docEl.clientWidth  Width of viewport excluding scrollbar.
+ * win.innerWidth     Width of viewport including scrollbar.
+ * body.clientWidth   Width of viewport excluding scrollbar.
+ *
+ * docEl.clientHeight Height of document.
+ * win.innerHeight    Height of viewport including scrollbar.
+ * body.clientHeight  Height of viewport excluding scrollbar.
+ *
+ * IE6/7 Standards mode:
+ * docEl.clientWidth  Width of viewport excluding scrollbar.
+ * win.innerWidth     Undefined.
+ * body.clientWidth   Width of body element.
+ *
+ * docEl.clientHeight Height of viewport excluding scrollbar.
+ * win.innerHeight    Undefined.
+ * body.clientHeight  Height of document element.
+ *
+ * IE5 + IE6/7 Backwards compatible mode:
+ * docEl.clientWidth  0.
+ * win.innerWidth     Undefined.
+ * body.clientWidth   Width of viewport excluding scrollbar.
+ *
+ * docEl.clientHeight 0.
+ * win.innerHeight    Undefined.
+ * body.clientHeight  Height of viewport excluding scrollbar.
+ *
+ * Opera 9 Standards and backwards compatible mode:
+ * docEl.clientWidth  Width of viewport excluding scrollbar.
+ * win.innerWidth     Width of viewport including scrollbar.
+ * body.clientWidth   Width of viewport excluding scrollbar.
+ *
+ * docEl.clientHeight Height of document.
+ * win.innerHeight    Height of viewport including scrollbar.
+ * body.clientHeight  Height of viewport excluding scrollbar.
+ *
+ * WebKit:
+ * Safari 2
+ * docEl.clientHeight Same as scrollHeight.
+ * docEl.clientWidth  Same as innerWidth.
+ * win.innerWidth     Width of viewport excluding scrollbar.
+ * win.innerHeight    Height of the viewport including scrollbar.
+ * frame.innerHeight  Height of the viewport exluding scrollbar.
+ *
+ * Safari 3 (tested in 522)
+ *
+ * docEl.clientWidth  Width of viewport excluding scrollbar.
+ * docEl.clientHeight Height of viewport excluding scrollbar in strict mode.
+ * body.clientHeight  Height of viewport excluding scrollbar in quirks mode.
+ *
+ * @param {Window=} opt_window Optional window element to test.
+ * @return {!goog.math.Size} Object with values 'width' and 'height'.
+ */
+goog.dom.getViewportSize = function(opt_window) {
+  // TODO(user): This should not take an argument
+  return goog.dom.getViewportSize_(opt_window || window);
+};
+
+
+/**
+ * Helper for {@code getViewportSize}.
+ * @param {Window} win The window to get the view port size for.
+ * @return {!goog.math.Size} Object with values 'width' and 'height'.
+ * @private
+ */
+goog.dom.getViewportSize_ = function(win) {
+  var doc = win.document;
+
+  if (goog.userAgent.WEBKIT && !goog.userAgent.isVersion('500') &&
+      !goog.userAgent.MOBILE) {
+    // TODO(user): Sometimes we get something that isn't a valid window
+    // object. In this case we just revert to the current window. We need to
+    // figure out when this happens and find a real fix for it.
+    // See the comments on goog.dom.getWindow.
+    if (typeof win.innerHeight == 'undefined') {
+      win = window;
+    }
+    var innerHeight = win.innerHeight;
+    var scrollHeight = win.document.documentElement.scrollHeight;
+
+    if (win == win.top) {
+      if (scrollHeight < innerHeight) {
+        innerHeight -= 15; // Scrollbars are 15px wide on Mac
+      }
+    }
+    return new goog.math.Size(win.innerWidth, innerHeight);
+  }
+
+  var el = goog.dom.isCss1CompatMode_(doc) ? doc.documentElement : doc.body;
+
+  return new goog.math.Size(el.clientWidth, el.clientHeight);
+};
+
+
+/**
+ * Calculates the height of the document.
+ *
+ * @return {number} The height of the current document.
+ */
+goog.dom.getDocumentHeight = function() {
+  return goog.dom.getDocumentHeight_(window);
+};
+
+
+/**
+ * Calculates the height of the document of the given window.
+ *
+ * Function code copied from the opensocial gadget api:
+ *   gadgets.window.adjustHeight(opt_height)
+ *
+ * @private
+ * @param {Window} win The window whose document height to retrieve.
+ * @return {number} The height of the document of the given window.
+ */
+goog.dom.getDocumentHeight_ = function(win) {
+  // NOTE(user): This method will return the window size rather than the document
+  // size in webkit quirks mode.
+  var doc = win.document;
+  var height = 0;
+
+  if (doc) {
+    // Calculating inner content height is hard and different between
+    // browsers rendering in Strict vs. Quirks mode.  We use a combination of
+    // three properties within document.body and document.documentElement:
+    // - scrollHeight
+    // - offsetHeight
+    // - clientHeight
+    // These values differ significantly between browsers and rendering modes.
+    // But there are patterns.  It just takes a lot of time and persistence
+    // to figure out.
+
+    // Get the height of the viewport
+    var vh = goog.dom.getViewportSize_(win).height;
+    var body = doc.body;
+    var docEl = doc.documentElement;
+    if (goog.dom.isCss1CompatMode_(doc) && docEl.scrollHeight) {
+      // In Strict mode:
+      // The inner content height is contained in either:
+      //    document.documentElement.scrollHeight
+      //    document.documentElement.offsetHeight
+      // Based on studying the values output by different browsers,
+      // use the value that's NOT equal to the viewport height found above.
+      height = docEl.scrollHeight != vh ?
+          docEl.scrollHeight : docEl.offsetHeight;
+    } else {
+      // In Quirks mode:
+      // documentElement.clientHeight is equal to documentElement.offsetHeight
+      // except in IE.  In most browsers, document.documentElement can be used
+      // to calculate the inner content height.
+      // However, in other browsers (e.g. IE), document.body must be used
+      // instead.  How do we know which one to use?
+      // If document.documentElement.clientHeight does NOT equal
+      // document.documentElement.offsetHeight, then use document.body.
+      var sh = docEl.scrollHeight;
+      var oh = docEl.offsetHeight;
+      if (docEl.clientHeight != oh) {
+        sh = body.scrollHeight;
+        oh = body.offsetHeight;
+      }
+
+      // Detect whether the inner content height is bigger or smaller
+      // than the bounding box (viewport).  If bigger, take the larger
+      // value.  If smaller, take the smaller value.
+      if (sh > vh) {
+        // Content is larger
+        height = sh > oh ? sh : oh;
+      } else {
+        // Content is smaller
+        height = sh < oh ? sh : oh;
+      }
+    }
+  }
+
+  return height;
+};
+
+
+/**
+ * Gets the page scroll distance as a coordinate object.
+ *
+ * @param {Window=} opt_window Optional window element to test.
+ * @return {!goog.math.Coordinate} Object with values 'x' and 'y'.
+ * @deprecated Use {@link goog.dom.getDocumentScroll} instead.
+ */
+goog.dom.getPageScroll = function(opt_window) {
+  var win = opt_window || goog.global || window;
+  return goog.dom.getDomHelper(win.document).getDocumentScroll();
+};
+
+
+/**
+ * Gets the document scroll distance as a coordinate object.
+ *
+ * @return {!goog.math.Coordinate} Object with values 'x' and 'y'.
+ */
+goog.dom.getDocumentScroll = function() {
+  return goog.dom.getDocumentScroll_(document);
+};
+
+
+/**
+ * Helper for {@code getDocumentScroll}.
+ *
+ * @param {!Document} doc The document to get the scroll for.
+ * @return {!goog.math.Coordinate} Object with values 'x' and 'y'.
+ * @private
+ */
+goog.dom.getDocumentScroll_ = function(doc) {
+  var el = goog.dom.getDocumentScrollElement_(doc);
+  var win = goog.dom.getWindow_(doc);
+  return new goog.math.Coordinate(win.pageXOffset || el.scrollLeft,
+      win.pageYOffset || el.scrollTop);
+};
+
+
+/**
+ * Gets the document scroll element.
+ * @return {Element} Scrolling element.
+ */
+goog.dom.getDocumentScrollElement = function() {
+  return goog.dom.getDocumentScrollElement_(document);
+};
+
+
+/**
+ * Helper for {@code getDocumentScrollElement}.
+ * @param {!Document} doc The document to get the scroll element for.
+ * @return {Element} Scrolling element.
+ * @private
+ */
+goog.dom.getDocumentScrollElement_ = function(doc) {
+  // Safari (2 and 3) needs body.scrollLeft in both quirks mode and strict mode.
+  return !goog.userAgent.WEBKIT && goog.dom.isCss1CompatMode_(doc) ?
+      doc.documentElement : doc.body;
+};
+
+
+/**
+ * Gets the window object associated with the given document.
+ *
+ * @param {Document=} opt_doc  Document object to get window for.
+ * @return {Window} The window associated with the given document.
+ */
+goog.dom.getWindow = function(opt_doc) {
+  // TODO(user): This should not take an argument.
+  return opt_doc ? goog.dom.getWindow_(opt_doc) : window;
+};
+
+
+/**
+ * Helper for {@code getWindow}.
+ *
+ * @param {!Document} doc  Document object to get window for.
+ * @return {!Window} The window associated with the given document.
+ * @private
+ */
+goog.dom.getWindow_ = function(doc) {
+  return doc.parentWindow || doc.defaultView;
+};
+
+
+/**
+ * Returns a dom node with a set of attributes.  This function accepts varargs
+ * for subsequent nodes to be added.  Subsequent nodes will be added to the
+ * first node as childNodes.
+ *
+ * So:
+ * <code>createDom('div', null, createDom('p'), createDom('p'));</code>
+ * would return a div with two child paragraphs
+ *
+ * @param {string} tagName Tag to create.
+ * @param {Object|Array.<string>|string=} opt_attributes If object, then a map
+ *     of name-value pairs for attributes. If a string, then this is the
+ *     className of the new element. If an array, the elements will be joined
+ *     together as the className of the new element.
+ * @param {...Object|string|Array|NodeList} var_args Further DOM nodes or
+ *     strings for text nodes. If one of the var_args is an array or NodeList,i
+ *     its elements will be added as childNodes instead.
+ * @return {!Element} Reference to a DOM node.
+ */
+goog.dom.createDom = function(tagName, opt_attributes, var_args) {
+  return goog.dom.createDom_(document, arguments);
+};
+
+
+/**
+ * Helper for {@code createDom}.
+ * @param {!Document} doc The document to create the DOM in.
+ * @param {!Arguments} args Argument object passed from the callers. See
+ *     {@code goog.dom.createDom} for details.
+ * @return {!Element} Reference to a DOM node.
+ * @private
+ */
+goog.dom.createDom_ = function(doc, args) {
+  var tagName = args[0];
+  var attributes = args[1];
+
+  // Internet Explorer is dumb: http://msdn.microsoft.com/workshop/author/
+  //                            dhtml/reference/properties/name_2.asp
+  // Also does not allow setting of 'type' attribute on 'input' or 'button'.
+  if (!goog.dom.BrowserFeature.CAN_ADD_NAME_OR_TYPE_ATTRIBUTES && attributes &&
+      (attributes.name || attributes.type)) {
+    var tagNameArr = ['<', tagName];
+    if (attributes.name) {
+      tagNameArr.push(' name="', goog.string.htmlEscape(attributes.name),
+                      '"');
+    }
+    if (attributes.type) {
+      tagNameArr.push(' type="', goog.string.htmlEscape(attributes.type),
+                      '"');
+
+      // Clone attributes map to remove 'type' without mutating the input.
+      var clone = {};
+      goog.object.extend(clone, attributes);
+      attributes = clone;
+      delete attributes.type;
+    }
+    tagNameArr.push('>');
+    tagName = tagNameArr.join('');
+  }
+
+  var element = doc.createElement(tagName);
+
+  if (attributes) {
+    if (goog.isString(attributes)) {
+      element.className = attributes;
+    } else if (goog.isArray(attributes)) {
+      goog.dom.classes.add.apply(null, [element].concat(attributes));
+    } else {
+      goog.dom.setProperties(element, attributes);
+    }
+  }
+
+  if (args.length > 2) {
+    goog.dom.append_(doc, element, args, 2);
+  }
+
+  return element;
+};
+
+
+/**
+ * Appends a node with text or other nodes.
+ * @param {!Document} doc The document to create new nodes in.
+ * @param {!Node} parent The node to append nodes to.
+ * @param {!Arguments} args The values to add. See {@code goog.dom.append}.
+ * @param {number} startIndex The index of the array to start from.
+ * @private
+ */
+goog.dom.append_ = function(doc, parent, args, startIndex) {
+  function childHandler(child) {
+    // TODO(user): More coercion, ala MochiKit?
+    if (child) {
+      parent.appendChild(goog.isString(child) ?
+          doc.createTextNode(child) : child);
+    }
+  }
+
+  for (var i = startIndex; i < args.length; i++) {
+    var arg = args[i];
+    // TODO(user): Fix isArrayLike to return false for a text node.
+    if (goog.isArrayLike(arg) && !goog.dom.isNodeLike(arg)) {
+      // If the argument is a node list, not a real array, use a clone,
+      // because forEach can't be used to mutate a NodeList.
+      goog.array.forEach(goog.dom.isNodeList(arg) ?
+          goog.array.clone(arg) : arg,
+          childHandler);
+    } else {
+      childHandler(arg);
+    }
+  }
+};
+
+
+/**
+ * Alias for {@code createDom}.
+ * @param {string} tagName Tag to create.
+ * @param {string|Object=} opt_attributes If object, then a map of name-value
+ *     pairs for attributes. If a string, then this is the className of the new
+ *     element.
+ * @param {...Object|string|Array|NodeList} var_args Further DOM nodes or
+ *     strings for text nodes. If one of the var_args is an array, its
+ *     children will be added as childNodes instead.
+ * @return {!Element} Reference to a DOM node.
+ * @deprecated Use {@link goog.dom.createDom} instead.
+ */
+goog.dom.$dom = goog.dom.createDom;
+
+
+/**
+ * Creates a new element.
+ * @param {string} name Tag name.
+ * @return {!Element} The new element.
+ */
+goog.dom.createElement = function(name) {
+  return document.createElement(name);
+};
+
+
+/**
+ * Creates a new text node.
+ * @param {string} content Content.
+ * @return {!Text} The new text node.
+ */
+goog.dom.createTextNode = function(content) {
+  return document.createTextNode(content);
+};
+
+
+/**
+ * Create a table.
+ * @param {number} rows The number of rows in the table.  Must be >= 1.
+ * @param {number} columns The number of columns in the table.  Must be >= 1.
+ * @param {boolean=} opt_fillWithNbsp If true, fills table entries with nsbps.
+ * @return {!Element} The created table.
+ */
+goog.dom.createTable = function(rows, columns, opt_fillWithNbsp) {
+  return goog.dom.createTable_(document, rows, columns, !!opt_fillWithNbsp);
+};
+
+
+/**
+ * Create a table.
+ * @param {!Document} doc Document object to use to create the table.
+ * @param {number} rows The number of rows in the table.  Must be >= 1.
+ * @param {number} columns The number of columns in the table.  Must be >= 1.
+ * @param {boolean} fillWithNbsp If true, fills table entries with nsbps.
+ * @return {!Element} The created table.
+ * @private
+ */
+goog.dom.createTable_ = function(doc, rows, columns, fillWithNbsp) {
+  var rowHtml = ['<tr>'];
+  for (var i = 0; i < columns; i++) {
+    rowHtml.push(fillWithNbsp ? '<td>&nbsp;</td>' : '<td></td>');
+  }
+  rowHtml.push('</tr>');
+  rowHtml = rowHtml.join('');
+  var totalHtml = ['<table>'];
+  for (i = 0; i < rows; i++) {
+    totalHtml.push(rowHtml);
+  }
+  totalHtml.push('</table>');
+
+  var elem = doc.createElement(goog.dom.TagName.DIV);
+  elem.innerHTML = totalHtml.join('');
+  return /** @type {!Element} */ (elem.removeChild(elem.firstChild));
+};
+
+
+/**
+ * Converts an HTML string into a document fragment.
+ *
+ * @param {string} htmlString The HTML string to convert.
+ * @return {!Node} The resulting document fragment.
+ */
+goog.dom.htmlToDocumentFragment = function(htmlString) {
+  return goog.dom.htmlToDocumentFragment_(document, htmlString);
+};
+
+
+/**
+ * Helper for {@code htmlToDocumentFragment}.
+ *
+ * @param {!Document} doc The document.
+ * @param {string} htmlString The HTML string to convert.
+ * @return {!Node} The resulting document fragment.
+ * @private
+ */
+goog.dom.htmlToDocumentFragment_ = function(doc, htmlString) {
+  var tempDiv = doc.createElement('div');
+  if (goog.dom.BrowserFeature.INNER_HTML_NEEDS_SCOPED_ELEMENT) {
+    tempDiv.innerHTML = '<br>' + htmlString;
+    tempDiv.removeChild(tempDiv.firstChild);
+  } else {
+    tempDiv.innerHTML = htmlString;
+  }
+  if (tempDiv.childNodes.length == 1) {
+    return /** @type {!Node} */ (tempDiv.removeChild(tempDiv.firstChild));
+  } else {
+    var fragment = doc.createDocumentFragment();
+    while (tempDiv.firstChild) {
+      fragment.appendChild(tempDiv.firstChild);
+    }
+    return fragment;
+  }
+};
+
+
+/**
+ * Returns the compatMode of the document.
+ * @return {string} The result is either CSS1Compat or BackCompat.
+ * @deprecated use goog.dom.isCss1CompatMode instead.
+ */
+goog.dom.getCompatMode = function() {
+  return goog.dom.isCss1CompatMode() ? 'CSS1Compat' : 'BackCompat';
+};
+
+
+/**
+ * Returns true if the browser is in "CSS1-compatible" (standards-compliant)
+ * mode, false otherwise.
+ * @return {boolean} True if in CSS1-compatible mode.
+ */
+goog.dom.isCss1CompatMode = function() {
+  return goog.dom.isCss1CompatMode_(document);
+};
+
+
+/**
+ * Returns true if the browser is in "CSS1-compatible" (standards-compliant)
+ * mode, false otherwise.
+ * @param {Document} doc The document to check.
+ * @return {boolean} True if in CSS1-compatible mode.
+ * @private
+ */
+goog.dom.isCss1CompatMode_ = function(doc) {
+  if (goog.dom.COMPAT_MODE_KNOWN_) {
+    return goog.dom.ASSUME_STANDARDS_MODE;
+  }
+
+  return doc.compatMode == 'CSS1Compat';
+};
+
+
+/**
+ * Determines if the given node can contain children, intended to be used for
+ * HTML generation.
+ *
+ * IE natively supports node.canHaveChildren but has inconsistent behavior.
+ * Prior to IE8 the base tag allows children and in IE9 all nodes return true
+ * for canHaveChildren.
+ *
+ * In practice all non-IE browsers allow you to add children to any node, but
+ * the behavior is inconsistent:
+ *
+ * <pre>
+ *   var a = document.createElement('br');
+ *   a.appendChild(document.createTextNode('foo'));
+ *   a.appendChild(document.createTextNode('bar'));
+ *   console.log(a.childNodes.length);  // 2
+ *   console.log(a.innerHTML);  // Chrome: "", IE9: "foobar", FF3.5: "foobar"
+ * </pre>
+ *
+ * TODO(user): Rename shouldAllowChildren() ?
+ *
+ * @param {Node} node The node to check.
+ * @return {boolean} Whether the node can contain children.
+ */
+goog.dom.canHaveChildren = function(node) {
+  if (node.nodeType != goog.dom.NodeType.ELEMENT) {
+    return false;
+  }
+  switch (node.tagName) {
+    case goog.dom.TagName.APPLET:
+    case goog.dom.TagName.AREA:
+    case goog.dom.TagName.BASE:
+    case goog.dom.TagName.BR:
+    case goog.dom.TagName.COL:
+    case goog.dom.TagName.FRAME:
+    case goog.dom.TagName.HR:
+    case goog.dom.TagName.IMG:
+    case goog.dom.TagName.INPUT:
+    case goog.dom.TagName.IFRAME:
+    case goog.dom.TagName.ISINDEX:
+    case goog.dom.TagName.LINK:
+    case goog.dom.TagName.NOFRAMES:
+    case goog.dom.TagName.NOSCRIPT:
+    case goog.dom.TagName.META:
+    case goog.dom.TagName.OBJECT:
+    case goog.dom.TagName.PARAM:
+    case goog.dom.TagName.SCRIPT:
+    case goog.dom.TagName.STYLE:
+      return false;
+  }
+  return true;
+};
+
+
+/**
+ * Appends a child to a node.
+ * @param {Node} parent Parent.
+ * @param {Node} child Child.
+ */
+goog.dom.appendChild = function(parent, child) {
+  parent.appendChild(child);
+};
+
+
+/**
+ * Appends a node with text or other nodes.
+ * @param {!Node} parent The node to append nodes to.
+ * @param {...goog.dom.Appendable} var_args The things to append to the node.
+ *     If this is a Node it is appended as is.
+ *     If this is a string then a text node is appended.
+ *     If this is an array like object then fields 0 to length - 1 are appended.
+ */
+goog.dom.append = function(parent, var_args) {
+  goog.dom.append_(goog.dom.getOwnerDocument(parent), parent, arguments, 1);
+};
+
+
+/**
+ * Removes all the child nodes on a DOM node.
+ * @param {Node} node Node to remove children from.
+ */
+goog.dom.removeChildren = function(node) {
+  // Note: Iterations over live collections can be slow, this is the fastest
+  // we could find. The double parenthesis are used to prevent JsCompiler and
+  // strict warnings.
+  var child;
+  while ((child = node.firstChild)) {
+    node.removeChild(child);
+  }
+};
+
+
+/**
+ * Inserts a new node before an existing reference node (i.e. as the previous
+ * sibling). If the reference node has no parent, then does nothing.
+ * @param {Node} newNode Node to insert.
+ * @param {Node} refNode Reference node to insert before.
+ */
+goog.dom.insertSiblingBefore = function(newNode, refNode) {
+  if (refNode.parentNode) {
+    refNode.parentNode.insertBefore(newNode, refNode);
+  }
+};
+
+
+/**
+ * Inserts a new node after an existing reference node (i.e. as the next
+ * sibling). If the reference node has no parent, then does nothing.
+ * @param {Node} newNode Node to insert.
+ * @param {Node} refNode Reference node to insert after.
+ */
+goog.dom.insertSiblingAfter = function(newNode, refNode) {
+  if (refNode.parentNode) {
+    refNode.parentNode.insertBefore(newNode, refNode.nextSibling);
+  }
+};
+
+
+/**
+ * Insert a child at a given index. If index is larger than the number of child
+ * nodes that the parent currently has, the node is inserted as the last child
+ * node.
+ * @param {Element} parent The element into which to insert the child.
+ * @param {Node} child The element to insert.
+ * @param {number} index The index at which to insert the new child node. Must
+ *     not be negative.
+ */
+goog.dom.insertChildAt = function(parent, child, index) {
+  // Note that if the second argument is null, insertBefore
+  // will append the child at the end of the list of children.
+  parent.insertBefore(child, parent.childNodes[index] || null);
+};
+
+
+/**
+ * Removes a node from its parent.
+ * @param {Node} node The node to remove.
+ * @return {Node} The node removed if removed; else, null.
+ */
+goog.dom.removeNode = function(node) {
+  return node && node.parentNode ? node.parentNode.removeChild(node) : null;
+};
+
+
+/**
+ * Replaces a node in the DOM tree. Will do nothing if {@code oldNode} has no
+ * parent.
+ * @param {Node} newNode Node to insert.
+ * @param {Node} oldNode Node to replace.
+ */
+goog.dom.replaceNode = function(newNode, oldNode) {
+  var parent = oldNode.parentNode;
+  if (parent) {
+    parent.replaceChild(newNode, oldNode);
+  }
+};
+
+
+/**
+ * Flattens an element. That is, removes it and replace it with its children.
+ * Does nothing if the element is not in the document.
+ * @param {Element} element The element to flatten.
+ * @return {Element|undefined} The original element, detached from the document
+ *     tree, sans children; or undefined, if the element was not in the
+ *     document to begin with.
+ */
+goog.dom.flattenElement = function(element) {
+  var child, parent = element.parentNode;
+  if (parent && parent.nodeType != goog.dom.NodeType.DOCUMENT_FRAGMENT) {
+    // Use IE DOM method (supported by Opera too) if available
+    if (element.removeNode) {
+      return /** @type {Element} */ (element.removeNode(false));
+    } else {
+      // Move all children of the original node up one level.
+      while ((child = element.firstChild)) {
+        parent.insertBefore(child, element);
+      }
+
+      // Detach the original element.
+      return /** @type {Element} */ (goog.dom.removeNode(element));
+    }
+  }
+};
+
+
+/**
+ * Returns an array containing just the element children of the given element.
+ * @param {Element} element The element whose element children we want.
+ * @return {Array|NodeList} An array or array-like list of just the element
+ *     children of the given element.
+ */
+goog.dom.getChildren = function(element) {
+  // We check if the children attribute is supported for child elements
+  // since IE8 misuses the attribute by also including comments.
+  if (goog.dom.BrowserFeature.CAN_USE_CHILDREN_ATTRIBUTE &&
+      element.children != undefined) {
+    return element.children;
+  }
+  // Fall back to manually filtering the element's child nodes.
+  return goog.array.filter(element.childNodes, function(node) {
+    return node.nodeType == goog.dom.NodeType.ELEMENT;
+  });
+};
+
+
+/**
+ * Returns the first child node that is an element.
+ * @param {Node} node The node to get the first child element of.
+ * @return {Element} The first child node of {@code node} that is an element.
+ */
+goog.dom.getFirstElementChild = function(node) {
+  if (node.firstElementChild != undefined) {
+    return /** @type {Element} */(node).firstElementChild;
+  }
+  return goog.dom.getNextElementNode_(node.firstChild, true);
+};
+
+
+/**
+ * Returns the last child node that is an element.
+ * @param {Node} node The node to get the last child element of.
+ * @return {Element} The last child node of {@code node} that is an element.
+ */
+goog.dom.getLastElementChild = function(node) {
+  if (node.lastElementChild != undefined) {
+    return /** @type {Element} */(node).lastElementChild;
+  }
+  return goog.dom.getNextElementNode_(node.lastChild, false);
+};
+
+
+/**
+ * Returns the first next sibling that is an element.
+ * @param {Node} node The node to get the next sibling element of.
+ * @return {Element} The next sibling of {@code node} that is an element.
+ */
+goog.dom.getNextElementSibling = function(node) {
+  if (node.nextElementSibling != undefined) {
+    return /** @type {Element} */(node).nextElementSibling;
+  }
+  return goog.dom.getNextElementNode_(node.nextSibling, true);
+};
+
+
+/**
+ * Returns the first previous sibling that is an element.
+ * @param {Node} node The node to get the previous sibling element of.
+ * @return {Element} The first previous sibling of {@code node} that is
+ *     an element.
+ */
+goog.dom.getPreviousElementSibling = function(node) {
+  if (node.previousElementSibling != undefined) {
+    return /** @type {Element} */(node).previousElementSibling;
+  }
+  return goog.dom.getNextElementNode_(node.previousSibling, false);
+};
+
+
+/**
+ * Returns the first node that is an element in the specified direction,
+ * starting with {@code node}.
+ * @param {Node} node The node to get the next element from.
+ * @param {boolean} forward Whether to look forwards or backwards.
+ * @return {Element} The first element.
+ * @private
+ */
+goog.dom.getNextElementNode_ = function(node, forward) {
+  while (node && node.nodeType != goog.dom.NodeType.ELEMENT) {
+    node = forward ? node.nextSibling : node.previousSibling;
+  }
+
+  return /** @type {Element} */ (node);
+};
+
+
+/**
+ * Returns the next node in source order from the given node.
+ * @param {Node} node The node.
+ * @return {Node} The next node in the DOM tree, or null if this was the last
+ *     node.
+ */
+goog.dom.getNextNode = function(node) {
+  if (!node) {
+    return null;
+  }
+
+  if (node.firstChild) {
+    return node.firstChild;
+  }
+
+  while (node && !node.nextSibling) {
+    node = node.parentNode;
+  }
+
+  return node ? node.nextSibling : null;
+};
+
+
+/**
+ * Returns the previous node in source order from the given node.
+ * @param {Node} node The node.
+ * @return {Node} The previous node in the DOM tree, or null if this was the
+ *     first node.
+ */
+goog.dom.getPreviousNode = function(node) {
+  if (!node) {
+    return null;
+  }
+
+  if (!node.previousSibling) {
+    return node.parentNode;
+  }
+
+  node = node.previousSibling;
+  while (node && node.lastChild) {
+    node = node.lastChild;
+  }
+
+  return node;
+};
+
+
+/**
+ * Whether the object looks like a DOM node.
+ * @param {*} obj The object being tested for node likeness.
+ * @return {boolean} Whether the object looks like a DOM node.
+ */
+goog.dom.isNodeLike = function(obj) {
+  return goog.isObject(obj) && obj.nodeType > 0;
+};
+
+
+/**
+ * Whether the object looks like an Element.
+ * @param {*} obj The object being tested for Element likeness.
+ * @return {boolean} Whether the object looks like an Element.
+ */
+goog.dom.isElement = function(obj) {
+  return goog.isObject(obj) && obj.nodeType == goog.dom.NodeType.ELEMENT;
+};
+
+
+/**
+ * Returns true if the specified value is a Window object. This includes the
+ * global window for HTML pages, and iframe windows.
+ * @param {*} obj Variable to test.
+ * @return {boolean} Whether the variable is a window.
+ */
+goog.dom.isWindow = function(obj) {
+  return goog.isObject(obj) && obj['window'] == obj;
+};
+
+
+/**
+ * Whether a node contains another node.
+ * @param {Node} parent The node that should contain the other node.
+ * @param {Node} descendant The node to test presence of.
+ * @return {boolean} Whether the parent node contains the descendent node.
+ */
+goog.dom.contains = function(parent, descendant) {
+  // We use browser specific methods for this if available since it is faster
+  // that way.
+
+  // IE DOM
+  if (parent.contains && descendant.nodeType == goog.dom.NodeType.ELEMENT) {
+    return parent == descendant || parent.contains(descendant);
+  }
+
+  // W3C DOM Level 3
+  if (typeof parent.compareDocumentPosition != 'undefined') {
+    return parent == descendant ||
+        Boolean(parent.compareDocumentPosition(descendant) & 16);
+  }
+
+  // W3C DOM Level 1
+  while (descendant && parent != descendant) {
+    descendant = descendant.parentNode;
+  }
+  return descendant == parent;
+};
+
+
+/**
+ * Compares the document order of two nodes, returning 0 if they are the same
+ * node, a negative number if node1 is before node2, and a positive number if
+ * node2 is before node1.  Note that we compare the order the tags appear in the
+ * document so in the tree <b><i>text</i></b> the B node is considered to be
+ * before the I node.
+ *
+ * @param {Node} node1 The first node to compare.
+ * @param {Node} node2 The second node to compare.
+ * @return {number} 0 if the nodes are the same node, a negative number if node1
+ *     is before node2, and a positive number if node2 is before node1.
+ */
+goog.dom.compareNodeOrder = function(node1, node2) {
+  // Fall out quickly for equality.
+  if (node1 == node2) {
+    return 0;
+  }
+
+  // Use compareDocumentPosition where available
+  if (node1.compareDocumentPosition) {
+    // 4 is the bitmask for FOLLOWS.
+    return node1.compareDocumentPosition(node2) & 2 ? 1 : -1;
+  }
+
+  // Process in IE using sourceIndex - we check to see if the first node has
+  // a source index or if its parent has one.
+  if ('sourceIndex' in node1 ||
+      (node1.parentNode && 'sourceIndex' in node1.parentNode)) {
+    var isElement1 = node1.nodeType == goog.dom.NodeType.ELEMENT;
+    var isElement2 = node2.nodeType == goog.dom.NodeType.ELEMENT;
+
+    if (isElement1 && isElement2) {
+      return node1.sourceIndex - node2.sourceIndex;
+    } else {
+      var parent1 = node1.parentNode;
+      var parent2 = node2.parentNode;
+
+      if (parent1 == parent2) {
+        return goog.dom.compareSiblingOrder_(node1, node2);
+      }
+
+      if (!isElement1 && goog.dom.contains(parent1, node2)) {
+        return -1 * goog.dom.compareParentsDescendantNodeIe_(node1, node2);
+      }
+
+
+      if (!isElement2 && goog.dom.contains(parent2, node1)) {
+        return goog.dom.compareParentsDescendantNodeIe_(node2, node1);
+      }
+
+      return (isElement1 ? node1.sourceIndex : parent1.sourceIndex) -
+             (isElement2 ? node2.sourceIndex : parent2.sourceIndex);
+    }
+  }
+
+  // For Safari, we compare ranges.
+  var doc = goog.dom.getOwnerDocument(node1);
+
+  var range1, range2;
+  range1 = doc.createRange();
+  range1.selectNode(node1);
+  range1.collapse(true);
+
+  range2 = doc.createRange();
+  range2.selectNode(node2);
+  range2.collapse(true);
+
+  return range1.compareBoundaryPoints(goog.global['Range'].START_TO_END,
+      range2);
+};
+
+
+/**
+ * Utility function to compare the position of two nodes, when
+ * {@code textNode}'s parent is an ancestor of {@code node}.  If this entry
+ * condition is not met, this function will attempt to reference a null object.
+ * @param {Node} textNode The textNode to compare.
+ * @param {Node} node The node to compare.
+ * @return {number} -1 if node is before textNode, +1 otherwise.
+ * @private
+ */
+goog.dom.compareParentsDescendantNodeIe_ = function(textNode, node) {
+  var parent = textNode.parentNode;
+  if (parent == node) {
+    // If textNode is a child of node, then node comes first.
+    return -1;
+  }
+  var sibling = node;
+  while (sibling.parentNode != parent) {
+    sibling = sibling.parentNode;
+  }
+  return goog.dom.compareSiblingOrder_(sibling, textNode);
+};
+
+
+/**
+ * Utility function to compare the position of two nodes known to be non-equal
+ * siblings.
+ * @param {Node} node1 The first node to compare.
+ * @param {Node} node2 The second node to compare.
+ * @return {number} -1 if node1 is before node2, +1 otherwise.
+ * @private
+ */
+goog.dom.compareSiblingOrder_ = function(node1, node2) {
+  var s = node2;
+  while ((s = s.previousSibling)) {
+    if (s == node1) {
+      // We just found node1 before node2.
+      return -1;
+    }
+  }
+
+  // Since we didn't find it, node1 must be after node2.
+  return 1;
+};
+
+
+/**
+ * Find the deepest common ancestor of the given nodes.
+ * @param {...Node} var_args The nodes to find a common ancestor of.
+ * @return {Node} The common ancestor of the nodes, or null if there is none.
+ *     null will only be returned if two or more of the nodes are from different
+ *     documents.
+ */
+goog.dom.findCommonAncestor = function(var_args) {
+  var i, count = arguments.length;
+  if (!count) {
+    return null;
+  } else if (count == 1) {
+    return arguments[0];
+  }
+
+  var paths = [];
+  var minLength = Infinity;
+  for (i = 0; i < count; i++) {
+    // Compute the list of ancestors.
+    var ancestors = [];
+    var node = arguments[i];
+    while (node) {
+      ancestors.unshift(node);
+      node = node.parentNode;
+    }
+
+    // Save the list for comparison.
+    paths.push(ancestors);
+    minLength = Math.min(minLength, ancestors.length);
+  }
+  var output = null;
+  for (i = 0; i < minLength; i++) {
+    var first = paths[0][i];
+    for (var j = 1; j < count; j++) {
+      if (first != paths[j][i]) {
+        return output;
+      }
+    }
+    output = first;
+  }
+  return output;
+};
+
+
+/**
+ * Returns the owner document for a node.
+ * @param {Node|Window} node The node to get the document for.
+ * @return {!Document} The document owning the node.
+ */
+goog.dom.getOwnerDocument = function(node) {
+  // TODO(user): Remove IE5 code.
+  // IE5 uses document instead of ownerDocument
+  return /** @type {!Document} */ (
+      node.nodeType == goog.dom.NodeType.DOCUMENT ? node :
+      node.ownerDocument || node.document);
+};
+
+
+/**
+ * Cross-browser function for getting the document element of a frame or iframe.
+ * @param {Element} frame Frame element.
+ * @return {!Document} The frame content document.
+ */
+goog.dom.getFrameContentDocument = function(frame) {
+  var doc;
+  if (goog.userAgent.WEBKIT) {
+    doc = (frame.document || frame.contentWindow.document);
+  } else {
+    doc = (frame.contentDocument || frame.contentWindow.document);
+  }
+  return doc;
+};
+
+
+/**
+ * Cross-browser function for getting the window of a frame or iframe.
+ * @param {HTMLIFrameElement|HTMLFrameElement} frame Frame element.
+ * @return {Window} The window associated with the given frame.
+ */
+goog.dom.getFrameContentWindow = function(frame) {
+  return frame.contentWindow ||
+      goog.dom.getWindow_(goog.dom.getFrameContentDocument(frame));
+};
+
+
+/**
+ * Cross-browser function for setting the text content of an element.
+ * @param {Element} element The element to change the text content of.
+ * @param {string} text The string that should replace the current element
+ *     content.
+ */
+goog.dom.setTextContent = function(element, text) {
+  if ('textContent' in element) {
+    element.textContent = text;
+  } else if (element.firstChild &&
+             element.firstChild.nodeType == goog.dom.NodeType.TEXT) {
+    // If the first child is a text node we just change its data and remove the
+    // rest of the children.
+    while (element.lastChild != element.firstChild) {
+      element.removeChild(element.lastChild);
+    }
+    element.firstChild.data = text;
+  } else {
+    goog.dom.removeChildren(element);
+    var doc = goog.dom.getOwnerDocument(element);
+    element.appendChild(doc.createTextNode(text));
+  }
+};
+
+
+/**
+ * Gets the outerHTML of a node, which islike innerHTML, except that it
+ * actually contains the HTML of the node itself.
+ * @param {Element} element The element to get the HTML of.
+ * @return {string} The outerHTML of the given element.
+ */
+goog.dom.getOuterHtml = function(element) {
+  // IE, Opera and WebKit all have outerHTML.
+  if ('outerHTML' in element) {
+    return element.outerHTML;
+  } else {
+    var doc = goog.dom.getOwnerDocument(element);
+    var div = doc.createElement('div');
+    div.appendChild(element.cloneNode(true));
+    return div.innerHTML;
+  }
+};
+
+
+/**
+ * Finds the first descendant node that matches the filter function, using
+ * a depth first search. This function offers the most general purpose way
+ * of finding a matching element. You may also wish to consider
+ * {@code goog.dom.query} which can express many matching criteria using
+ * CSS selector expressions. These expressions often result in a more
+ * compact representation of the desired result.
+ * @see goog.dom.query
+ *
+ * @param {Node} root The root of the tree to search.
+ * @param {function(Node) : boolean} p The filter function.
+ * @return {Node|undefined} The found node or undefined if none is found.
+ */
+goog.dom.findNode = function(root, p) {
+  var rv = [];
+  var found = goog.dom.findNodes_(root, p, rv, true);
+  return found ? rv[0] : undefined;
+};
+
+
+/**
+ * Finds all the descendant nodes that match the filter function, using a
+ * a depth first search. This function offers the most general-purpose way
+ * of finding a set of matching elements. You may also wish to consider
+ * {@code goog.dom.query} which can express many matching criteria using
+ * CSS selector expressions. These expressions often result in a more
+ * compact representation of the desired result.
+
+ * @param {Node} root The root of the tree to search.
+ * @param {function(Node) : boolean} p The filter function.
+ * @return {Array.<Node>} The found nodes or an empty array if none are found.
+ */
+goog.dom.findNodes = function(root, p) {
+  var rv = [];
+  goog.dom.findNodes_(root, p, rv, false);
+  return rv;
+};
+
+
+/**
+ * Finds the first or all the descendant nodes that match the filter function,
+ * using a depth first search.
+ * @param {Node} root The root of the tree to search.
+ * @param {function(Node) : boolean} p The filter function.
+ * @param {Array.<Node>} rv The found nodes are added to this array.
+ * @param {boolean} findOne If true we exit after the first found node.
+ * @return {boolean} Whether the search is complete or not. True in case findOne
+ *     is true and the node is found. False otherwise.
+ * @private
+ */
+goog.dom.findNodes_ = function(root, p, rv, findOne) {
+  if (root != null) {
+    var child = root.firstChild;
+    while (child) {
+      if (p(child)) {
+        rv.push(child);
+        if (findOne) {
+          return true;
+        }
+      }
+      if (goog.dom.findNodes_(child, p, rv, findOne)) {
+        return true;
+      }
+      child = child.nextSibling;
+    }
+  }
+  return false;
+};
+
+
+/**
+ * Map of tags whose content to ignore when calculating text length.
+ * @type {Object}
+ * @private
+ */
+goog.dom.TAGS_TO_IGNORE_ = {
+  'SCRIPT': 1,
+  'STYLE': 1,
+  'HEAD': 1,
+  'IFRAME': 1,
+  'OBJECT': 1
+};
+
+
+/**
+ * Map of tags which have predefined values with regard to whitespace.
+ * @type {Object}
+ * @private
+ */
+goog.dom.PREDEFINED_TAG_VALUES_ = {'IMG': ' ', 'BR': '\n'};
+
+
+/**
+ * Returns true if the element has a tab index that allows it to receive
+ * keyboard focus (tabIndex >= 0), false otherwise.  Note that form elements
+ * natively support keyboard focus, even if they have no tab index.
+ * @param {Element} element Element to check.
+ * @return {boolean} Whether the element has a tab index that allows keyboard
+ *     focus.
+ * @see http://fluidproject.org/blog/2008/01/09/getting-setting-and-removing-tabindex-values-with-javascript/
+ */
+goog.dom.isFocusableTabIndex = function(element) {
+  // IE returns 0 for an unset tabIndex, so we must use getAttributeNode(),
+  // which returns an object with a 'specified' property if tabIndex is
+  // specified.  This works on other browsers, too.
+  var attrNode = element.getAttributeNode('tabindex'); // Must be lowercase!
+  if (attrNode && attrNode.specified) {
+    var index = element.tabIndex;
+    // NOTE: IE9 puts tabIndex in 16-bit int, e.g. -2 is 65534.
+    return goog.isNumber(index) && index >= 0 && index < 32768;
+  }
+  return false;
+};
+
+
+/**
+ * Enables or disables keyboard focus support on the element via its tab index.
+ * Only elements for which {@link goog.dom.isFocusableTabIndex} returns true
+ * (or elements that natively support keyboard focus, like form elements) can
+ * receive keyboard focus.  See http://go/tabindex for more info.
+ * @param {Element} element Element whose tab index is to be changed.
+ * @param {boolean} enable Whether to set or remove a tab index on the element
+ *     that supports keyboard focus.
+ */
+goog.dom.setFocusableTabIndex = function(element, enable) {
+  if (enable) {
+    element.tabIndex = 0;
+  } else {
+    // Set tabIndex to -1 first, then remove it. This is a workaround for
+    // Safari (confirmed in version 4 on Windows). When removing the attribute
+    // without setting it to -1 first, the element remains keyboard focusable
+    // despite not having a tabIndex attribute anymore.
+    element.tabIndex = -1;
+    element.removeAttribute('tabIndex'); // Must be camelCase!
+  }
+};
+
+
+/**
+ * Returns the text content of the current node, without markup and invisible
+ * symbols. New lines are stripped and whitespace is collapsed,
+ * such that each character would be visible.
+ *
+ * In browsers that support it, innerText is used.  Other browsers attempt to
+ * simulate it via node traversal.  Line breaks are canonicalized in IE.
+ *
+ * @param {Node} node The node from which we are getting content.
+ * @return {string} The text content.
+ */
+goog.dom.getTextContent = function(node) {
+  var textContent;
+  // Note(user): IE9, Opera, and Safari 3 support innerText but they include
+  // text nodes in script tags. So we revert to use a user agent test here.
+  if (goog.dom.BrowserFeature.CAN_USE_INNER_TEXT && ('innerText' in node)) {
+    textContent = goog.string.canonicalizeNewlines(node.innerText);
+    // Unfortunately .innerText() returns text with &shy; symbols
+    // We need to filter it out and then remove duplicate whitespaces
+  } else {
+    var buf = [];
+    goog.dom.getTextContent_(node, buf, true);
+    textContent = buf.join('');
+  }
+
+  // Strip &shy; entities. goog.format.insertWordBreaks inserts them in Opera.
+  textContent = textContent.replace(/ \xAD /g, ' ').replace(/\xAD/g, '');
+  // Strip &#8203; entities. goog.format.insertWordBreaks inserts them in IE8.
+  textContent = textContent.replace(/\u200B/g, '');
+
+  // Skip this replacement on old browsers with working innerText, which
+  // automatically turns &nbsp; into ' ' and / +/ into ' ' when reading
+  // innerText.
+  if (!goog.dom.BrowserFeature.CAN_USE_INNER_TEXT) {
+    textContent = textContent.replace(/ +/g, ' ');
+  }
+  if (textContent != ' ') {
+    textContent = textContent.replace(/^\s*/, '');
+  }
+
+  return textContent;
+};
+
+
+/**
+ * Returns the text content of the current node, without markup.
+ *
+ * Unlike {@code getTextContent} this method does not collapse whitespaces
+ * or normalize lines breaks.
+ *
+ * @param {Node} node The node from which we are getting content.
+ * @return {string} The raw text content.
+ */
+goog.dom.getRawTextContent = function(node) {
+  var buf = [];
+  goog.dom.getTextContent_(node, buf, false);
+
+  return buf.join('');
+};
+
+
+/**
+ * Recursive support function for text content retrieval.
+ *
+ * @param {Node} node The node from which we are getting content.
+ * @param {Array} buf string buffer.
+ * @param {boolean} normalizeWhitespace Whether to normalize whitespace.
+ * @private
+ */
+goog.dom.getTextContent_ = function(node, buf, normalizeWhitespace) {
+  if (node.nodeName in goog.dom.TAGS_TO_IGNORE_) {
+    // ignore certain tags
+  } else if (node.nodeType == goog.dom.NodeType.TEXT) {
+    if (normalizeWhitespace) {
+      buf.push(String(node.nodeValue).replace(/(\r\n|\r|\n)/g, ''));
+    } else {
+      buf.push(node.nodeValue);
+    }
+  } else if (node.nodeName in goog.dom.PREDEFINED_TAG_VALUES_) {
+    buf.push(goog.dom.PREDEFINED_TAG_VALUES_[node.nodeName]);
+  } else {
+    var child = node.firstChild;
+    while (child) {
+      goog.dom.getTextContent_(child, buf, normalizeWhitespace);
+      child = child.nextSibling;
+    }
+  }
+};
+
+
+/**
+ * Returns the text length of the text contained in a node, without markup. This
+ * is equivalent to the selection length if the node was selected, or the number
+ * of cursor movements to traverse the node. Images & BRs take one space.  New
+ * lines are ignored.
+ *
+ * @param {Node} node The node whose text content length is being calculated.
+ * @return {number} The length of {@code node}'s text content.
+ */
+goog.dom.getNodeTextLength = function(node) {
+  return goog.dom.getTextContent(node).length;
+};
+
+
+/**
+ * Returns the text offset of a node relative to one of its ancestors. The text
+ * length is the same as the length calculated by goog.dom.getNodeTextLength.
+ *
+ * @param {Node} node The node whose offset is being calculated.
+ * @param {Node=} opt_offsetParent The node relative to which the offset will
+ *     be calculated. Defaults to the node's owner document's body.
+ * @return {number} The text offset.
+ */
+goog.dom.getNodeTextOffset = function(node, opt_offsetParent) {
+  var root = opt_offsetParent || goog.dom.getOwnerDocument(node).body;
+  var buf = [];
+  while (node && node != root) {
+    var cur = node;
+    while ((cur = cur.previousSibling)) {
+      buf.unshift(goog.dom.getTextContent(cur));
+    }
+    node = node.parentNode;
+  }
+  // Trim left to deal with FF cases when there might be line breaks and empty
+  // nodes at the front of the text
+  return goog.string.trimLeft(buf.join('')).replace(/ +/g, ' ').length;
+};
+
+
+/**
+ * Returns the node at a given offset in a parent node.  If an object is
+ * provided for the optional third parameter, the node and the remainder of the
+ * offset will stored as properties of this object.
+ * @param {Node} parent The parent node.
+ * @param {number} offset The offset into the parent node.
+ * @param {Object=} opt_result Object to be used to store the return value. The
+ *     return value will be stored in the form {node: Node, remainder: number}
+ *     if this object is provided.
+ * @return {Node} The node at the given offset.
+ */
+goog.dom.getNodeAtOffset = function(parent, offset, opt_result) {
+  var stack = [parent], pos = 0, cur;
+  while (stack.length > 0 && pos < offset) {
+    cur = stack.pop();
+    if (cur.nodeName in goog.dom.TAGS_TO_IGNORE_) {
+      // ignore certain tags
+    } else if (cur.nodeType == goog.dom.NodeType.TEXT) {
+      var text = cur.nodeValue.replace(/(\r\n|\r|\n)/g, '').replace(/ +/g, ' ');
+      pos += text.length;
+    } else if (cur.nodeName in goog.dom.PREDEFINED_TAG_VALUES_) {
+      pos += goog.dom.PREDEFINED_TAG_VALUES_[cur.nodeName].length;
+    } else {
+      for (var i = cur.childNodes.length - 1; i >= 0; i--) {
+        stack.push(cur.childNodes[i]);
+      }
+    }
+  }
+  if (goog.isObject(opt_result)) {
+    opt_result.remainder = cur ? cur.nodeValue.length + offset - pos - 1 : 0;
+    opt_result.node = cur;
+  }
+
+  return cur;
+};
+
+
+/**
+ * Returns true if the object is a {@code NodeList}.  To qualify as a NodeList,
+ * the object must have a numeric length property and an item function (which
+ * has type 'string' on IE for some reason).
+ * @param {Object} val Object to test.
+ * @return {boolean} Whether the object is a NodeList.
+ */
+goog.dom.isNodeList = function(val) {
+  // TODO(user): Now the isNodeList is part of goog.dom we can use
+  // goog.userAgent to make this simpler.
+  // A NodeList must have a length property of type 'number' on all platforms.
+  if (val && typeof val.length == 'number') {
+    // A NodeList is an object everywhere except Safari, where it's a function.
+    if (goog.isObject(val)) {
+      // A NodeList must have an item function (on non-IE platforms) or an item
+      // property of type 'string' (on IE).
+      return typeof val.item == 'function' || typeof val.item == 'string';
+    } else if (goog.isFunction(val)) {
+      // On Safari, a NodeList is a function with an item property that is also
+      // a function.
+      return typeof val.item == 'function';
+    }
+  }
+
+  // Not a NodeList.
+  return false;
+};
+
+
+/**
+ * Walks up the DOM hierarchy returning the first ancestor that has the passed
+ * tag name and/or class name. If the passed element matches the specified
+ * criteria, the element itself is returned.
+ * @param {Node} element The DOM node to start with.
+ * @param {?string=} opt_tag The tag name to match (or null/undefined to match
+ *     any node regardless of tag name). Must be uppercase (goog.dom.TagName).
+ * @param {?string=} opt_class The class name to match (or null/undefined to
+ *     match any node regardless of class name).
+ * @return {Node} The first ancestor that matches the passed criteria, or
+ *     null if none match.
+ */
+goog.dom.getAncestorByTagNameAndClass = function(element, opt_tag, opt_class) {
+  var tagName = opt_tag ? opt_tag.toUpperCase() : null;
+  return goog.dom.getAncestor(element,
+      function(node) {
+        return (!tagName || node.nodeName == tagName) &&
+               (!opt_class || goog.dom.classes.has(node, opt_class));
+      }, true);
+};
+
+
+/**
+ * Walks up the DOM hierarchy returning the first ancestor that has the passed
+ * class name. If the passed element matches the specified criteria, the
+ * element itself is returned.
+ * @param {Node} element The DOM node to start with.
+ * @param {?string=} opt_class The class name to match (or null/undefined to
+ *     match any node regardless of class name).
+ * @return {Node} The first ancestor that matches the passed criteria, or
+ *     null if none match.
+ */
+goog.dom.getAncestorByClass = function(element, opt_class) {
+  return goog.dom.getAncestorByTagNameAndClass(element, null, opt_class);
+};
+
+
+/**
+ * Walks up the DOM hierarchy returning the first ancestor that passes the
+ * matcher function.
+ * @param {Node} element The DOM node to start with.
+ * @param {function(Node) : boolean} matcher A function that returns true if the
+ *     passed node matches the desired criteria.
+ * @param {boolean=} opt_includeNode If true, the node itself is included in
+ *     the search (the first call to the matcher will pass startElement as
+ *     the node to test).
+ * @param {number=} opt_maxSearchSteps Maximum number of levels to search up the
+ *     dom.
+ * @return {Node} DOM node that matched the matcher, or null if there was
+ *     no match.
+ */
+goog.dom.getAncestor = function(
+    element, matcher, opt_includeNode, opt_maxSearchSteps) {
+  if (!opt_includeNode) {
+    element = element.parentNode;
+  }
+  var ignoreSearchSteps = opt_maxSearchSteps == null;
+  var steps = 0;
+  while (element && (ignoreSearchSteps || steps <= opt_maxSearchSteps)) {
+    if (matcher(element)) {
+      return element;
+    }
+    element = element.parentNode;
+    steps++;
+  }
+  // Reached the root of the DOM without a match
+  return null;
+};
+
+
+/**
+ * Determines the active element in the given document.
+ * @param {Document} doc The document to look in.
+ * @return {Element} The active element.
+ */
+goog.dom.getActiveElement = function(doc) {
+  try {
+    return doc && doc.activeElement;
+  } catch (e) {
+    // NOTE(nicksantos): Sometimes, evaluating document.activeElement in IE
+    // throws an exception. I'm not 100% sure why, but I suspect it chokes
+    // on document.activeElement if the activeElement has been recently
+    // removed from the DOM by a JS operation.
+    //
+    // We assume that an exception here simply means
+    // "there is no active element."
+  }
+
+  return null;
+};
+
+
+
+/**
+ * Create an instance of a DOM helper with a new document object.
+ * @param {Document=} opt_document Document object to associate with this
+ *     DOM helper.
+ * @constructor
+ */
+goog.dom.DomHelper = function(opt_document) {
+  /**
+   * Reference to the document object to use
+   * @type {!Document}
+   * @private
+   */
+  this.document_ = opt_document || goog.global.document || document;
+};
+
+
+/**
+ * Gets the dom helper object for the document where the element resides.
+ * @param {Node=} opt_node If present, gets the DomHelper for this node.
+ * @return {!goog.dom.DomHelper} The DomHelper.
+ */
+goog.dom.DomHelper.prototype.getDomHelper = goog.dom.getDomHelper;
+
+
+/**
+ * Sets the document object.
+ * @param {!Document} document Document object.
+ */
+goog.dom.DomHelper.prototype.setDocument = function(document) {
+  this.document_ = document;
+};
+
+
+/**
+ * Gets the document object being used by the dom library.
+ * @return {!Document} Document object.
+ */
+goog.dom.DomHelper.prototype.getDocument = function() {
+  return this.document_;
+};
+
+
+/**
+ * Alias for {@code getElementById}. If a DOM node is passed in then we just
+ * return that.
+ * @param {string|Element} element Element ID or a DOM node.
+ * @return {Element} The element with the given ID, or the node passed in.
+ */
+goog.dom.DomHelper.prototype.getElement = function(element) {
+  if (goog.isString(element)) {
+    return this.document_.getElementById(element);
+  } else {
+    return element;
+  }
+};
+
+
+/**
+ * Alias for {@code getElement}.
+ * @param {string|Element} element Element ID or a DOM node.
+ * @return {Element} The element with the given ID, or the node passed in.
+ * @deprecated Use {@link goog.dom.DomHelper.prototype.getElement} instead.
+ */
+goog.dom.DomHelper.prototype.$ = goog.dom.DomHelper.prototype.getElement;
+
+
+/**
+ * Looks up elements by both tag and class name, using browser native functions
+ * ({@code querySelectorAll}, {@code getElementsByTagName} or
+ * {@code getElementsByClassName}) where possible. The returned array is a live
+ * NodeList or a static list depending on the code path taken.
+ *
+ * @see goog.dom.query
+ *
+ * @param {?string=} opt_tag Element tag name or * for all tags.
+ * @param {?string=} opt_class Optional class name.
+ * @param {Document|Element=} opt_el Optional element to look in.
+ * @return { {length: number} } Array-like list of elements (only a length
+ *     property and numerical indices are guaranteed to exist).
+ */
+goog.dom.DomHelper.prototype.getElementsByTagNameAndClass = function(opt_tag,
+                                                                     opt_class,
+                                                                     opt_el) {
+  return goog.dom.getElementsByTagNameAndClass_(this.document_, opt_tag,
+                                                opt_class, opt_el);
+};
+
+
+/**
+ * Returns an array of all the elements with the provided className.
+ * @see {goog.dom.query}
+ * @param {string} className the name of the class to look for.
+ * @param {Element|Document=} opt_el Optional element to look in.
+ * @return { {length: number} } The items found with the class name provided.
+ */
+goog.dom.DomHelper.prototype.getElementsByClass = function(className, opt_el) {
+  var doc = opt_el || this.document_;
+  return goog.dom.getElementsByClass(className, doc);
+};
+
+
+/**
+ * Returns the first element we find matching the provided class name.
+ * @see {goog.dom.query}
+ * @param {string} className the name of the class to look for.
+ * @param {Element|Document=} opt_el Optional element to look in.
+ * @return {Element} The first item found with the class name provided.
+ */
+goog.dom.DomHelper.prototype.getElementByClass = function(className, opt_el) {
+  var doc = opt_el || this.document_;
+  return goog.dom.getElementByClass(className, doc);
+};
+
+
+/**
+ * Alias for {@code getElementsByTagNameAndClass}.
+ * @deprecated Use DomHelper getElementsByTagNameAndClass.
+ * @see goog.dom.query
+ *
+ * @param {?string=} opt_tag Element tag name.
+ * @param {?string=} opt_class Optional class name.
+ * @param {Element=} opt_el Optional element to look in.
+ * @return { {length: number} } Array-like list of elements (only a length
+ *     property and numerical indices are guaranteed to exist).
+ */
+goog.dom.DomHelper.prototype.$$ =
+    goog.dom.DomHelper.prototype.getElementsByTagNameAndClass;
+
+
+/**
+ * Sets a number of properties on a node.
+ * @param {Element} element DOM node to set properties on.
+ * @param {Object} properties Hash of property:value pairs.
+ */
+goog.dom.DomHelper.prototype.setProperties = goog.dom.setProperties;
+
+
+/**
+ * Gets the dimensions of the viewport.
+ * @param {Window=} opt_window Optional window element to test. Defaults to
+ *     the window of the Dom Helper.
+ * @return {!goog.math.Size} Object with values 'width' and 'height'.
+ */
+goog.dom.DomHelper.prototype.getViewportSize = function(opt_window) {
+  // TODO(user): This should not take an argument. That breaks the rule of a
+  // a DomHelper representing a single frame/window/document.
+  return goog.dom.getViewportSize(opt_window || this.getWindow());
+};
+
+
+/**
+ * Calculates the height of the document.
+ *
+ * @return {number} The height of the document.
+ */
+goog.dom.DomHelper.prototype.getDocumentHeight = function() {
+  return goog.dom.getDocumentHeight_(this.getWindow());
+};
+
+
+/**
+ * Typedef for use with goog.dom.createDom and goog.dom.append.
+ * @typedef {Object|string|Array|NodeList}
+ */
+goog.dom.Appendable;
+
+
+/**
+ * Returns a dom node with a set of attributes.  This function accepts varargs
+ * for subsequent nodes to be added.  Subsequent nodes will be added to the
+ * first node as childNodes.
+ *
+ * So:
+ * <code>createDom('div', null, createDom('p'), createDom('p'));</code>
+ * would return a div with two child paragraphs
+ *
+ * An easy way to move all child nodes of an existing element to a new parent
+ * element is:
+ * <code>createDom('div', null, oldElement.childNodes);</code>
+ * which will remove all child nodes from the old element and add them as
+ * child nodes of the new DIV.
+ *
+ * @param {string} tagName Tag to create.
+ * @param {Object|string=} opt_attributes If object, then a map of name-value
+ *     pairs for attributes. If a string, then this is the className of the new
+ *     element.
+ * @param {...goog.dom.Appendable} var_args Further DOM nodes or
+ *     strings for text nodes. If one of the var_args is an array or
+ *     NodeList, its elements will be added as childNodes instead.
+ * @return {!Element} Reference to a DOM node.
+ */
+goog.dom.DomHelper.prototype.createDom = function(tagName,
+                                                  opt_attributes,
+                                                  var_args) {
+  return goog.dom.createDom_(this.document_, arguments);
+};
+
+
+/**
+ * Alias for {@code createDom}.
+ * @param {string} tagName Tag to create.
+ * @param {Object|string=} opt_attributes If object, then a map of name-value
+ *     pairs for attributes. If a string, then this is the className of the new
+ *     element.
+ * @param {...goog.dom.Appendable} var_args Further DOM nodes or strings for
+ *     text nodes.  If one of the var_args is an array, its children will be
+ *     added as childNodes instead.
+ * @return {!Element} Reference to a DOM node.
+ * @deprecated Use {@link goog.dom.DomHelper.prototype.createDom} instead.
+ */
+goog.dom.DomHelper.prototype.$dom = goog.dom.DomHelper.prototype.createDom;
+
+
+/**
+ * Creates a new element.
+ * @param {string} name Tag name.
+ * @return {!Element} The new element.
+ */
+goog.dom.DomHelper.prototype.createElement = function(name) {
+  return this.document_.createElement(name);
+};
+
+
+/**
+ * Creates a new text node.
+ * @param {string} content Content.
+ * @return {!Text} The new text node.
+ */
+goog.dom.DomHelper.prototype.createTextNode = function(content) {
+  return this.document_.createTextNode(content);
+};
+
+
+/**
+ * Create a table.
+ * @param {number} rows The number of rows in the table.  Must be >= 1.
+ * @param {number} columns The number of columns in the table.  Must be >= 1.
+ * @param {boolean=} opt_fillWithNbsp If true, fills table entries with nsbps.
+ * @return {!Element} The created table.
+ */
+goog.dom.DomHelper.prototype.createTable = function(rows, columns,
+    opt_fillWithNbsp) {
+  return goog.dom.createTable_(this.document_, rows, columns,
+      !!opt_fillWithNbsp);
+};
+
+
+/**
+ * Converts an HTML string into a node or a document fragment.  A single Node
+ * is used if the {@code htmlString} only generates a single node.  If the
+ * {@code htmlString} generates multiple nodes then these are put inside a
+ * {@code DocumentFragment}.
+ *
+ * @param {string} htmlString The HTML string to convert.
+ * @return {!Node} The resulting node.
+ */
+goog.dom.DomHelper.prototype.htmlToDocumentFragment = function(htmlString) {
+  return goog.dom.htmlToDocumentFragment_(this.document_, htmlString);
+};
+
+
+/**
+ * Returns the compatMode of the document.
+ * @return {string} The result is either CSS1Compat or BackCompat.
+ * @deprecated use goog.dom.DomHelper.prototype.isCss1CompatMode instead.
+ */
+goog.dom.DomHelper.prototype.getCompatMode = function() {
+  return this.isCss1CompatMode() ? 'CSS1Compat' : 'BackCompat';
+};
+
+
+/**
+ * Returns true if the browser is in "CSS1-compatible" (standards-compliant)
+ * mode, false otherwise.
+ * @return {boolean} True if in CSS1-compatible mode.
+ */
+goog.dom.DomHelper.prototype.isCss1CompatMode = function() {
+  return goog.dom.isCss1CompatMode_(this.document_);
+};
+
+
+/**
+ * Gets the window object associated with the document.
+ * @return {!Window} The window associated with the given document.
+ */
+goog.dom.DomHelper.prototype.getWindow = function() {
+  return goog.dom.getWindow_(this.document_);
+};
+
+
+/**
+ * Gets the document scroll element.
+ * @return {Element} Scrolling element.
+ */
+goog.dom.DomHelper.prototype.getDocumentScrollElement = function() {
+  return goog.dom.getDocumentScrollElement_(this.document_);
+};
+
+
+/**
+ * Gets the document scroll distance as a coordinate object.
+ * @return {!goog.math.Coordinate} Object with properties 'x' and 'y'.
+ */
+goog.dom.DomHelper.prototype.getDocumentScroll = function() {
+  return goog.dom.getDocumentScroll_(this.document_);
+};
+
+
+/**
+ * Appends a child to a node.
+ * @param {Node} parent Parent.
+ * @param {Node} child Child.
+ */
+goog.dom.DomHelper.prototype.appendChild = goog.dom.appendChild;
+
+
+/**
+ * Appends a node with text or other nodes.
+ * @param {!Node} parent The node to append nodes to.
+ * @param {...goog.dom.Appendable} var_args The things to append to the node.
+ *     If this is a Node it is appended as is.
+ *     If this is a string then a text node is appended.
+ *     If this is an array like object then fields 0 to length - 1 are appended.
+ */
+goog.dom.DomHelper.prototype.append = goog.dom.append;
+
+
+/**
+ * Removes all the child nodes on a DOM node.
+ * @param {Node} node Node to remove children from.
+ */
+goog.dom.DomHelper.prototype.removeChildren = goog.dom.removeChildren;
+
+
+/**
+ * Inserts a new node before an existing reference node (i.e., as the previous
+ * sibling). If the reference node has no parent, then does nothing.
+ * @param {Node} newNode Node to insert.
+ * @param {Node} refNode Reference node to insert before.
+ */
+goog.dom.DomHelper.prototype.insertSiblingBefore = goog.dom.insertSiblingBefore;
+
+
+/**
+ * Inserts a new node after an existing reference node (i.e., as the next
+ * sibling). If the reference node has no parent, then does nothing.
+ * @param {Node} newNode Node to insert.
+ * @param {Node} refNode Reference node to insert after.
+ */
+goog.dom.DomHelper.prototype.insertSiblingAfter = goog.dom.insertSiblingAfter;
+
+
+/**
+ * Removes a node from its parent.
+ * @param {Node} node The node to remove.
+ * @return {Node} The node removed if removed; else, null.
+ */
+goog.dom.DomHelper.prototype.removeNode = goog.dom.removeNode;
+
+
+/**
+ * Replaces a node in the DOM tree. Will do nothing if {@code oldNode} has no
+ * parent.
+ * @param {Node} newNode Node to insert.
+ * @param {Node} oldNode Node to replace.
+ */
+goog.dom.DomHelper.prototype.replaceNode = goog.dom.replaceNode;
+
+
+/**
+ * Flattens an element. That is, removes it and replace it with its children.
+ * @param {Element} element The element to flatten.
+ * @return {Element|undefined} The original element, detached from the document
+ *     tree, sans children, or undefined if the element was already not in the
+ *     document.
+ */
+goog.dom.DomHelper.prototype.flattenElement = goog.dom.flattenElement;
+
+
+/**
+ * Returns the first child node that is an element.
+ * @param {Node} node The node to get the first child element of.
+ * @return {Element} The first child node of {@code node} that is an element.
+ */
+goog.dom.DomHelper.prototype.getFirstElementChild =
+    goog.dom.getFirstElementChild;
+
+
+/**
+ * Returns the last child node that is an element.
+ * @param {Node} node The node to get the last child element of.
+ * @return {Element} The last child node of {@code node} that is an element.
+ */
+goog.dom.DomHelper.prototype.getLastElementChild = goog.dom.getLastElementChild;
+
+
+/**
+ * Returns the first next sibling that is an element.
+ * @param {Node} node The node to get the next sibling element of.
+ * @return {Element} The next sibling of {@code node} that is an element.
+ */
+goog.dom.DomHelper.prototype.getNextElementSibling =
+    goog.dom.getNextElementSibling;
+
+
+/**
+ * Returns the first previous sibling that is an element.
+ * @param {Node} node The node to get the previous sibling element of.
+ * @return {Element} The first previous sibling of {@code node} that is
+ *     an element.
+ */
+goog.dom.DomHelper.prototype.getPreviousElementSibling =
+    goog.dom.getPreviousElementSibling;
+
+
+/**
+ * Returns the next node in source order from the given node.
+ * @param {Node} node The node.
+ * @return {Node} The next node in the DOM tree, or null if this was the last
+ *     node.
+ */
+goog.dom.DomHelper.prototype.getNextNode =
+    goog.dom.getNextNode;
+
+
+/**
+ * Returns the previous node in source order from the given node.
+ * @param {Node} node The node.
+ * @return {Node} The previous node in the DOM tree, or null if this was the
+ *     first node.
+ */
+goog.dom.DomHelper.prototype.getPreviousNode =
+    goog.dom.getPreviousNode;
+
+
+/**
+ * Whether the object looks like a DOM node.
+ * @param {*} obj The object being tested for node likeness.
+ * @return {boolean} Whether the object looks like a DOM node.
+ */
+goog.dom.DomHelper.prototype.isNodeLike = goog.dom.isNodeLike;
+
+
+/**
+ * Whether a node contains another node.
+ * @param {Node} parent The node that should contain the other node.
+ * @param {Node} descendant The node to test presence of.
+ * @return {boolean} Whether the parent node contains the descendent node.
+ */
+goog.dom.DomHelper.prototype.contains = goog.dom.contains;
+
+
+/**
+ * Returns the owner document for a node.
+ * @param {Node} node The node to get the document for.
+ * @return {!Document} The document owning the node.
+ */
+goog.dom.DomHelper.prototype.getOwnerDocument = goog.dom.getOwnerDocument;
+
+
+/**
+ * Cross browser function for getting the document element of an iframe.
+ * @param {HTMLIFrameElement|HTMLFrameElement} iframe Iframe element.
+ * @return {!HTMLDocument} The frame content document.
+ */
+goog.dom.DomHelper.prototype.getFrameContentDocument =
+    goog.dom.getFrameContentDocument;
+
+
+/**
+ * Cross browser function for getting the window of a frame or iframe.
+ * @param {HTMLIFrameElement|HTMLFrameElement} frame Frame element.
+ * @return {Window} The window associated with the given frame.
+ */
+goog.dom.DomHelper.prototype.getFrameContentWindow =
+    goog.dom.getFrameContentWindow;
+
+
+/**
+ * Cross browser function for setting the text content of an element.
+ * @param {Element} element The element to change the text content of.
+ * @param {string} text The string that should replace the current element
+ *     content with.
+ */
+goog.dom.DomHelper.prototype.setTextContent = goog.dom.setTextContent;
+
+
+/**
+ * Finds the first descendant node that matches the filter function. This does
+ * a depth first search.
+ * @param {Node} root The root of the tree to search.
+ * @param {function(Node) : boolean} p The filter function.
+ * @return {(Node, undefined)} The found node or undefined if none is found.
+ */
+goog.dom.DomHelper.prototype.findNode = goog.dom.findNode;
+
+
+/**
+ * Finds all the descendant nodes that matches the filter function. This does a
+ * depth first search.
+ * @param {Node} root The root of the tree to search.
+ * @param {function(Node) : boolean} p The filter function.
+ * @return {Array.<Node>} The found nodes or an empty array if none are found.
+ */
+goog.dom.DomHelper.prototype.findNodes = goog.dom.findNodes;
+
+
+/**
+ * Returns the text contents of the current node, without markup. New lines are
+ * stripped and whitespace is collapsed, such that each character would be
+ * visible.
+ *
+ * In browsers that support it, innerText is used.  Other browsers attempt to
+ * simulate it via node traversal.  Line breaks are canonicalized in IE.
+ *
+ * @param {Node} node The node from which we are getting content.
+ * @return {string} The text content.
+ */
+goog.dom.DomHelper.prototype.getTextContent = goog.dom.getTextContent;
+
+
+/**
+ * Returns the text length of the text contained in a node, without markup. This
+ * is equivalent to the selection length if the node was selected, or the number
+ * of cursor movements to traverse the node. Images & BRs take one space.  New
+ * lines are ignored.
+ *
+ * @param {Node} node The node whose text content length is being calculated.
+ * @return {number} The length of {@code node}'s text content.
+ */
+goog.dom.DomHelper.prototype.getNodeTextLength = goog.dom.getNodeTextLength;
+
+
+/**
+ * Returns the text offset of a node relative to one of its ancestors. The text
+ * length is the same as the length calculated by
+ * {@code goog.dom.getNodeTextLength}.
+ *
+ * @param {Node} node The node whose offset is being calculated.
+ * @param {Node=} opt_offsetParent Defaults to the node's owner document's body.
+ * @return {number} The text offset.
+ */
+goog.dom.DomHelper.prototype.getNodeTextOffset = goog.dom.getNodeTextOffset;
+
+
+/**
+ * Walks up the DOM hierarchy returning the first ancestor that has the passed
+ * tag name and/or class name. If the passed element matches the specified
+ * criteria, the element itself is returned.
+ * @param {Node} element The DOM node to start with.
+ * @param {?string=} opt_tag The tag name to match (or null/undefined to match
+ *     any node regardless of tag name). Must be uppercase (goog.dom.TagName).
+ * @param {?string=} opt_class The class name to match (or null/undefined to
+ *     match any node regardless of class name).
+ * @return {Node} The first ancestor that matches the passed criteria, or
+ *     null if none match.
+ */
+goog.dom.DomHelper.prototype.getAncestorByTagNameAndClass =
+    goog.dom.getAncestorByTagNameAndClass;
+
+
+/**
+ * Walks up the DOM hierarchy returning the first ancestor that has the passed
+ * class name. If the passed element matches the specified criteria, the
+ * element itself is returned.
+ * @param {Node} element The DOM node to start with.
+ * @param {?string=} opt_class The class name to match (or null/undefined to
+ *     match any node regardless of class name).
+ * @return {Node} The first ancestor that matches the passed criteria, or
+ *     null if none match.
+ */
+goog.dom.DomHelper.prototype.getAncestorByClass =
+    goog.dom.getAncestorByClass;
+
+
+/**
+ * Walks up the DOM hierarchy returning the first ancestor that passes the
+ * matcher function.
+ * @param {Node} element The DOM node to start with.
+ * @param {function(Node) : boolean} matcher A function that returns true if the
+ *     passed node matches the desired criteria.
+ * @param {boolean=} opt_includeNode If true, the node itself is included in
+ *     the search (the first call to the matcher will pass startElement as
+ *     the node to test).
+ * @param {number=} opt_maxSearchSteps Maximum number of levels to search up the
+ *     dom.
+ * @return {Node} DOM node that matched the matcher, or null if there was
+ *     no match.
+ */
+goog.dom.DomHelper.prototype.getAncestor = goog.dom.getAncestor;
+
+// Input 50
+// Copyright 2007 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Utilities for adding, removing and setting ARIA roles
+ * as defined by W3C ARIA Working Draft:
+ *     http://www.w3.org/TR/2010/WD-wai-aria-20100916/
+ * All modern browsers have some form of ARIA support, so no browser checks are
+ * performed when adding ARIA to components.
+ *
+ */
+goog.provide('goog.dom.a11y');
+goog.provide('goog.dom.a11y.Announcer');
+goog.provide('goog.dom.a11y.LivePriority');
+goog.provide('goog.dom.a11y.Role');
+goog.provide('goog.dom.a11y.State');
+
+goog.require('goog.Disposable');
+goog.require('goog.dom');
+goog.require('goog.object');
+
+
+/**
+ * Enumeration of ARIA states and properties.
+ * @enum {string}
+ */
+goog.dom.a11y.State = {
+  // ARIA property for setting the currently active descendant of an element,
+  // for example the selected item in a list box. Value: ID of an element.
+  ACTIVEDESCENDANT: 'activedescendant',
+
+  // ARIA property that, if true, indicates that all of a changed region should
+  // be presented, instead of only parts. Value: one of {true, false}.
+  ATOMIC: 'atomic',
+
+  // ARIA property to specify that input completion is provided. Value:
+  // one of {'inline', 'list', 'both', 'none'}.
+  AUTOCOMPLETE: 'autocomplete',
+
+  // ARIA state to indicate that an element and its subtree are being updated.
+  // Value: one of {true, false}.
+  BUSY: 'busy',
+
+  // ARIA state for a checked item. Value: one of {'true', 'false', 'mixed',
+  // undefined}.
+  CHECKED: 'checked',
+
+  // ARIA property that identifies the element or elements whose contents or
+  // presence are controlled by this element. Value: space-separated IDs of
+  // other elements.
+  CONTROLS: 'controls',
+
+  // ARIA property that identifies the element or elements that describe
+  // this element. Value: space-separated IDs of other elements.
+  DESCRIBEDBY: 'describedby',
+
+  // ARIA state for a disabled item. Value: one of {true, false}.
+  DISABLED: 'disabled',
+
+  // ARIA property that indicates what functions can be performed when a
+  // dragged object is released on the drop target.  Value: one of
+  // {'copy', 'move', 'link', 'execute', 'popup', 'none'}.
+  DROPEFFECT: 'dropeffect',
+
+  // ARIA state for setting whether the element like a tree node is expanded.
+  // Value: one of {true, false, undefined}.
+  EXPANDED: 'expanded',
+
+  // ARIA property that identifies the next element (or elements) in the
+  // recommended reading order of content. Value: space-separated ids of
+  // elements to flow to.
+  FLOWTO: 'flowto',
+
+  // ARIA state that indicates an element's "grabbed" state in drag-and-drop.
+  // Value: one of {true, false, undefined}.
+  GRABBED: 'grabbed',
+
+  // ARIA property indicating whether the element has a popup. Value: one of
+  // {true, false}.
+  HASPOPUP: 'haspopup',
+
+  // ARIA state indicating that the element is not visible or perceivable
+  // to any user. Value: one of {true, false}.
+  HIDDEN: 'hidden',
+
+  // ARIA state indicating that the entered value does not conform. Value:
+  // one of {false, true, 'grammar', 'spelling'}
+  INVALID: 'invalid',
+
+  // ARIA property that provides a label to override any other text, value, or
+  // contents used to describe this element. Value: string.
+  LABEL: 'label',
+
+  // ARIA property for setting the element which labels another element.
+  // Value: space-separated IDs of elements.
+  LABELLEDBY: 'labelledby',
+
+  // ARIA property for setting the level of an element in the hierarchy.
+  // Value: integer.
+  LEVEL: 'level',
+
+  // ARIA property indicating that an element will be updated, and
+  // describes the types of updates the user agents, assistive technologies,
+  // and user can expect from the live region. Value: one of {'off', 'polite',
+  // 'assertive'}.
+  LIVE: 'live',
+
+  // ARIA property indicating whether a text box can accept multiline input.
+  // Value: one of {true, false}.
+  MULTILINE: 'multiline',
+
+  // ARIA property indicating if the user may select more than one item.
+  // Value: one of {true, false}.
+  MULTISELECTABLE: 'multiselectable',
+
+  // ARIA property indicating if the element is horizontal or vertical.
+  // Value: one of {'vertical', 'horizontal'}.
+  ORIENTATION: 'orientation',
+
+  // ARIA property creating a visual, functional, or contextual parent/child
+  // relationship when the DOM hierarchy can't be used to represent it.
+  // Value: Space-separated IDs of elements.
+  OWNS: 'owns',
+
+  // ARIA property that defines an element's number of position in a list.
+  // Value: integer.
+  POSINSET: 'posinset',
+
+  // ARIA state for a pressed item. Value: one of {true, false, undefined,
+  // 'mixed'}.
+  PRESSED: 'pressed',
+
+  // ARIA property indicating that an element is not editable.  Value:
+  // one of {true, false}.
+  READONLY: 'readonly',
+
+  // ARIA property indicating that change notifications within this subtree
+  // of a live region should be announced. Value: one of {'additions',
+  // 'removals', 'text', 'all', 'additions text'}.
+  RELEVANT: 'relevant',
+
+  // ARIA property indicating that user input is required on this element
+  // before a form may be submitted. Value: one of {true, false}.
+  REQUIRED: 'required',
+
+  // ARIA state for setting the currently selected item in the list.
+  // Value: one of {true, false, undefined}.
+  SELECTED: 'selected',
+
+  // ARIA property defining the number of items in a list. Value: integer.
+  SETSIZE: 'setsize',
+
+  // ARIA property indicating if items are sorted. Value: one of {'ascending',
+  // 'descending', 'none', 'other'}.
+  SORT: 'sort',
+
+  // ARIA property for slider maximum value. Value: number.
+  VALUEMAX: 'valuemax',
+
+  // ARIA property for slider minimum value. Value: number.
+  VALUEMIN: 'valuemin',
+
+  // ARIA property for slider active value. Value: number.
+  VALUENOW: 'valuenow',
+
+  // ARIA property for slider active value represented as text. Value: string.
+  VALUETEXT: 'valuetext'
+};
+
+
+/**
+ * Enumeration of ARIA roles.
+ * @enum {string}
+ */
+goog.dom.a11y.Role = {
+  // ARIA role for an alert element that doesn't need to be explicitly closed.
+  ALERT: 'alert',
+
+  // ARIA role for an alert dialog element that takes focus and must be closed.
+  ALERTDIALOG: 'alertdialog',
+
+  // ARIA role for an application that implements its own keyboard navigation.
+  APPLICATION: 'application',
+
+  // ARIA role for an article.
+  ARTICLE: 'article',
+
+  // ARIA role for a banner containing mostly site content, not page content.
+  BANNER: 'banner',
+
+  // ARIA role for a button element.
+  BUTTON: 'button',
+
+  // ARIA role for a checkbox button element; use with the CHECKED state.
+  CHECKBOX: 'checkbox',
+
+  // ARIA role for a column header of a table or grid.
+  COLUMNHEADER: 'columnheader',
+
+  // ARIA role for a combo box element.
+  COMBOBOX: 'combobox',
+
+  // ARIA role for a supporting section of the document.
+  COMPLEMENTARY: 'complementary',
+
+  // ARIA role for a dialog, some descendant must take initial focus.
+  DIALOG: 'dialog',
+
+  // ARIA role for a directory, like a table of contents.
+  DIRECTORY: 'directory',
+
+  // ARIA role for a part of a page that's a document, not a web application.
+  DOCUMENT: 'document',
+
+  // ARIA role for a landmark region logically considered one form.
+  FORM: 'form',
+
+  // ARIA role for an interactive control of tabular data.
+  GRID: 'grid',
+
+  // ARIA role for a cell in a grid.
+  GRIDCELL: 'gridcell',
+
+  // ARIA role for a group of related elements like tree item siblings.
+  GROUP: 'group',
+
+  // ARIA role for a heading element.
+  HEADING: 'heading',
+
+  // ARIA role for a container of elements that together comprise one image.
+  IMG: 'img',
+
+  // ARIA role for a link.
+  LINK: 'link',
+
+  // ARIA role for a list of non-interactive list items.
+  LIST: 'list',
+
+  // ARIA role for a listbox.
+  LISTBOX: 'listbox',
+
+  // ARIA role for a list item.
+  LISTITEM: 'listitem',
+
+  // ARIA role for a live region where new information is added.
+  LOG: 'log',
+
+  // ARIA landmark role for the main content in a document. Use only once.
+  MAIN: 'main',
+
+  // ARIA role for a live region of non-essential information that changes.
+  MARQUEE: 'marquee',
+
+  // ARIA role for a mathematical expression.
+  MATH: 'math',
+
+  // ARIA role for a popup menu.
+  MENU: 'menu',
+
+  // ARIA role for a menubar element containing menu elements.
+  MENUBAR: 'menubar',
+
+  // ARIA role for menu item elements.
+  MENU_ITEM: 'menuitem',
+
+  // ARIA role for a checkbox box element inside a menu.
+  MENU_ITEM_CHECKBOX: 'menuitemcheckbox',
+
+  // ARIA role for a radio button element inside a menu.
+  MENU_ITEM_RADIO: 'menuitemradio',
+
+  // ARIA landmark role for a collection of navigation links.
+  NAVIGATION: 'navigation',
+
+  // ARIA role for a section ancillary to the main content.
+  NOTE: 'note',
+
+  // ARIA role for option items that are  children of combobox, listbox, menu,
+  // radiogroup, or tree elements.
+  OPTION: 'option',
+
+  // ARIA role for ignorable cosmetic elements with no semantic significance.
+  PRESENTATION: 'presentation',
+
+  // ARIA role for a progress bar element.
+  PROGRESSBAR: 'progressbar',
+
+  // ARIA role for a radio button element.
+  RADIO: 'radio',
+
+  // ARIA role for a group of connected radio button elements.
+  RADIOGROUP: 'radiogroup',
+
+  // ARIA role for an important region of the page.
+  REGION: 'region',
+
+  // ARIA role for a row of cells in a grid.
+  ROW: 'row',
+
+  // ARIA role for a group of one or more rows in a grid.
+  ROWGROUP: 'rowgroup',
+
+  // ARIA role for a row header of a table or grid.
+  ROWHEADER: 'rowheader',
+
+  // ARIA role for a scrollbar element.
+  SCROLLBAR: 'scrollbar',
+
+  // ARIA landmark role for a part of the page providing search functionality.
+  SEARCH: 'search',
+
+  // ARIA role for a menu separator.
+  SEPARATOR: 'separator',
+
+  // ARIA role for a slider.
+  SLIDER: 'slider',
+
+  // ARIA role for a spin button.
+  SPINBUTTON: 'spinbutton',
+
+  // ARIA role for a live region with advisory info less severe than an alert.
+  STATUS: 'status',
+
+  // ARIA role for a tab button.
+  TAB: 'tab',
+
+  // ARIA role for a tab bar (i.e. a list of tab buttons).
+  TAB_LIST: 'tablist',
+
+  // ARIA role for a tab page (i.e. the element holding tab contents).
+  TAB_PANEL: 'tabpanel',
+
+  // ARIA role for a textbox element.
+  TEXTBOX: 'textbox',
+
+  // ARIA role for an element displaying elapsed time or time remaining.
+  TIMER: 'timer',
+
+  // ARIA role for a toolbar element.
+  TOOLBAR: 'toolbar',
+
+  // ARIA role for a tooltip element.
+  TOOLTIP: 'tooltip',
+
+  // ARIA role for a tree.
+  TREE: 'tree',
+
+  // ARIA role for a grid whose rows can be expanded and collapsed like a tree.
+  TREEGRID: 'treegrid',
+
+  // ARIA role for a tree item that sometimes may be expanded or collapsed.
+  TREEITEM: 'treeitem'
+};
+
+
+/**
+ * Enumeration of ARIA state values for live regions.
+ *
+ * See http://www.w3.org/TR/wai-aria/states_and_properties#aria-live
+ * for more information.
+ * @enum {string}
+ */
+goog.dom.a11y.LivePriority = {
+  /**
+   * Default value.  Used for live regions that should never be spoken.
+   */
+  OFF: 'off',
+  /**
+   * Spoke only when the user is idle.  Best option in most cases.
+   */
+  POLITE: 'polite',
+  /**
+   * Spoken as soon as possible, which means that the information has a
+   * higher priority than normal, but does not necessarily interrupt
+   * immediately.
+   */
+  ASSERTIVE: 'assertive'
+};
+
+
+/**
+ * Sets the role of an element.
+ * @param {Element} element DOM node to set role of.
+ * @param {string} roleName role name(s).
+ */
+goog.dom.a11y.setRole = function(element, roleName) {
+  element.setAttribute('role', roleName);
+  element.roleName = roleName;
+};
+
+
+/**
+ * Gets role of an element.
+ * @param {Element} element DOM node to get role of.
+ * @return {string} rolename.
+ */
+goog.dom.a11y.getRole = function(element) {
+  return element.roleName || '';
+};
+
+
+/**
+ * Sets the state or property of an element.
+ * @param {Element} element DOM node where we set state.
+ * @param {string} state State attribute being set. Automatically adds prefix
+ *     'aria-' to the state name.
+ * @param {string|boolean|number} value Value for the state attribute.
+ */
+goog.dom.a11y.setState = function(element, state, value) {
+  element.setAttribute('aria-' + state, value);
+};
+
+
+/**
+ * Gets value of specified state or property.
+ * @param {Element} element DOM node to get state from.
+ * @param {string} stateName State name.
+ * @return {string} Value of the state attribute.
+ */
+goog.dom.a11y.getState = function(element, stateName) {
+  var attrb =
+      /** @type {string|number|boolean} */(element.getAttribute('aria-' +
+          stateName));
+  // Check for multiple representations -  attrb might
+  // be a boolean or a string
+  if ((attrb === true) || (attrb === false)) {
+    return attrb ? 'true' : 'false';
+  } else if (!attrb) {
+    return '';
+  } else {
+    return String(attrb);
+  }
+};
+
+
+/**
+ * Gets the activedescendant of the given element.
+ * @param {Element} element DOM node to get activedescendant from.
+ * @return {Element} DOM node of the activedescendant.
+ */
+goog.dom.a11y.getActiveDescendant = function(element) {
+  var id = goog.dom.a11y.getState(
+      element, goog.dom.a11y.State.ACTIVEDESCENDANT);
+  return goog.dom.getOwnerDocument(element).getElementById(id);
+};
+
+
+/**
+ * Sets the activedescendant value for an element.
+ * @param {Element} element DOM node to set activedescendant to.
+ * @param {Element} activeElement DOM node being set as activedescendant.
+ */
+goog.dom.a11y.setActiveDescendant = function(element, activeElement) {
+  goog.dom.a11y.setState(element, goog.dom.a11y.State.ACTIVEDESCENDANT,
+      activeElement ? activeElement.id : '');
+};
+
+
+
+/**
+ * Class that allows messages to be spoken by assistive technologies that the
+ * user may have active.
+ *
+ * @param {goog.dom.DomHelper} domHelper DOM helper.
+ * @constructor
+ * @extends {goog.Disposable}
+ */
+goog.dom.a11y.Announcer = function(domHelper) {
+  goog.base(this);
+
+  /**
+   * @type {goog.dom.DomHelper}
+   * @private
+   */
+  this.domHelper_ = domHelper;
+
+  /**
+   * Map of priority to live region elements to use for communicating updates.
+   * Elements are created on demand.
+   * @type {Object.<goog.dom.a11y.LivePriority, Element>}
+   * @private
+   */
+  this.liveRegions_ = {};
+};
+goog.inherits(goog.dom.a11y.Announcer, goog.Disposable);
+
+
+/** @override */
+goog.dom.a11y.Announcer.prototype.disposeInternal = function() {
+  goog.object.forEach(
+      this.liveRegions_, this.domHelper_.removeNode, this.domHelper_);
+  this.liveRegions_ = null;
+  this.domHelper_ = null;
+  goog.base(this, 'disposeInternal');
+};
+
+
+/**
+ * Announce a message to be read by any assistive technologies the user may
+ * have active.
+ * @param {string} message The message to announce to screen readers.
+ * @param {goog.dom.a11y.LivePriority=} opt_priority The priority of the
+ *     message. Defaults to POLITE.
+ */
+goog.dom.a11y.Announcer.prototype.say = function(message, opt_priority) {
+  goog.dom.setTextContent(this.getLiveRegion_(
+      opt_priority || goog.dom.a11y.LivePriority.POLITE), message);
+};
+
+
+/**
+ * Returns an aria-live region that can be used to communicate announcements.
+ * @param {goog.dom.a11y.LivePriority} priority The required priority.
+ * @return {Element} A live region of the requested priority.
+ * @private
+ */
+goog.dom.a11y.Announcer.prototype.getLiveRegion_ = function(priority) {
+  if (this.liveRegions_[priority]) {
+    return this.liveRegions_[priority];
+  }
+  var liveRegion;
+  liveRegion = this.domHelper_.createElement('div');
+  liveRegion.style.position = 'absolute';
+  liveRegion.style.top = '-1000px';
+  goog.dom.a11y.setState(liveRegion, 'live', priority);
+  goog.dom.a11y.setState(liveRegion, 'atomic', 'true');
+  this.domHelper_.getDocument().body.appendChild(liveRegion);
+  this.liveRegions_[priority] = liveRegion;
+  return liveRegion;
+};
+
+// Input 51
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Constant declarations for common key codes.
+ *
+ * @see ../demos/keyhandler.html
+ */
+
+goog.provide('goog.events.KeyCodes');
+
+goog.require('goog.userAgent');
+
+
+/**
+ * Key codes for common characters.
+ *
+ * This list is not localized and therefor some of the key codes are not correct
+ * for non US keyboard layouts. See comments below.
+ *
+ * @enum {number}
+ */
+goog.events.KeyCodes = {
+  MAC_ENTER: 3,
+  BACKSPACE: 8,
+  TAB: 9,
+  NUM_CENTER: 12,  // NUMLOCK on FF/Safari Mac
+  ENTER: 13,
+  SHIFT: 16,
+  CTRL: 17,
+  ALT: 18,
+  PAUSE: 19,
+  CAPS_LOCK: 20,
+  ESC: 27,
+  SPACE: 32,
+  PAGE_UP: 33,     // also NUM_NORTH_EAST
+  PAGE_DOWN: 34,   // also NUM_SOUTH_EAST
+  END: 35,         // also NUM_SOUTH_WEST
+  HOME: 36,        // also NUM_NORTH_WEST
+  LEFT: 37,        // also NUM_WEST
+  UP: 38,          // also NUM_NORTH
+  RIGHT: 39,       // also NUM_EAST
+  DOWN: 40,        // also NUM_SOUTH
+  PRINT_SCREEN: 44,
+  INSERT: 45,      // also NUM_INSERT
+  DELETE: 46,      // also NUM_DELETE
+  ZERO: 48,
+  ONE: 49,
+  TWO: 50,
+  THREE: 51,
+  FOUR: 52,
+  FIVE: 53,
+  SIX: 54,
+  SEVEN: 55,
+  EIGHT: 56,
+  NINE: 57,
+  FF_SEMICOLON: 59, // Firefox (Gecko) fires this for semicolon instead of 186
+  QUESTION_MARK: 63, // needs localization
+  A: 65,
+  B: 66,
+  C: 67,
+  D: 68,
+  E: 69,
+  F: 70,
+  G: 71,
+  H: 72,
+  I: 73,
+  J: 74,
+  K: 75,
+  L: 76,
+  M: 77,
+  N: 78,
+  O: 79,
+  P: 80,
+  Q: 81,
+  R: 82,
+  S: 83,
+  T: 84,
+  U: 85,
+  V: 86,
+  W: 87,
+  X: 88,
+  Y: 89,
+  Z: 90,
+  META: 91, // WIN_KEY_LEFT
+  WIN_KEY_RIGHT: 92,
+  CONTEXT_MENU: 93,
+  NUM_ZERO: 96,
+  NUM_ONE: 97,
+  NUM_TWO: 98,
+  NUM_THREE: 99,
+  NUM_FOUR: 100,
+  NUM_FIVE: 101,
+  NUM_SIX: 102,
+  NUM_SEVEN: 103,
+  NUM_EIGHT: 104,
+  NUM_NINE: 105,
+  NUM_MULTIPLY: 106,
+  NUM_PLUS: 107,
+  NUM_MINUS: 109,
+  NUM_PERIOD: 110,
+  NUM_DIVISION: 111,
+  F1: 112,
+  F2: 113,
+  F3: 114,
+  F4: 115,
+  F5: 116,
+  F6: 117,
+  F7: 118,
+  F8: 119,
+  F9: 120,
+  F10: 121,
+  F11: 122,
+  F12: 123,
+  NUMLOCK: 144,
+  SCROLL_LOCK: 145,
+
+  // OS-specific media keys like volume controls and browser controls.
+  FIRST_MEDIA_KEY: 166,
+  LAST_MEDIA_KEY: 183,
+
+  SEMICOLON: 186,            // needs localization
+  DASH: 189,                 // needs localization
+  EQUALS: 187,               // needs localization
+  COMMA: 188,                // needs localization
+  PERIOD: 190,               // needs localization
+  SLASH: 191,                // needs localization
+  APOSTROPHE: 192,           // needs localization
+  TILDE: 192,                // needs localization
+  SINGLE_QUOTE: 222,         // needs localization
+  OPEN_SQUARE_BRACKET: 219,  // needs localization
+  BACKSLASH: 220,            // needs localization
+  CLOSE_SQUARE_BRACKET: 221, // needs localization
+  WIN_KEY: 224,
+  MAC_FF_META: 224, // Firefox (Gecko) fires this for the meta key instead of 91
+  WIN_IME: 229,
+
+  // We've seen users whose machines fire this keycode at regular one
+  // second intervals. The common thread among these users is that
+  // they're all using Dell Inspiron laptops, so we suspect that this
+  // indicates a hardware/bios problem.
+  // http://en.community.dell.com/support-forums/laptop/f/3518/p/19285957/19523128.aspx
+  PHANTOM: 255
+};
+
+
+/**
+ * Returns true if the event contains a text modifying key.
+ * @param {goog.events.BrowserEvent} e A key event.
+ * @return {boolean} Whether it's a text modifying key.
+ */
+goog.events.KeyCodes.isTextModifyingKeyEvent = function(e) {
+  if (e.altKey && !e.ctrlKey ||
+      e.metaKey ||
+      // Function keys don't generate text
+      e.keyCode >= goog.events.KeyCodes.F1 &&
+      e.keyCode <= goog.events.KeyCodes.F12) {
+    return false;
+  }
+
+  // The following keys are quite harmless, even in combination with
+  // CTRL, ALT or SHIFT.
+  switch (e.keyCode) {
+    case goog.events.KeyCodes.ALT:
+    case goog.events.KeyCodes.CAPS_LOCK:
+    case goog.events.KeyCodes.CONTEXT_MENU:
+    case goog.events.KeyCodes.CTRL:
+    case goog.events.KeyCodes.DOWN:
+    case goog.events.KeyCodes.END:
+    case goog.events.KeyCodes.ESC:
+    case goog.events.KeyCodes.HOME:
+    case goog.events.KeyCodes.INSERT:
+    case goog.events.KeyCodes.LEFT:
+    case goog.events.KeyCodes.MAC_FF_META:
+    case goog.events.KeyCodes.META:
+    case goog.events.KeyCodes.NUMLOCK:
+    case goog.events.KeyCodes.NUM_CENTER:
+    case goog.events.KeyCodes.PAGE_DOWN:
+    case goog.events.KeyCodes.PAGE_UP:
+    case goog.events.KeyCodes.PAUSE:
+    case goog.events.KeyCodes.PHANTOM:
+    case goog.events.KeyCodes.PRINT_SCREEN:
+    case goog.events.KeyCodes.RIGHT:
+    case goog.events.KeyCodes.SCROLL_LOCK:
+    case goog.events.KeyCodes.SHIFT:
+    case goog.events.KeyCodes.UP:
+    case goog.events.KeyCodes.WIN_KEY:
+    case goog.events.KeyCodes.WIN_KEY_RIGHT:
+      return false;
+    default:
+      return e.keyCode < goog.events.KeyCodes.FIRST_MEDIA_KEY ||
+          e.keyCode > goog.events.KeyCodes.LAST_MEDIA_KEY;
+  }
+};
+
+
+/**
+ * Returns true if the key fires a keypress event in the current browser.
+ *
+ * Accoridng to MSDN [1] IE only fires keypress events for the following keys:
+ * - Letters: A - Z (uppercase and lowercase)
+ * - Numerals: 0 - 9
+ * - Symbols: ! @ # $ % ^ & * ( ) _ - + = < [ ] { } , . / ? \ | ' ` " ~
+ * - System: ESC, SPACEBAR, ENTER
+ *
+ * That's not entirely correct though, for instance there's no distinction
+ * between upper and lower case letters.
+ *
+ * [1] http://msdn2.microsoft.com/en-us/library/ms536939(VS.85).aspx)
+ *
+ * Safari is similar to IE, but does not fire keypress for ESC.
+ *
+ * Additionally, IE6 does not fire keydown or keypress events for letters when
+ * the control or alt keys are held down and the shift key is not. IE7 does
+ * fire keydown in these cases, though, but not keypress.
+ *
+ * @param {number} keyCode A key code.
+ * @param {number=} opt_heldKeyCode Key code of a currently-held key.
+ * @param {boolean=} opt_shiftKey Whether the shift key is held down.
+ * @param {boolean=} opt_ctrlKey Whether the control key is held down.
+ * @param {boolean=} opt_altKey Whether the alt key is held down.
+ * @return {boolean} Whether it's a key that fires a keypress event.
+ */
+goog.events.KeyCodes.firesKeyPressEvent = function(keyCode, opt_heldKeyCode,
+    opt_shiftKey, opt_ctrlKey, opt_altKey) {
+  if (!goog.userAgent.IE &&
+      !(goog.userAgent.WEBKIT && goog.userAgent.isVersion('525'))) {
+    return true;
+  }
+
+  if (goog.userAgent.MAC && opt_altKey) {
+    return goog.events.KeyCodes.isCharacterKey(keyCode);
+  }
+
+  // Alt but not AltGr which is represented as Alt+Ctrl.
+  if (opt_altKey && !opt_ctrlKey) {
+    return false;
+  }
+
+  // Saves Ctrl or Alt + key for IE and WebKit 525+, which won't fire keypress.
+  // Non-IE browsers and WebKit prior to 525 won't get this far so no need to
+  // check the user agent.
+  if (!opt_shiftKey &&
+      (opt_heldKeyCode == goog.events.KeyCodes.CTRL ||
+       opt_heldKeyCode == goog.events.KeyCodes.ALT)) {
+    return false;
+  }
+
+  // When Ctrl+<somekey> is held in IE, it only fires a keypress once, but it
+  // continues to fire keydown events as the event repeats.
+  if (goog.userAgent.IE && opt_ctrlKey && opt_heldKeyCode == keyCode) {
+    return false;
+  }
+
+  switch (keyCode) {
+    case goog.events.KeyCodes.ENTER:
+      // IE9 does not fire KEYPRESS on ENTER.
+      return !(goog.userAgent.IE && goog.userAgent.isDocumentMode(9));
+    case goog.events.KeyCodes.ESC:
+      return !goog.userAgent.WEBKIT;
+  }
+
+  return goog.events.KeyCodes.isCharacterKey(keyCode);
+};
+
+
+/**
+ * Returns true if the key produces a character.
+ * This does not cover characters on non-US keyboards (Russian, Hebrew, etc.).
+ *
+ * @param {number} keyCode A key code.
+ * @return {boolean} Whether it's a character key.
+ */
+goog.events.KeyCodes.isCharacterKey = function(keyCode) {
+  if (keyCode >= goog.events.KeyCodes.ZERO &&
+      keyCode <= goog.events.KeyCodes.NINE) {
+    return true;
+  }
+
+  if (keyCode >= goog.events.KeyCodes.NUM_ZERO &&
+      keyCode <= goog.events.KeyCodes.NUM_MULTIPLY) {
+    return true;
+  }
+
+  if (keyCode >= goog.events.KeyCodes.A &&
+      keyCode <= goog.events.KeyCodes.Z) {
+    return true;
+  }
+
+  // Safari sends zero key code for non-latin characters.
+  if (goog.userAgent.WEBKIT && keyCode == 0) {
+    return true;
+  }
+
+  switch (keyCode) {
+    case goog.events.KeyCodes.SPACE:
+    case goog.events.KeyCodes.QUESTION_MARK:
+    case goog.events.KeyCodes.NUM_PLUS:
+    case goog.events.KeyCodes.NUM_MINUS:
+    case goog.events.KeyCodes.NUM_PERIOD:
+    case goog.events.KeyCodes.NUM_DIVISION:
+    case goog.events.KeyCodes.SEMICOLON:
+    case goog.events.KeyCodes.FF_SEMICOLON:
+    case goog.events.KeyCodes.DASH:
+    case goog.events.KeyCodes.EQUALS:
+    case goog.events.KeyCodes.COMMA:
+    case goog.events.KeyCodes.PERIOD:
+    case goog.events.KeyCodes.SLASH:
+    case goog.events.KeyCodes.APOSTROPHE:
+    case goog.events.KeyCodes.SINGLE_QUOTE:
+    case goog.events.KeyCodes.OPEN_SQUARE_BRACKET:
+    case goog.events.KeyCodes.BACKSLASH:
+    case goog.events.KeyCodes.CLOSE_SQUARE_BRACKET:
+      return true;
+    default:
+      return false;
+  }
+};
+
+// Input 52
+// Copyright 2005 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Class to create objects which want to handle multiple events
+ * and have their listeners easily cleaned up via a dispose method.
+ *
+ * Example:
+ * <pre>
+ * function Something() {
+ *   goog.base(this);
+ *
+ *   ... set up object ...
+ *
+ *   // Add event listeners
+ *   this.listen(this.starEl, goog.events.EventType.CLICK, this.handleStar);
+ *   this.listen(this.headerEl, goog.events.EventType.CLICK, this.expand);
+ *   this.listen(this.collapseEl, goog.events.EventType.CLICK, this.collapse);
+ *   this.listen(this.infoEl, goog.events.EventType.MOUSEOVER, this.showHover);
+ *   this.listen(this.infoEl, goog.events.EventType.MOUSEOUT, this.hideHover);
+ * }
+ * goog.inherits(Something, goog.events.EventHandler);
+ *
+ * Something.prototype.disposeInternal = function() {
+ *   goog.base(this, 'disposeInternal');
+ *   goog.dom.removeNode(this.container);
+ * };
+ *
+ *
+ * // Then elsewhere:
+ *
+ * var activeSomething = null;
+ * function openSomething() {
+ *   activeSomething = new Something();
+ * }
+ *
+ * function closeSomething() {
+ *   if (activeSomething) {
+ *     activeSomething.dispose();  // Remove event listeners
+ *     activeSomething = null;
+ *   }
+ * }
+ * </pre>
+ *
+ */
+
+goog.provide('goog.events.EventHandler');
+
+goog.require('goog.Disposable');
+goog.require('goog.array');
+goog.require('goog.events');
+goog.require('goog.events.EventWrapper');
+
+
+
+/**
+ * Super class for objects that want to easily manage a number of event
+ * listeners.  It allows a short cut to listen and also provides a quick way
+ * to remove all events listeners belonging to this object.
+ * @param {Object=} opt_handler Object in whose scope to call the listeners.
+ * @constructor
+ * @extends {goog.Disposable}
+ */
+goog.events.EventHandler = function(opt_handler) {
+  goog.Disposable.call(this);
+  this.handler_ = opt_handler;
+
+  /**
+   * Keys for events that are being listened to.
+   * @type {Array.<number>}
+   * @private
+   */
+  this.keys_ = [];
+};
+goog.inherits(goog.events.EventHandler, goog.Disposable);
+
+
+/**
+ * Utility array used to unify the cases of listening for an array of types
+ * and listening for a single event, without using recursion or allocating
+ * an array each time.
+ * @type {Array.<string>}
+ * @private
+ */
+goog.events.EventHandler.typeArray_ = [];
+
+
+/**
+ * Listen to an event on a DOM node or EventTarget.  If the function is omitted
+ * then the EventHandler's handleEvent method will be used.
+ * @param {goog.events.EventTarget|EventTarget} src Event source.
+ * @param {string|Array.<string>} type Event type to listen for or array of
+ *     event types.
+ * @param {Function|Object=} opt_fn Optional callback function to be used as the
+ *    listener or an object with handleEvent function.
+ * @param {boolean=} opt_capture Optional whether to use capture phase.
+ * @param {Object=} opt_handler Object in whose scope to call the listener.
+ * @return {goog.events.EventHandler} This object, allowing for chaining of
+ *     calls.
+ */
+goog.events.EventHandler.prototype.listen = function(src, type, opt_fn,
+                                                     opt_capture,
+                                                     opt_handler) {
+  if (!goog.isArray(type)) {
+    goog.events.EventHandler.typeArray_[0] = /** @type {string} */(type);
+    type = goog.events.EventHandler.typeArray_;
+  }
+  for (var i = 0; i < type.length; i++) {
+    // goog.events.listen generates unique keys so we don't have to check their
+    // presence in the this.keys_ array.
+    var key = (/** @type {number} */
+        goog.events.listen(src, type[i], opt_fn || this,
+                           opt_capture || false,
+                           opt_handler || this.handler_ || this));
+    this.keys_.push(key);
+  }
+
+  return this;
+};
+
+
+/**
+ * Listen to an event on a DOM node or EventTarget.  If the function is omitted
+ * then the EventHandler's handleEvent method will be used. After the event has
+ * fired the event listener is removed from the target. If an array of event
+ * types is provided, each event type will be listened to once.
+ * @param {goog.events.EventTarget|EventTarget} src Event source.
+ * @param {string|Array.<string>} type Event type to listen for or array of
+ *     event types.
+ * @param {Function|Object=} opt_fn Optional callback function to be used as the
+ *    listener or an object with handleEvent function.
+ * @param {boolean=} opt_capture Optional whether to use capture phase.
+ * @param {Object=} opt_handler Object in whose scope to call the listener.
+ * @return {goog.events.EventHandler} This object, allowing for chaining of
+ *     calls.
+ */
+goog.events.EventHandler.prototype.listenOnce = function(src, type, opt_fn,
+                                                         opt_capture,
+                                                         opt_handler) {
+  if (goog.isArray(type)) {
+    for (var i = 0; i < type.length; i++) {
+      this.listenOnce(src, type[i], opt_fn, opt_capture, opt_handler);
+    }
+  } else {
+    var key = (/** @type {number} */
+        goog.events.listenOnce(src, type, opt_fn || this, opt_capture,
+                               opt_handler || this.handler_ || this));
+    this.keys_.push(key);
+  }
+
+  return this;
+};
+
+
+/**
+ * Adds an event listener with a specific event wrapper on a DOM Node or an
+ * object that has implemented {@link goog.events.EventTarget}. A listener can
+ * only be added once to an object.
+ *
+ * @param {EventTarget|goog.events.EventTarget} src The node to listen to
+ *     events on.
+ * @param {goog.events.EventWrapper} wrapper Event wrapper to use.
+ * @param {Function|Object} listener Callback method, or an object with a
+ *     handleEvent function.
+ * @param {boolean=} opt_capt Whether to fire in capture phase (defaults to
+ *     false).
+ * @param {Object=} opt_handler Element in whose scope to call the listener.
+ * @return {goog.events.EventHandler} This object, allowing for chaining of
+ *     calls.
+ */
+goog.events.EventHandler.prototype.listenWithWrapper = function(src, wrapper,
+    listener, opt_capt, opt_handler) {
+  wrapper.listen(src, listener, opt_capt, opt_handler || this.handler_, this);
+  return this;
+};
+
+
+/**
+ * @return {number} Number of listeners registered by this handler.
+ */
+goog.events.EventHandler.prototype.getListenerCount = function() {
+  return this.keys_.length;
+};
+
+
+/**
+ * Unlistens on an event.
+ * @param {goog.events.EventTarget|EventTarget} src Event source.
+ * @param {string|Array.<string>} type Event type to listen for.
+ * @param {Function|Object=} opt_fn Optional callback function to be used as the
+ *    listener or an object with handleEvent function.
+ * @param {boolean=} opt_capture Optional whether to use capture phase.
+ * @param {Object=} opt_handler Object in whose scope to call the listener.
+ * @return {goog.events.EventHandler} This object, allowing for chaining of
+ *     calls.
+ */
+goog.events.EventHandler.prototype.unlisten = function(src, type, opt_fn,
+                                                       opt_capture,
+                                                       opt_handler) {
+  if (goog.isArray(type)) {
+    for (var i = 0; i < type.length; i++) {
+      this.unlisten(src, type[i], opt_fn, opt_capture, opt_handler);
+    }
+  } else {
+    var listener = goog.events.getListener(src, type, opt_fn || this,
+        opt_capture, opt_handler || this.handler_ || this);
+
+    if (listener) {
+      var key = listener.key;
+      goog.events.unlistenByKey(key);
+      goog.array.remove(this.keys_, key);
+    }
+  }
+
+  return this;
+};
+
+
+/**
+ * Removes an event listener which was added with listenWithWrapper().
+ *
+ * @param {EventTarget|goog.events.EventTarget} src The target to stop
+ *     listening to events on.
+ * @param {goog.events.EventWrapper} wrapper Event wrapper to use.
+ * @param {Function|Object} listener The listener function to remove.
+ * @param {boolean=} opt_capt In DOM-compliant browsers, this determines
+ *     whether the listener is fired during the capture or bubble phase of the
+ *     event.
+ * @param {Object=} opt_handler Element in whose scope to call the listener.
+ * @return {goog.events.EventHandler} This object, allowing for chaining of
+ *     calls.
+ */
+goog.events.EventHandler.prototype.unlistenWithWrapper = function(src, wrapper,
+    listener, opt_capt, opt_handler) {
+  wrapper.unlisten(src, listener, opt_capt, opt_handler || this.handler_, this);
+  return this;
+};
+
+
+/**
+ * Unlistens to all events.
+ */
+goog.events.EventHandler.prototype.removeAll = function() {
+  goog.array.forEach(this.keys_, goog.events.unlistenByKey);
+  this.keys_.length = 0;
+};
+
+
+/**
+ * Disposes of this EventHandler and removes all listeners that it registered.
+ * @override
+ * @protected
+ */
+goog.events.EventHandler.prototype.disposeInternal = function() {
+  goog.events.EventHandler.superClass_.disposeInternal.call(this);
+  this.removeAll();
+};
+
+
+/**
+ * Default event handler
+ * @param {goog.events.Event} e Event object.
+ */
+goog.events.EventHandler.prototype.handleEvent = function(e) {
+  throw Error('EventHandler.handleEvent not implemented');
+};
+
+// Input 53
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview A utility class for representing a numeric box.
+ */
+
+
+goog.provide('goog.math.Box');
+
+goog.require('goog.math.Coordinate');
+
+
+
+/**
+ * Class for representing a box. A box is specified as a top, right, bottom,
+ * and left. A box is useful for representing margins and padding.
+ *
+ * @param {number} top Top.
+ * @param {number} right Right.
+ * @param {number} bottom Bottom.
+ * @param {number} left Left.
+ * @constructor
+ */
+goog.math.Box = function(top, right, bottom, left) {
+  /**
+   * Top
+   * @type {number}
+   */
+  this.top = top;
+
+  /**
+   * Right
+   * @type {number}
+   */
+  this.right = right;
+
+  /**
+   * Bottom
+   * @type {number}
+   */
+  this.bottom = bottom;
+
+  /**
+   * Left
+   * @type {number}
+   */
+  this.left = left;
+};
+
+
+/**
+ * Creates a Box by bounding a collection of goog.math.Coordinate objects
+ * @param {...goog.math.Coordinate} var_args Coordinates to be included inside
+ *     the box.
+ * @return {!goog.math.Box} A Box containing all the specified Coordinates.
+ */
+goog.math.Box.boundingBox = function(var_args) {
+  var box = new goog.math.Box(arguments[0].y, arguments[0].x,
+                              arguments[0].y, arguments[0].x);
+  for (var i = 1; i < arguments.length; i++) {
+    var coord = arguments[i];
+    box.top = Math.min(box.top, coord.y);
+    box.right = Math.max(box.right, coord.x);
+    box.bottom = Math.max(box.bottom, coord.y);
+    box.left = Math.min(box.left, coord.x);
+  }
+  return box;
+};
+
+
+/**
+ * Creates a copy of the box with the same dimensions.
+ * @return {!goog.math.Box} A clone of this Box.
+ */
+goog.math.Box.prototype.clone = function() {
+  return new goog.math.Box(this.top, this.right, this.bottom, this.left);
+};
+
+
+if (goog.DEBUG) {
+  /**
+   * Returns a nice string representing the box.
+   * @return {string} In the form (50t, 73r, 24b, 13l).
+   */
+  goog.math.Box.prototype.toString = function() {
+    return '(' + this.top + 't, ' + this.right + 'r, ' + this.bottom + 'b, ' +
+           this.left + 'l)';
+  };
+}
+
+
+/**
+ * Returns whether the box contains a coordinate or another box.
+ *
+ * @param {goog.math.Coordinate|goog.math.Box} other A Coordinate or a Box.
+ * @return {boolean} Whether the box contains the coordinate or other box.
+ */
+goog.math.Box.prototype.contains = function(other) {
+  return goog.math.Box.contains(this, other);
+};
+
+
+/**
+ * Expands box with the given margins.
+ *
+ * @param {number|goog.math.Box} top Top margin or box with all margins.
+ * @param {number=} opt_right Right margin.
+ * @param {number=} opt_bottom Bottom margin.
+ * @param {number=} opt_left Left margin.
+ * @return {!goog.math.Box} A reference to this Box.
+ */
+goog.math.Box.prototype.expand = function(top, opt_right, opt_bottom,
+    opt_left) {
+  if (goog.isObject(top)) {
+    this.top -= top.top;
+    this.right += top.right;
+    this.bottom += top.bottom;
+    this.left -= top.left;
+  } else {
+    this.top -= top;
+    this.right += opt_right;
+    this.bottom += opt_bottom;
+    this.left -= opt_left;
+  }
+
+  return this;
+};
+
+
+/**
+ * Expand this box to include another box.
+ * NOTE(user): This is used in code that needs to be very fast, please don't
+ * add functionality to this function at the expense of speed (variable
+ * arguments, accepting multiple argument types, etc).
+ * @param {goog.math.Box} box The box to include in this one.
+ */
+goog.math.Box.prototype.expandToInclude = function(box) {
+  this.left = Math.min(this.left, box.left);
+  this.top = Math.min(this.top, box.top);
+  this.right = Math.max(this.right, box.right);
+  this.bottom = Math.max(this.bottom, box.bottom);
+};
+
+
+/**
+ * Compares boxes for equality.
+ * @param {goog.math.Box} a A Box.
+ * @param {goog.math.Box} b A Box.
+ * @return {boolean} True iff the boxes are equal, or if both are null.
+ */
+goog.math.Box.equals = function(a, b) {
+  if (a == b) {
+    return true;
+  }
+  if (!a || !b) {
+    return false;
+  }
+  return a.top == b.top && a.right == b.right &&
+         a.bottom == b.bottom && a.left == b.left;
+};
+
+
+/**
+ * Returns whether a box contains a coordinate or another box.
+ *
+ * @param {goog.math.Box} box A Box.
+ * @param {goog.math.Coordinate|goog.math.Box} other A Coordinate or a Box.
+ * @return {boolean} Whether the box contains the coordinate or other box.
+ */
+goog.math.Box.contains = function(box, other) {
+  if (!box || !other) {
+    return false;
+  }
+
+  if (other instanceof goog.math.Box) {
+    return other.left >= box.left && other.right <= box.right &&
+        other.top >= box.top && other.bottom <= box.bottom;
+  }
+
+  // other is a Coordinate.
+  return other.x >= box.left && other.x <= box.right &&
+         other.y >= box.top && other.y <= box.bottom;
+};
+
+
+/**
+ * Returns the distance between a coordinate and the nearest corner/side of a
+ * box. Returns zero if the coordinate is inside the box.
+ *
+ * @param {goog.math.Box} box A Box.
+ * @param {goog.math.Coordinate} coord A Coordinate.
+ * @return {number} The distance between {@code coord} and the nearest
+ *     corner/side of {@code box}, or zero if {@code coord} is inside
+ *     {@code box}.
+ */
+goog.math.Box.distance = function(box, coord) {
+  if (coord.x >= box.left && coord.x <= box.right) {
+    if (coord.y >= box.top && coord.y <= box.bottom) {
+      return 0;
+    }
+    return coord.y < box.top ? box.top - coord.y : coord.y - box.bottom;
+  }
+
+  if (coord.y >= box.top && coord.y <= box.bottom) {
+    return coord.x < box.left ? box.left - coord.x : coord.x - box.right;
+  }
+
+  return goog.math.Coordinate.distance(coord,
+      new goog.math.Coordinate(coord.x < box.left ? box.left : box.right,
+                               coord.y < box.top ? box.top : box.bottom));
+};
+
+
+/**
+ * Returns whether two boxes intersect.
+ *
+ * @param {goog.math.Box} a A Box.
+ * @param {goog.math.Box} b A second Box.
+ * @return {boolean} Whether the boxes intersect.
+ */
+goog.math.Box.intersects = function(a, b) {
+  return (a.left <= b.right && b.left <= a.right &&
+          a.top <= b.bottom && b.top <= a.bottom);
+};
+
+
+/**
+ * Returns whether two boxes would intersect with additional padding.
+ *
+ * @param {goog.math.Box} a A Box.
+ * @param {goog.math.Box} b A second Box.
+ * @param {number} padding The additional padding.
+ * @return {boolean} Whether the boxes intersect.
+ */
+goog.math.Box.intersectsWithPadding = function(a, b, padding) {
+  return (a.left <= b.right + padding && b.left <= a.right + padding &&
+          a.top <= b.bottom + padding && b.top <= a.bottom + padding);
+};
+
+// Input 54
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview A utility class for representing rectangles.
+ */
+
+
+goog.provide('goog.math.Rect');
+
+goog.require('goog.math.Box');
+goog.require('goog.math.Size');
+
+
+
+/**
+ * Class for representing rectangular regions.
+ * @param {number} x Left.
+ * @param {number} y Top.
+ * @param {number} w Width.
+ * @param {number} h Height.
+ * @constructor
+ */
+goog.math.Rect = function(x, y, w, h) {
+  /**
+   * Left
+   * @type {number}
+   */
+  this.left = x;
+
+  /**
+   * Top
+   * @type {number}
+   */
+  this.top = y;
+
+  /**
+   * Width
+   * @type {number}
+   */
+  this.width = w;
+
+  /**
+   * Height
+   * @type {number}
+   */
+  this.height = h;
+};
+
+
+/**
+ * Returns a new copy of the rectangle.
+ * @return {!goog.math.Rect} A clone of this Rectangle.
+ */
+goog.math.Rect.prototype.clone = function() {
+  return new goog.math.Rect(this.left, this.top, this.width, this.height);
+};
+
+
+/**
+ * Returns a new Box object with the same position and dimensions as this
+ * rectangle.
+ * @return {!goog.math.Box} A new Box representation of this Rectangle.
+ */
+goog.math.Rect.prototype.toBox = function() {
+  var right = this.left + this.width;
+  var bottom = this.top + this.height;
+  return new goog.math.Box(this.top,
+                           right,
+                           bottom,
+                           this.left);
+};
+
+
+/**
+ * Creates a new Rect object with the same position and dimensions as a given
+ * Box.  Note that this is only the inverse of toBox if left/top are defined.
+ * @param {goog.math.Box} box A box.
+ * @return {!goog.math.Rect} A new Rect initialized with the box's position
+ *     and size.
+ */
+goog.math.Rect.createFromBox = function(box) {
+  return new goog.math.Rect(box.left, box.top,
+      box.right - box.left, box.bottom - box.top);
+};
+
+
+if (goog.DEBUG) {
+  /**
+   * Returns a nice string representing size and dimensions of rectangle.
+   * @return {string} In the form (50, 73 - 75w x 25h).
+   */
+  goog.math.Rect.prototype.toString = function() {
+    return '(' + this.left + ', ' + this.top + ' - ' + this.width + 'w x ' +
+           this.height + 'h)';
+  };
+}
+
+
+/**
+ * Compares rectangles for equality.
+ * @param {goog.math.Rect} a A Rectangle.
+ * @param {goog.math.Rect} b A Rectangle.
+ * @return {boolean} True iff the rectangles have the same left, top, width,
+ *     and height, or if both are null.
+ */
+goog.math.Rect.equals = function(a, b) {
+  if (a == b) {
+    return true;
+  }
+  if (!a || !b) {
+    return false;
+  }
+  return a.left == b.left && a.width == b.width &&
+         a.top == b.top && a.height == b.height;
+};
+
+
+/**
+ * Computes the intersection of this rectangle and the rectangle parameter.  If
+ * there is no intersection, returns false and leaves this rectangle as is.
+ * @param {goog.math.Rect} rect A Rectangle.
+ * @return {boolean} True iff this rectangle intersects with the parameter.
+ */
+goog.math.Rect.prototype.intersection = function(rect) {
+  var x0 = Math.max(this.left, rect.left);
+  var x1 = Math.min(this.left + this.width, rect.left + rect.width);
+
+  if (x0 <= x1) {
+    var y0 = Math.max(this.top, rect.top);
+    var y1 = Math.min(this.top + this.height, rect.top + rect.height);
+
+    if (y0 <= y1) {
+      this.left = x0;
+      this.top = y0;
+      this.width = x1 - x0;
+      this.height = y1 - y0;
+
+      return true;
+    }
+  }
+  return false;
+};
+
+
+/**
+ * Returns the intersection of two rectangles. Two rectangles intersect if they
+ * touch at all, for example, two zero width and height rectangles would
+ * intersect if they had the same top and left.
+ * @param {goog.math.Rect} a A Rectangle.
+ * @param {goog.math.Rect} b A Rectangle.
+ * @return {goog.math.Rect} A new intersection rect (even if width and height
+ *     are 0), or null if there is no intersection.
+ */
+goog.math.Rect.intersection = function(a, b) {
+  // There is no nice way to do intersection via a clone, because any such
+  // clone might be unnecessary if this function returns null.  So, we duplicate
+  // code from above.
+
+  var x0 = Math.max(a.left, b.left);
+  var x1 = Math.min(a.left + a.width, b.left + b.width);
+
+  if (x0 <= x1) {
+    var y0 = Math.max(a.top, b.top);
+    var y1 = Math.min(a.top + a.height, b.top + b.height);
+
+    if (y0 <= y1) {
+      return new goog.math.Rect(x0, y0, x1 - x0, y1 - y0);
+    }
+  }
+  return null;
+};
+
+
+/**
+ * Returns whether two rectangles intersect. Two rectangles intersect if they
+ * touch at all, for example, two zero width and height rectangles would
+ * intersect if they had the same top and left.
+ * @param {goog.math.Rect} a A Rectangle.
+ * @param {goog.math.Rect} b A Rectangle.
+ * @return {boolean} Whether a and b intersect.
+ */
+goog.math.Rect.intersects = function(a, b) {
+  return (a.left <= b.left + b.width && b.left <= a.left + a.width &&
+      a.top <= b.top + b.height && b.top <= a.top + a.height);
+};
+
+
+/**
+ * Returns whether a rectangle intersects this rectangle.
+ * @param {goog.math.Rect} rect A rectangle.
+ * @return {boolean} Whether rect intersects this rectangle.
+ */
+goog.math.Rect.prototype.intersects = function(rect) {
+  return goog.math.Rect.intersects(this, rect);
+};
+
+
+/**
+ * Computes the difference regions between two rectangles. The return value is
+ * an array of 0 to 4 rectangles defining the remaining regions of the first
+ * rectangle after the second has been subtracted.
+ * @param {goog.math.Rect} a A Rectangle.
+ * @param {goog.math.Rect} b A Rectangle.
+ * @return {!Array.<!goog.math.Rect>} An array with 0 to 4 rectangles which
+ *     together define the difference area of rectangle a minus rectangle b.
+ */
+goog.math.Rect.difference = function(a, b) {
+  var intersection = goog.math.Rect.intersection(a, b);
+  if (!intersection || !intersection.height || !intersection.width) {
+    return [a.clone()];
+  }
+
+  var result = [];
+
+  var top = a.top;
+  var height = a.height;
+
+  var ar = a.left + a.width;
+  var ab = a.top + a.height;
+
+  var br = b.left + b.width;
+  var bb = b.top + b.height;
+
+  // Subtract off any area on top where A extends past B
+  if (b.top > a.top) {
+    result.push(new goog.math.Rect(a.left, a.top, a.width, b.top - a.top));
+    top = b.top;
+    // If we're moving the top down, we also need to subtract the height diff.
+    height -= b.top - a.top;
+  }
+  // Subtract off any area on bottom where A extends past B
+  if (bb < ab) {
+    result.push(new goog.math.Rect(a.left, bb, a.width, ab - bb));
+    height = bb - top;
+  }
+  // Subtract any area on left where A extends past B
+  if (b.left > a.left) {
+    result.push(new goog.math.Rect(a.left, top, b.left - a.left, height));
+  }
+  // Subtract any area on right where A extends past B
+  if (br < ar) {
+    result.push(new goog.math.Rect(br, top, ar - br, height));
+  }
+
+  return result;
+};
+
+
+/**
+ * Computes the difference regions between this rectangle and {@code rect}. The
+ * return value is an array of 0 to 4 rectangles defining the remaining regions
+ * of this rectangle after the other has been subtracted.
+ * @param {goog.math.Rect} rect A Rectangle.
+ * @return {!Array.<!goog.math.Rect>} An array with 0 to 4 rectangles which
+ *     together define the difference area of rectangle a minus rectangle b.
+ */
+goog.math.Rect.prototype.difference = function(rect) {
+  return goog.math.Rect.difference(this, rect);
+};
+
+
+/**
+ * Expand this rectangle to also include the area of the given rectangle.
+ * @param {goog.math.Rect} rect The other rectangle.
+ */
+goog.math.Rect.prototype.boundingRect = function(rect) {
+  // We compute right and bottom before we change left and top below.
+  var right = Math.max(this.left + this.width, rect.left + rect.width);
+  var bottom = Math.max(this.top + this.height, rect.top + rect.height);
+
+  this.left = Math.min(this.left, rect.left);
+  this.top = Math.min(this.top, rect.top);
+
+  this.width = right - this.left;
+  this.height = bottom - this.top;
+};
+
+
+/**
+ * Returns a new rectangle which completely contains both input rectangles.
+ * @param {goog.math.Rect} a A rectangle.
+ * @param {goog.math.Rect} b A rectangle.
+ * @return {goog.math.Rect} A new bounding rect, or null if either rect is
+ *     null.
+ */
+goog.math.Rect.boundingRect = function(a, b) {
+  if (!a || !b) {
+    return null;
+  }
+
+  var clone = a.clone();
+  clone.boundingRect(b);
+
+  return clone;
+};
+
+
+/**
+ * Tests whether this rectangle entirely contains another rectangle or
+ * coordinate.
+ *
+ * @param {goog.math.Rect|goog.math.Coordinate} another The rectangle or
+ *     coordinate to test for containment.
+ * @return {boolean} Whether this rectangle contains given rectangle or
+ *     coordinate.
+ */
+goog.math.Rect.prototype.contains = function(another) {
+  if (another instanceof goog.math.Rect) {
+    return this.left <= another.left &&
+           this.left + this.width >= another.left + another.width &&
+           this.top <= another.top &&
+           this.top + this.height >= another.top + another.height;
+  } else { // (another instanceof goog.math.Coordinate)
+    return another.x >= this.left &&
+           another.x <= this.left + this.width &&
+           another.y >= this.top &&
+           another.y <= this.top + this.height;
+  }
+};
+
+
+/**
+ * Returns the size of this rectangle.
+ * @return {!goog.math.Size} The size of this rectangle.
+ */
+goog.math.Rect.prototype.getSize = function() {
+  return new goog.math.Size(this.width, this.height);
+};
+
+// Input 55
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Drag Utilities.
+ *
+ * Provides extensible functionality for drag & drop behaviour.
+ *
+ * @see ../demos/drag.html
+ * @see ../demos/dragger.html
+ */
+
+
+goog.provide('goog.fx.DragEvent');
+goog.provide('goog.fx.Dragger');
+goog.provide('goog.fx.Dragger.EventType');
+
+goog.require('goog.dom');
+goog.require('goog.events');
+goog.require('goog.events.BrowserEvent.MouseButton');
+goog.require('goog.events.Event');
+goog.require('goog.events.EventHandler');
+goog.require('goog.events.EventTarget');
+goog.require('goog.events.EventType');
+goog.require('goog.math.Coordinate');
+goog.require('goog.math.Rect');
+goog.require('goog.userAgent');
+
+
+
+/**
+ * A class that allows mouse or touch-based dragging (moving) of an element
+ *
+ * @param {Element} target The element that will be dragged.
+ * @param {Element=} opt_handle An optional handle to control the drag, if null
+ *     the target is used.
+ * @param {goog.math.Rect=} opt_limits Object containing left, top, width,
+ *     and height.
+ *
+ * @extends {goog.events.EventTarget}
+ * @constructor
+ */
+goog.fx.Dragger = function(target, opt_handle, opt_limits) {
+  goog.events.EventTarget.call(this);
+  this.target = target;
+  this.handle = opt_handle || target;
+  this.limits = opt_limits || new goog.math.Rect(NaN, NaN, NaN, NaN);
+
+  this.document_ = goog.dom.getOwnerDocument(target);
+  this.eventHandler_ = new goog.events.EventHandler(this);
+
+  // Add listener. Do not use the event handler here since the event handler is
+  // used for listeners added and removed during the drag operation.
+  goog.events.listen(this.handle,
+      [goog.events.EventType.TOUCHSTART, goog.events.EventType.MOUSEDOWN],
+      this.startDrag, false, this);
+};
+goog.inherits(goog.fx.Dragger, goog.events.EventTarget);
+
+
+/**
+ * Whether setCapture is supported by the browser.
+ * @type {boolean}
+ * @private
+ */
+goog.fx.Dragger.HAS_SET_CAPTURE_ =
+    // IE and Gecko after 1.9.3 has setCapture
+    // WebKit does not yet: https://bugs.webkit.org/show_bug.cgi?id=27330
+    goog.userAgent.IE ||
+    goog.userAgent.GECKO && goog.userAgent.isVersion('1.9.3');
+
+
+/**
+ * Constants for event names.
+ * @enum {string}
+ */
+goog.fx.Dragger.EventType = {
+  // The drag action was canceled before the START event. Possible reasons:
+  // disabled dragger, dragging with the right mouse button or releasing the
+  // button before reaching the hysteresis distance.
+  EARLY_CANCEL: 'earlycancel',
+  START: 'start',
+  BEFOREDRAG: 'beforedrag',
+  DRAG: 'drag',
+  END: 'end'
+};
+
+
+/**
+ * Reference to drag target element.
+ * @type {Element}
+ */
+goog.fx.Dragger.prototype.target;
+
+
+/**
+ * Reference to the handler that initiates the drag.
+ * @type {Element}
+ */
+goog.fx.Dragger.prototype.handle;
+
+
+/**
+ * Object representing the limits of the drag region.
+ * @type {goog.math.Rect}
+ */
+goog.fx.Dragger.prototype.limits;
+
+
+/**
+ * Current x position of mouse or touch relative to viewport.
+ * @type {number}
+ */
+goog.fx.Dragger.prototype.clientX = 0;
+
+
+/**
+ * Current y position of mouse or touch relative to viewport.
+ * @type {number}
+ */
+goog.fx.Dragger.prototype.clientY = 0;
+
+
+/**
+ * Current x position of mouse or touch relative to screen. Deprecated because
+ * it doesn't take into affect zoom level or pixel density.
+ * @type {number}
+ * @deprecated Consider switching to clientX instead.
+ */
+goog.fx.Dragger.prototype.screenX = 0;
+
+
+/**
+ * Current y position of mouse or touch relative to screen. Deprecated because
+ * it doesn't take into affect zoom level or pixel density.
+ * @type {number}
+ * @deprecated Consider switching to clientY instead.
+ */
+goog.fx.Dragger.prototype.screenY = 0;
+
+
+/**
+ * The x position where the first mousedown or touchstart occurred.
+ * @type {number}
+ */
+goog.fx.Dragger.prototype.startX = 0;
+
+
+/**
+ * The y position where the first mousedown or touchstart occurred.
+ * @type {number}
+ */
+goog.fx.Dragger.prototype.startY = 0;
+
+
+/**
+ * Current x position of drag relative to target's parent.
+ * @type {number}
+ */
+goog.fx.Dragger.prototype.deltaX = 0;
+
+
+/**
+ * Current y position of drag relative to target's parent.
+ * @type {number}
+ */
+goog.fx.Dragger.prototype.deltaY = 0;
+
+
+/**
+ * The current page scroll value.
+ * @type {goog.math.Coordinate}
+ */
+goog.fx.Dragger.prototype.pageScroll;
+
+
+/**
+ * Whether dragging is currently enabled.
+ * @type {boolean}
+ * @private
+ */
+goog.fx.Dragger.prototype.enabled_ = true;
+
+
+/**
+ * Whether object is currently being dragged.
+ * @type {boolean}
+ * @private
+ */
+goog.fx.Dragger.prototype.dragging_ = false;
+
+
+/**
+ * The amount of distance, in pixels, after which a mousedown or touchstart is
+ * considered a drag.
+ * @type {number}
+ * @private
+ */
+goog.fx.Dragger.prototype.hysteresisDistanceSquared_ = 0;
+
+
+/**
+ * Timestamp of when the mousedown or touchstart occurred.
+ * @type {number}
+ * @private
+ */
+goog.fx.Dragger.prototype.mouseDownTime_ = 0;
+
+
+/**
+ * Reference to a document object to use for the events.
+ * @type {Document}
+ * @private
+ */
+goog.fx.Dragger.prototype.document_;
+
+
+/**
+ * Event handler used to simplify managing events.
+ * @type {goog.events.EventHandler}
+ * @private
+ */
+goog.fx.Dragger.prototype.eventHandler_;
+
+
+/**
+ * The SCROLL event target used to make drag element follow scrolling.
+ * @type {EventTarget}
+ * @private
+ */
+goog.fx.Dragger.prototype.scrollTarget_;
+
+
+/**
+ * Whether IE drag events cancelling is on.
+ * @type {boolean}
+ * @private
+ */
+goog.fx.Dragger.prototype.ieDragStartCancellingOn_ = false;
+
+
+/**
+ * Returns the event handler, intended for subclass use.
+ * @return {goog.events.EventHandler} The event handler.
+ */
+goog.fx.Dragger.prototype.getHandler = function() {
+  return this.eventHandler_;
+};
+
+
+/**
+ * Sets (or reset) the Drag limits after a Dragger is created.
+ * @param {goog.math.Rect?} limits Object containing left, top, width,
+ *     height for new Dragger limits.
+ */
+goog.fx.Dragger.prototype.setLimits = function(limits) {
+  this.limits = limits || new goog.math.Rect(NaN, NaN, NaN, NaN);
+};
+
+
+/**
+ * Sets the distance the user has to drag the element before a drag operation is
+ * started.
+ * @param {number} distance The number of pixels after which a mousedown and
+ *     move is considered a drag.
+ */
+goog.fx.Dragger.prototype.setHysteresis = function(distance) {
+  this.hysteresisDistanceSquared_ = Math.pow(distance, 2);
+};
+
+
+/**
+ * Gets the distance the user has to drag the element before a drag operation is
+ * started.
+ * @return {number} distance The number of pixels after which a mousedown and
+ *     move is considered a drag.
+ */
+goog.fx.Dragger.prototype.getHysteresis = function() {
+  return Math.sqrt(this.hysteresisDistanceSquared_);
+};
+
+
+/**
+ * Sets the SCROLL event target to make drag element follow scrolling.
+ *
+ * @param {EventTarget} scrollTarget The event target that dispatches SCROLL
+ *     events.
+ */
+goog.fx.Dragger.prototype.setScrollTarget = function(scrollTarget) {
+  this.scrollTarget_ = scrollTarget;
+};
+
+
+/**
+ * Enables cancelling of built-in IE drag events.
+ * @param {boolean} cancelIeDragStart Whether to enable cancelling of IE
+ *     dragstart event.
+ */
+goog.fx.Dragger.prototype.setCancelIeDragStart = function(cancelIeDragStart) {
+  this.ieDragStartCancellingOn_ = cancelIeDragStart;
+};
+
+
+/**
+ * @return {boolean} Whether the dragger is enabled.
+ */
+goog.fx.Dragger.prototype.getEnabled = function() {
+  return this.enabled_;
+};
+
+
+/**
+ * Set whether dragger is enabled
+ * @param {boolean} enabled Whether dragger is enabled.
+ */
+goog.fx.Dragger.prototype.setEnabled = function(enabled) {
+  this.enabled_ = enabled;
+};
+
+
+/** @override */
+goog.fx.Dragger.prototype.disposeInternal = function() {
+  goog.fx.Dragger.superClass_.disposeInternal.call(this);
+
+  goog.events.unlisten(this.handle,
+      [goog.events.EventType.TOUCHSTART, goog.events.EventType.MOUSEDOWN],
+      this.startDrag, false, this);
+  this.eventHandler_.dispose();
+
+  delete this.target;
+  delete this.handle;
+  delete this.eventHandler_;
+};
+
+
+/**
+ * Event handler that is used to start the drag
+ * @param {goog.events.BrowserEvent} e Event object.
+ */
+goog.fx.Dragger.prototype.startDrag = function(e) {
+  var isMouseDown = e.type == goog.events.EventType.MOUSEDOWN;
+
+  // Dragger.startDrag() can be called by AbstractDragDrop with a mousemove
+  // event and IE does not report pressed mouse buttons on mousemove. Also,
+  // it does not make sense to check for the button if the user is already
+  // dragging.
+
+  if (this.enabled_ && !this.dragging_ &&
+      (!isMouseDown || e.isMouseActionButton())) {
+    this.maybeReinitTouchEvent_(e);
+    if (this.hysteresisDistanceSquared_ == 0) {
+      this.initializeDrag_(e);
+      if (this.dragging_) {
+        e.preventDefault();
+      } else {
+        // If the start drag is cancelled, don't setup for a drag.
+        return;
+      }
+    } else {
+      // Need to preventDefault for hysteresis to prevent page getting selected.
+      e.preventDefault();
+    }
+    this.setupDragHandlers();
+
+    this.clientX = this.startX = e.clientX;
+    this.clientY = this.startY = e.clientY;
+    this.screenX = e.screenX;
+    this.screenY = e.screenY;
+    this.deltaX = this.target.offsetLeft;
+    this.deltaY = this.target.offsetTop;
+    this.pageScroll = goog.dom.getDomHelper(this.document_).getDocumentScroll();
+
+    this.mouseDownTime_ = goog.now();
+  } else {
+    this.dispatchEvent(goog.fx.Dragger.EventType.EARLY_CANCEL);
+  }
+};
+
+
+/**
+ * Sets up event handlers when dragging starts.
+ * @protected
+ */
+goog.fx.Dragger.prototype.setupDragHandlers = function() {
+  var doc = this.document_;
+  var docEl = doc.documentElement;
+  // Use bubbling when we have setCapture since we got reports that IE has
+  // problems with the capturing events in combination with setCapture.
+  var useCapture = !goog.fx.Dragger.HAS_SET_CAPTURE_;
+
+  this.eventHandler_.listen(doc,
+      [goog.events.EventType.TOUCHMOVE, goog.events.EventType.MOUSEMOVE],
+      this.handleMove_, useCapture);
+  this.eventHandler_.listen(doc,
+      [goog.events.EventType.TOUCHEND, goog.events.EventType.MOUSEUP],
+      this.endDrag, useCapture);
+
+  if (goog.fx.Dragger.HAS_SET_CAPTURE_) {
+    docEl.setCapture(false);
+    this.eventHandler_.listen(docEl,
+                              goog.events.EventType.LOSECAPTURE,
+                              this.endDrag);
+  } else {
+    // Make sure we stop the dragging if the window loses focus.
+    // Don't use capture in this listener because we only want to end the drag
+    // if the actual window loses focus. Since blur events do not bubble we use
+    // a bubbling listener on the window.
+    this.eventHandler_.listen(goog.dom.getWindow(doc),
+                              goog.events.EventType.BLUR,
+                              this.endDrag);
+  }
+
+  if (goog.userAgent.IE && this.ieDragStartCancellingOn_) {
+    // Cancel IE's 'ondragstart' event.
+    this.eventHandler_.listen(doc, goog.events.EventType.DRAGSTART,
+                              goog.events.Event.preventDefault);
+  }
+
+  if (this.scrollTarget_) {
+    this.eventHandler_.listen(this.scrollTarget_, goog.events.EventType.SCROLL,
+                              this.onScroll_, useCapture);
+  }
+};
+
+
+/**
+ * Event handler that is used to start the drag
+ * @param {goog.events.BrowserEvent|goog.events.Event} e Event object.
+ * @private
+ */
+goog.fx.Dragger.prototype.initializeDrag_ = function(e) {
+  var rv = this.dispatchEvent(new goog.fx.DragEvent(
+      goog.fx.Dragger.EventType.START, this, e.clientX, e.clientY,
+      /** @type {goog.events.BrowserEvent} */(e)));
+  if (rv !== false) {
+    this.dragging_ = true;
+  }
+};
+
+
+/**
+ * Event handler that is used to end the drag
+ * @param {goog.events.BrowserEvent} e Event object.
+ * @param {boolean=} opt_dragCanceled Whether the drag has been canceled.
+ */
+goog.fx.Dragger.prototype.endDrag = function(e, opt_dragCanceled) {
+  this.eventHandler_.removeAll();
+
+  if (goog.fx.Dragger.HAS_SET_CAPTURE_) {
+    this.document_.releaseCapture();
+  }
+
+  var x = this.limitX(this.deltaX);
+  var y = this.limitY(this.deltaY);
+
+  if (this.dragging_) {
+    this.maybeReinitTouchEvent_(e);
+    this.dragging_ = false;
+
+    var dragCancelled = opt_dragCanceled ||
+                        e.type == goog.events.EventType.TOUCHCANCEL;
+    this.dispatchEvent(new goog.fx.DragEvent(
+        goog.fx.Dragger.EventType.END, this, e.clientX, e.clientY, e, x, y,
+        dragCancelled));
+  } else {
+    this.dispatchEvent(goog.fx.Dragger.EventType.EARLY_CANCEL);
+  }
+
+  // Call preventDefault to prevent mouseup from being raised if this is a
+  // touchend event.
+  if (e.type == goog.events.EventType.TOUCHEND ||
+      e.type == goog.events.EventType.TOUCHCANCEL) {
+    e.preventDefault();
+  }
+};
+
+
+/**
+ * Event handler that is used to end the drag by cancelling it.
+ * @param {goog.events.BrowserEvent} e Event object.
+ */
+goog.fx.Dragger.prototype.endDragCancel = function(e) {
+  this.endDrag(e, true);
+};
+
+
+/**
+ * Re-initializes the event with the first target touch event or, in the case
+ * of a stop event, the last changed touch.
+ * @param {goog.events.BrowserEvent} e A TOUCH... event.
+ * @private
+ */
+goog.fx.Dragger.prototype.maybeReinitTouchEvent_ = function(e) {
+  var type = e.type;
+
+  if (type == goog.events.EventType.TOUCHSTART ||
+      type == goog.events.EventType.TOUCHMOVE) {
+    e.init(e.getBrowserEvent().targetTouches[0], e.currentTarget);
+  } else if (type == goog.events.EventType.TOUCHEND ||
+             type == goog.events.EventType.TOUCHCANCEL) {
+    e.init(e.getBrowserEvent().changedTouches[0], e.currentTarget);
+  }
+};
+
+
+/**
+ * Event handler that is used on mouse / touch move to update the drag
+ * @param {goog.events.BrowserEvent} e Event object.
+ * @private
+ */
+goog.fx.Dragger.prototype.handleMove_ = function(e) {
+  if (this.enabled_) {
+    this.maybeReinitTouchEvent_(e);
+    var dx = e.clientX - this.clientX;
+    var dy = e.clientY - this.clientY;
+    this.clientX = e.clientX;
+    this.clientY = e.clientY;
+    this.screenX = e.screenX;
+    this.screenY = e.screenY;
+
+    if (!this.dragging_) {
+      var diffX = this.startX - this.clientX;
+      var diffY = this.startY - this.clientY;
+      var distance = diffX * diffX + diffY * diffY;
+      if (distance > this.hysteresisDistanceSquared_) {
+        this.initializeDrag_(e);
+        if (!this.dragging_) {
+          // If the start drag is cancelled, stop trying to drag.
+          this.endDrag(e);
+          return;
+        }
+      }
+    }
+
+    var pos = this.calculatePosition_(dx, dy);
+    var x = pos.x;
+    var y = pos.y;
+
+    if (this.dragging_) {
+
+      var rv = this.dispatchEvent(new goog.fx.DragEvent(
+          goog.fx.Dragger.EventType.BEFOREDRAG, this, e.clientX, e.clientY,
+          e, x, y));
+
+      // Only do the defaultAction and dispatch drag event if predrag didn't
+      // prevent default
+      if (rv !== false) {
+        this.doDrag(e, x, y, false);
+        e.preventDefault();
+      }
+    }
+  }
+};
+
+
+/**
+ * Calculates the drag position.
+ *
+ * @param {number} dx The horizontal movement delta.
+ * @param {number} dy The vertical movement delta.
+ * @return {goog.math.Coordinate} The newly calculated drag element position.
+ * @private
+ */
+goog.fx.Dragger.prototype.calculatePosition_ = function(dx, dy) {
+  // Update the position for any change in body scrolling
+  var pageScroll = goog.dom.getDomHelper(this.document_).getDocumentScroll();
+  dx += pageScroll.x - this.pageScroll.x;
+  dy += pageScroll.y - this.pageScroll.y;
+  this.pageScroll = pageScroll;
+
+  this.deltaX += dx;
+  this.deltaY += dy;
+
+  var x = this.limitX(this.deltaX);
+  var y = this.limitY(this.deltaY);
+  return new goog.math.Coordinate(x, y);
+};
+
+
+/**
+ * Event handler for scroll target scrolling.
+ * @param {goog.events.BrowserEvent} e The event.
+ * @private
+ */
+goog.fx.Dragger.prototype.onScroll_ = function(e) {
+  var pos = this.calculatePosition_(0, 0);
+  e.clientX = this.clientX;
+  e.clientY = this.clientY;
+  this.doDrag(e, pos.x, pos.y, true);
+};
+
+
+/**
+ * @param {goog.events.BrowserEvent} e The closure object
+ *     representing the browser event that caused a drag event.
+ * @param {number} x The new horizontal position for the drag element.
+ * @param {number} y The new vertical position for the drag element.
+ * @param {boolean} dragFromScroll Whether dragging was caused by scrolling
+ *     the associated scroll target.
+ * @protected
+ */
+goog.fx.Dragger.prototype.doDrag = function(e, x, y, dragFromScroll) {
+  this.defaultAction(x, y);
+  this.dispatchEvent(new goog.fx.DragEvent(
+      goog.fx.Dragger.EventType.DRAG, this, e.clientX, e.clientY, e, x, y));
+};
+
+
+/**
+ * Returns the 'real' x after limits are applied (allows for some
+ * limits to be undefined).
+ * @param {number} x X-coordinate to limit.
+ * @return {number} The 'real' X-coordinate after limits are applied.
+ */
+goog.fx.Dragger.prototype.limitX = function(x) {
+  var rect = this.limits;
+  var left = !isNaN(rect.left) ? rect.left : null;
+  var width = !isNaN(rect.width) ? rect.width : 0;
+  var maxX = left != null ? left + width : Infinity;
+  var minX = left != null ? left : -Infinity;
+  return Math.min(maxX, Math.max(minX, x));
+};
+
+
+/**
+ * Returns the 'real' y after limits are applied (allows for some
+ * limits to be undefined).
+ * @param {number} y Y-coordinate to limit.
+ * @return {number} The 'real' Y-coordinate after limits are applied.
+ */
+goog.fx.Dragger.prototype.limitY = function(y) {
+  var rect = this.limits;
+  var top = !isNaN(rect.top) ? rect.top : null;
+  var height = !isNaN(rect.height) ? rect.height : 0;
+  var maxY = top != null ? top + height : Infinity;
+  var minY = top != null ? top : -Infinity;
+  return Math.min(maxY, Math.max(minY, y));
+};
+
+
+/**
+ * Overridable function for handling the default action of the drag behaviour.
+ * Normally this is simply moving the element to x,y though in some cases it
+ * might be used to resize the layer.  This is basically a shortcut to
+ * implementing a default ondrag event handler.
+ * @param {number} x X-coordinate for target element.
+ * @param {number} y Y-coordinate for target element.
+ */
+goog.fx.Dragger.prototype.defaultAction = function(x, y) {
+  this.target.style.left = x + 'px';
+  this.target.style.top = y + 'px';
+};
+
+
+
+/**
+ * Object representing a drag event
+ * @param {string} type Event type.
+ * @param {goog.fx.Dragger} dragobj Drag object initiating event.
+ * @param {number} clientX X-coordinate relative to the viewport.
+ * @param {number} clientY Y-coordinate relative to the viewport.
+ * @param {goog.events.BrowserEvent} browserEvent The closure object
+ *   representing the browser event that caused this drag event.
+ * @param {number=} opt_actX Optional actual x for drag if it has been limited.
+ * @param {number=} opt_actY Optional actual y for drag if it has been limited.
+ * @param {boolean=} opt_dragCanceled Whether the drag has been canceled.
+ * @constructor
+ * @extends {goog.events.Event}
+ */
+goog.fx.DragEvent = function(type, dragobj, clientX, clientY, browserEvent,
+                             opt_actX, opt_actY, opt_dragCanceled) {
+  goog.events.Event.call(this, type);
+
+  /**
+   * X-coordinate relative to the viewport
+   * @type {number}
+   */
+  this.clientX = clientX;
+
+  /**
+   * Y-coordinate relative to the viewport
+   * @type {number}
+   */
+  this.clientY = clientY;
+
+  /**
+   * The closure object representing the browser event that caused this drag
+   * event.
+   * @type {goog.events.BrowserEvent}
+   */
+  this.browserEvent = browserEvent;
+
+  /**
+   * The real x-position of the drag if it has been limited
+   * @type {number}
+   */
+  this.left = goog.isDef(opt_actX) ? opt_actX : dragobj.deltaX;
+
+  /**
+   * The real y-position of the drag if it has been limited
+   * @type {number}
+   */
+  this.top = goog.isDef(opt_actY) ? opt_actY : dragobj.deltaY;
+
+  /**
+   * Reference to the drag object for this event
+   * @type {goog.fx.Dragger}
+   */
+  this.dragger = dragobj;
+
+  /**
+   * Whether drag was canceled with this event. Used to differentiate between
+   * a legitimate drag END that can result in an action and a drag END which is
+   * a result of a drag cancelation. For now it can happen 1) with drag END
+   * event on FireFox when user drags the mouse out of the window, 2) with
+   * drag END event on IE7 which is generated on MOUSEMOVE event when user
+   * moves the mouse into the document after the mouse button has been
+   * released, 3) when TOUCHCANCEL is raised instead of TOUCHEND (on touch
+   * events).
+   * @type {boolean}
+   */
+  this.dragCanceled = !!opt_dragCanceled;
+};
+goog.inherits(goog.fx.DragEvent, goog.events.Event);
+
+// Input 56
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Utilities for element styles.
+ *
+ * @see ../demos/inline_block_quirks.html
+ * @see ../demos/inline_block_standards.html
+ * @see ../demos/style_viewport.html
+ */
+
+goog.provide('goog.style');
+
+
+goog.require('goog.array');
+goog.require('goog.dom');
+goog.require('goog.math.Box');
+goog.require('goog.math.Coordinate');
+goog.require('goog.math.Rect');
+goog.require('goog.math.Size');
+goog.require('goog.object');
+goog.require('goog.string');
+goog.require('goog.userAgent');
+
+
+/**
+ * Sets a style value on an element.
+ *
+ * This function is not indended to patch issues in the browser's style
+ * handling, but to allow easy programmatic access to setting dash-separated
+ * style properties.  An example is setting a batch of properties from a data
+ * object without overwriting old styles.  When possible, use native APIs:
+ * elem.style.propertyKey = 'value' or (if obliterating old styles is fine)
+ * elem.style.cssText = 'property1: value1; property2: value2'.
+ *
+ * @param {Element} element The element to change.
+ * @param {string|Object} style If a string, a style name. If an object, a hash
+ *     of style names to style values.
+ * @param {string|number|boolean=} opt_value If style was a string, then this
+ *     should be the value.
+ */
+goog.style.setStyle = function(element, style, opt_value) {
+  if (goog.isString(style)) {
+    goog.style.setStyle_(element, opt_value, style);
+  } else {
+    goog.object.forEach(style, goog.partial(goog.style.setStyle_, element));
+  }
+};
+
+
+/**
+ * Sets a style value on an element, with parameters swapped to work with
+ * {@code goog.object.forEach()}.
+ * @param {Element} element The element to change.
+ * @param {string|number|boolean|undefined} value Style value.
+ * @param {string} style Style name.
+ * @private
+ */
+goog.style.setStyle_ = function(element, value, style) {
+  element.style[goog.string.toCamelCase(style)] = value;
+};
+
+
+/**
+ * Retrieves an explicitly-set style value of a node. This returns '' if there
+ * isn't a style attribute on the element or if this style property has not been
+ * explicitly set in script.
+ *
+ * @param {Element} element Element to get style of.
+ * @param {string} property Property to get, css-style (if you have a camel-case
+ * property, use element.style[style]).
+ * @return {string} Style value.
+ */
+goog.style.getStyle = function(element, property) {
+  // element.style is '' for well-known properties which are unset.
+  // For for browser specific styles as 'filter' is undefined
+  // so we need to return '' explicitly to make it consistent across
+  // browsers.
+  return element.style[goog.string.toCamelCase(property)] || '';
+};
+
+
+/**
+ * Retrieves a computed style value of a node. It returns empty string if the
+ * value cannot be computed (which will be the case in Internet Explorer) or
+ * "none" if the property requested is an SVG one and it has not been
+ * explicitly set (firefox and webkit).
+ *
+ * @param {Element} element Element to get style of.
+ * @param {string} property Property to get (camel-case).
+ * @return {string} Style value.
+ */
+goog.style.getComputedStyle = function(element, property) {
+  var doc = goog.dom.getOwnerDocument(element);
+  if (doc.defaultView && doc.defaultView.getComputedStyle) {
+    var styles = doc.defaultView.getComputedStyle(element, null);
+    if (styles) {
+      // element.style[..] is undefined for browser specific styles
+      // as 'filter'.
+      return styles[property] || styles.getPropertyValue(property);
+    }
+  }
+
+  return '';
+};
+
+
+/**
+ * Gets the cascaded style value of a node, or null if the value cannot be
+ * computed (only Internet Explorer can do this).
+ *
+ * @param {Element} element Element to get style of.
+ * @param {string} style Property to get (camel-case).
+ * @return {string} Style value.
+ */
+goog.style.getCascadedStyle = function(element, style) {
+  return element.currentStyle ? element.currentStyle[style] : null;
+};
+
+
+/**
+ * Cross-browser pseudo get computed style. It returns the computed style where
+ * available. If not available it tries the cascaded style value (IE
+ * currentStyle) and in worst case the inline style value.  It shouldn't be
+ * called directly, see http://wiki/Main/ComputedStyleVsCascadedStyle for
+ * discussion.
+ *
+ * @param {Element} element Element to get style of.
+ * @param {string} style Property to get (must be camelCase, not css-style.).
+ * @return {string} Style value.
+ * @private
+ */
+goog.style.getStyle_ = function(element, style) {
+  return goog.style.getComputedStyle(element, style) ||
+         goog.style.getCascadedStyle(element, style) ||
+         element.style[style];
+};
+
+
+/**
+ * Retrieves the computed value of the position CSS attribute.
+ * @param {Element} element The element to get the position of.
+ * @return {string} Position value.
+ */
+goog.style.getComputedPosition = function(element) {
+  return goog.style.getStyle_(element, 'position');
+};
+
+
+/**
+ * Retrieves the computed background color string for a given element. The
+ * string returned is suitable for assigning to another element's
+ * background-color, but is not guaranteed to be in any particular string
+ * format. Accessing the color in a numeric form may not be possible in all
+ * browsers or with all input.
+ *
+ * If the background color for the element is defined as a hexadecimal value,
+ * the resulting string can be parsed by goog.color.parse in all supported
+ * browsers.
+ *
+ * Whether named colors like "red" or "lightblue" get translated into a
+ * format which can be parsed is browser dependent. Calling this function on
+ * transparent elements will return "transparent" in most browsers or
+ * "rgba(0, 0, 0, 0)" in WebKit.
+ * @param {Element} element The element to get the background color of.
+ * @return {string} The computed string value of the background color.
+ */
+goog.style.getBackgroundColor = function(element) {
+  return goog.style.getStyle_(element, 'backgroundColor');
+};
+
+
+/**
+ * Retrieves the computed value of the overflow-x CSS attribute.
+ * @param {Element} element The element to get the overflow-x of.
+ * @return {string} The computed string value of the overflow-x attribute.
+ */
+goog.style.getComputedOverflowX = function(element) {
+  return goog.style.getStyle_(element, 'overflowX');
+};
+
+
+/**
+ * Retrieves the computed value of the overflow-y CSS attribute.
+ * @param {Element} element The element to get the overflow-y of.
+ * @return {string} The computed string value of the overflow-y attribute.
+ */
+goog.style.getComputedOverflowY = function(element) {
+  return goog.style.getStyle_(element, 'overflowY');
+};
+
+
+/**
+ * Retrieves the computed value of the z-index CSS attribute.
+ * @param {Element} element The element to get the z-index of.
+ * @return {string|number} The computed value of the z-index attribute.
+ */
+goog.style.getComputedZIndex = function(element) {
+  return goog.style.getStyle_(element, 'zIndex');
+};
+
+
+/**
+ * Retrieves the computed value of the text-align CSS attribute.
+ * @param {Element} element The element to get the text-align of.
+ * @return {string} The computed string value of the text-align attribute.
+ */
+goog.style.getComputedTextAlign = function(element) {
+  return goog.style.getStyle_(element, 'textAlign');
+};
+
+
+/**
+ * Retrieves the computed value of the cursor CSS attribute.
+ * @param {Element} element The element to get the cursor of.
+ * @return {string} The computed string value of the cursor attribute.
+ */
+goog.style.getComputedCursor = function(element) {
+  return goog.style.getStyle_(element, 'cursor');
+};
+
+
+/**
+ * Sets the top/left values of an element.  If no unit is specified in the
+ * argument then it will add px.
+ * @param {Element} el Element to move.
+ * @param {string|number|goog.math.Coordinate} arg1 Left position or coordinate.
+ * @param {string|number=} opt_arg2 Top position.
+ */
+goog.style.setPosition = function(el, arg1, opt_arg2) {
+  var x, y;
+  var buggyGeckoSubPixelPos = goog.userAgent.GECKO &&
+      (goog.userAgent.MAC || goog.userAgent.X11) &&
+      goog.userAgent.isVersion('1.9');
+
+  if (arg1 instanceof goog.math.Coordinate) {
+    x = arg1.x;
+    y = arg1.y;
+  } else {
+    x = arg1;
+    y = opt_arg2;
+  }
+
+  // Round to the nearest pixel for buggy sub-pixel support.
+  el.style.left = goog.style.getPixelStyleValue_(
+      /** @type {number|string} */ (x), buggyGeckoSubPixelPos);
+  el.style.top = goog.style.getPixelStyleValue_(
+      /** @type {number|string} */ (y), buggyGeckoSubPixelPos);
+};
+
+
+/**
+ * Gets the offsetLeft and offsetTop properties of an element and returns them
+ * in a Coordinate object
+ * @param {Element} element Element.
+ * @return {!goog.math.Coordinate} The position.
+ */
+goog.style.getPosition = function(element) {
+  return new goog.math.Coordinate(element.offsetLeft, element.offsetTop);
+};
+
+
+/**
+ * Returns the viewport element for a particular document
+ * @param {Node=} opt_node DOM node (Document is OK) to get the viewport element
+ *     of.
+ * @return {Element} document.documentElement or document.body.
+ */
+goog.style.getClientViewportElement = function(opt_node) {
+  var doc;
+  if (opt_node) {
+    if (opt_node.nodeType == goog.dom.NodeType.DOCUMENT) {
+      doc = opt_node;
+    } else {
+      doc = goog.dom.getOwnerDocument(opt_node);
+    }
+  } else {
+    doc = goog.dom.getDocument();
+  }
+
+  // In old IE versions the document.body represented the viewport
+  if (goog.userAgent.IE && !goog.userAgent.isDocumentMode(9) &&
+      !goog.dom.getDomHelper(doc).isCss1CompatMode()) {
+    return doc.body;
+  }
+  return doc.documentElement;
+};
+
+
+/**
+ * Gets the client rectangle of the DOM element.
+ *
+ * getBoundingClientRect is part of a new CSS object model draft (with a
+ * long-time presence in IE), replacing the error-prone parent offset
+ * computation and the now-deprecated Gecko getBoxObjectFor.
+ *
+ * This utility patches common browser bugs in getClientBoundingRect. It
+ * will fail if getClientBoundingRect is unsupported.
+ *
+ * If the element is not in the DOM, the result is undefined, and an error may
+ * be thrown depending on user agent.
+ *
+ * @param {Element} el The element whose bounding rectangle is being queried.
+ * @return {Object} A native bounding rectangle with numerical left, top,
+ *     right, and bottom.  Reported by Firefox to be of object type ClientRect.
+ * @private
+ */
+goog.style.getBoundingClientRect_ = function(el) {
+  var rect = el.getBoundingClientRect();
+  // Patch the result in IE only, so that this function can be inlined if
+  // compiled for non-IE.
+  if (goog.userAgent.IE) {
+
+    // In IE, most of the time, 2 extra pixels are added to the top and left
+    // due to the implicit 2-pixel inset border.  In IE6/7 quirks mode and
+    // IE6 standards mode, this border can be overridden by setting the
+    // document element's border to zero -- thus, we cannot rely on the
+    // offset always being 2 pixels.
+
+    // In quirks mode, the offset can be determined by querying the body's
+    // clientLeft/clientTop, but in standards mode, it is found by querying
+    // the document element's clientLeft/clientTop.  Since we already called
+    // getClientBoundingRect we have already forced a reflow, so it is not
+    // too expensive just to query them all.
+
+    // See: http://msdn.microsoft.com/en-us/library/ms536433(VS.85).aspx
+    var doc = el.ownerDocument;
+    rect.left -= doc.documentElement.clientLeft + doc.body.clientLeft;
+    rect.top -= doc.documentElement.clientTop + doc.body.clientTop;
+  }
+  return /** @type {Object} */ (rect);
+};
+
+
+/**
+ * Returns the first parent that could affect the position of a given element.
+ * @param {Element} element The element to get the offset parent for.
+ * @return {Element} The first offset parent or null if one cannot be found.
+ */
+goog.style.getOffsetParent = function(element) {
+  // element.offsetParent does the right thing in IE, in other browser it
+  // only includes elements with position absolute, relative or fixed, not
+  // elements with overflow set to auto or scroll.
+  if (goog.userAgent.IE) {
+    return element.offsetParent;
+  }
+
+  var doc = goog.dom.getOwnerDocument(element);
+  var positionStyle = goog.style.getStyle_(element, 'position');
+  var skipStatic = positionStyle == 'fixed' || positionStyle == 'absolute';
+  for (var parent = element.parentNode; parent && parent != doc;
+       parent = parent.parentNode) {
+    positionStyle =
+        goog.style.getStyle_(/** @type {!Element} */ (parent), 'position');
+    skipStatic = skipStatic && positionStyle == 'static' &&
+                 parent != doc.documentElement && parent != doc.body;
+    if (!skipStatic && (parent.scrollWidth > parent.clientWidth ||
+                        parent.scrollHeight > parent.clientHeight ||
+                        positionStyle == 'fixed' ||
+                        positionStyle == 'absolute' ||
+                        positionStyle == 'relative')) {
+      return /** @type {!Element} */ (parent);
+    }
+  }
+  return null;
+};
+
+
+/**
+ * Calculates and returns the visible rectangle for a given element. Returns a
+ * box describing the visible portion of the nearest scrollable offset ancestor.
+ * Coordinates are given relative to the document.
+ *
+ * @param {Element} element Element to get the visible rect for.
+ * @return {goog.math.Box} Bounding elementBox describing the visible rect or
+ *     null if scrollable ancestor isn't inside the visible viewport.
+ */
+goog.style.getVisibleRectForElement = function(element) {
+  var visibleRect = new goog.math.Box(0, Infinity, Infinity, 0);
+  var dom = goog.dom.getDomHelper(element);
+  var body = dom.getDocument().body;
+  var documentElement = dom.getDocument().documentElement;
+  var scrollEl = dom.getDocumentScrollElement();
+
+  // Determine the size of the visible rect by climbing the dom accounting for
+  // all scrollable containers.
+  for (var el = element; el = goog.style.getOffsetParent(el); ) {
+    // clientWidth is zero for inline block elements in IE.
+    // on WEBKIT, body element can have clientHeight = 0 and scrollHeight > 0
+    if ((!goog.userAgent.IE || el.clientWidth != 0) &&
+        (!goog.userAgent.WEBKIT || el.clientHeight != 0 || el != body) &&
+        // body may have overflow set on it, yet we still get the entire
+        // viewport. In some browsers, el.offsetParent may be
+        // document.documentElement, so check for that too.
+        (el != body && el != documentElement &&
+            goog.style.getStyle_(el, 'overflow') != 'visible')) {
+      var pos = goog.style.getPageOffset(el);
+      var client = goog.style.getClientLeftTop(el);
+      pos.x += client.x;
+      pos.y += client.y;
+
+      visibleRect.top = Math.max(visibleRect.top, pos.y);
+      visibleRect.right = Math.min(visibleRect.right,
+                                   pos.x + el.clientWidth);
+      visibleRect.bottom = Math.min(visibleRect.bottom,
+                                    pos.y + el.clientHeight);
+      visibleRect.left = Math.max(visibleRect.left, pos.x);
+    }
+  }
+
+  // Clip by window's viewport.
+  var scrollX = scrollEl.scrollLeft, scrollY = scrollEl.scrollTop;
+  visibleRect.left = Math.max(visibleRect.left, scrollX);
+  visibleRect.top = Math.max(visibleRect.top, scrollY);
+  var winSize = dom.getViewportSize();
+  visibleRect.right = Math.min(visibleRect.right, scrollX + winSize.width);
+  visibleRect.bottom = Math.min(visibleRect.bottom, scrollY + winSize.height);
+  return visibleRect.top >= 0 && visibleRect.left >= 0 &&
+         visibleRect.bottom > visibleRect.top &&
+         visibleRect.right > visibleRect.left ?
+         visibleRect : null;
+};
+
+
+/**
+ * Changes the scroll position of {@code container} with the minimum amount so
+ * that the content and the borders of the given {@code element} become visible.
+ * If the element is bigger than the container, its top left corner will be
+ * aligned to the container's top left corner.
+ *
+ * @param {Element} element The element to make visible.
+ * @param {Element} container The container to scroll.
+ * @param {boolean=} opt_center Whether to center the element in the container.
+ *     Defaults to false.
+ */
+goog.style.scrollIntoContainerView = function(element, container, opt_center) {
+  // Absolute position of the element's border's top left corner.
+  var elementPos = goog.style.getPageOffset(element);
+  // Absolute position of the container's border's top left corner.
+  var containerPos = goog.style.getPageOffset(container);
+  var containerBorder = goog.style.getBorderBox(container);
+  // Relative pos. of the element's border box to the container's content box.
+  var relX = elementPos.x - containerPos.x - containerBorder.left;
+  var relY = elementPos.y - containerPos.y - containerBorder.top;
+  // How much the element can move in the container, i.e. the difference between
+  // the element's bottom-right-most and top-left-most position where it's
+  // fully visible.
+  var spaceX = container.clientWidth - element.offsetWidth;
+  var spaceY = container.clientHeight - element.offsetHeight;
+
+  if (opt_center) {
+    // All browsers round non-integer scroll positions down.
+    container.scrollLeft += relX - spaceX / 2;
+    container.scrollTop += relY - spaceY / 2;
+  } else {
+    // This formula was designed to give the correct scroll values in the
+    // following cases:
+    // - element is higher than container (spaceY < 0) => scroll down by relY
+    // - element is not higher that container (spaceY >= 0):
+    //   - it is above container (relY < 0) => scroll up by abs(relY)
+    //   - it is below container (relY > spaceY) => scroll down by relY - spaceY
+    //   - it is in the container => don't scroll
+    container.scrollLeft += Math.min(relX, Math.max(relX - spaceX, 0));
+    container.scrollTop += Math.min(relY, Math.max(relY - spaceY, 0));
+  }
+};
+
+
+/**
+ * Returns clientLeft (width of the left border and, if the directionality is
+ * right to left, the vertical scrollbar) and clientTop as a coordinate object.
+ *
+ * @param {Element} el Element to get clientLeft for.
+ * @return {!goog.math.Coordinate} Client left and top.
+ */
+goog.style.getClientLeftTop = function(el) {
+  // NOTE(user): Gecko prior to 1.9 doesn't support clientTop/Left, see
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=111207
+  if (goog.userAgent.GECKO && !goog.userAgent.isVersion('1.9')) {
+    var left = parseFloat(goog.style.getComputedStyle(el, 'borderLeftWidth'));
+    if (goog.style.isRightToLeft(el)) {
+      var scrollbarWidth = el.offsetWidth - el.clientWidth - left -
+          parseFloat(goog.style.getComputedStyle(el, 'borderRightWidth'));
+      left += scrollbarWidth;
+    }
+    return new goog.math.Coordinate(left,
+        parseFloat(goog.style.getComputedStyle(el, 'borderTopWidth')));
+  }
+
+  return new goog.math.Coordinate(el.clientLeft, el.clientTop);
+};
+
+
+/**
+ * Returns a Coordinate object relative to the top-left of the HTML document.
+ * Implemented as a single function to save having to do two recursive loops in
+ * opera and safari just to get both coordinates.  If you just want one value do
+ * use goog.style.getPageOffsetLeft() and goog.style.getPageOffsetTop(), but
+ * note if you call both those methods the tree will be analysed twice.
+ *
+ * @param {Element} el Element to get the page offset for.
+ * @return {!goog.math.Coordinate} The page offset.
+ */
+goog.style.getPageOffset = function(el) {
+  var box, doc = goog.dom.getOwnerDocument(el);
+  var positionStyle = goog.style.getStyle_(el, 'position');
+
+  // NOTE(user): Gecko pre 1.9 normally use getBoxObjectFor to calculate the
+  // position. When invoked for an element with position absolute and a negative
+  // position though it can be off by one. Therefor the recursive implementation
+  // is used in those (relatively rare) cases.
+  var BUGGY_GECKO_BOX_OBJECT = goog.userAgent.GECKO && doc.getBoxObjectFor &&
+      !el.getBoundingClientRect && positionStyle == 'absolute' &&
+      (box = doc.getBoxObjectFor(el)) && (box.screenX < 0 || box.screenY < 0);
+
+  // NOTE(user): If element is hidden (display none or disconnected or any the
+  // ancestors are hidden) we get (0,0) by default but we still do the
+  // accumulation of scroll position.
+
+  // TODO(user): Should we check if the node is disconnected and in that case
+  //            return (0,0)?
+
+  var pos = new goog.math.Coordinate(0, 0);
+  var viewportElement = goog.style.getClientViewportElement(doc);
+  if (el == viewportElement) {
+    // viewport is always at 0,0 as that defined the coordinate system for this
+    // function - this avoids special case checks in the code below
+    return pos;
+  }
+
+  // IE and Gecko 1.9+.
+  if (el.getBoundingClientRect) {
+    box = goog.style.getBoundingClientRect_(el);
+    // Must add the scroll coordinates in to get the absolute page offset
+    // of element since getBoundingClientRect returns relative coordinates to
+    // the viewport.
+    var scrollCoord = goog.dom.getDomHelper(doc).getDocumentScroll();
+    pos.x = box.left + scrollCoord.x;
+    pos.y = box.top + scrollCoord.y;
+
+  // Gecko prior to 1.9.
+  } else if (doc.getBoxObjectFor && !BUGGY_GECKO_BOX_OBJECT) {
+    // Gecko ignores the scroll values for ancestors, up to 1.9.  See:
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=328881 and
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=330619
+
+    box = doc.getBoxObjectFor(el);
+    // TODO(user): Fix the off-by-one error when window is scrolled down
+    // or right more than 1 pixel. The viewport offset does not move in lock
+    // step with the window scroll; it moves in increments of 2px and at
+    // somewhat random intervals.
+    var vpBox = doc.getBoxObjectFor(viewportElement);
+    pos.x = box.screenX - vpBox.screenX;
+    pos.y = box.screenY - vpBox.screenY;
+
+  // Safari, Opera and Camino up to 1.0.4.
+  } else {
+    var parent = el;
+    do {
+      pos.x += parent.offsetLeft;
+      pos.y += parent.offsetTop;
+      // For safari/chrome, we need to add parent's clientLeft/Top as well.
+      if (parent != el) {
+        pos.x += parent.clientLeft || 0;
+        pos.y += parent.clientTop || 0;
+      }
+      // In Safari when hit a position fixed element the rest of the offsets
+      // are not correct.
+      if (goog.userAgent.WEBKIT &&
+          goog.style.getComputedPosition(parent) == 'fixed') {
+        pos.x += doc.body.scrollLeft;
+        pos.y += doc.body.scrollTop;
+        break;
+      }
+      parent = parent.offsetParent;
+    } while (parent && parent != el);
+
+    // Opera & (safari absolute) incorrectly account for body offsetTop.
+    if (goog.userAgent.OPERA || (goog.userAgent.WEBKIT &&
+        positionStyle == 'absolute')) {
+      pos.y -= doc.body.offsetTop;
+    }
+
+    for (parent = el; (parent = goog.style.getOffsetParent(parent)) &&
+        parent != doc.body && parent != viewportElement; ) {
+      pos.x -= parent.scrollLeft;
+      // Workaround for a bug in Opera 9.2 (and earlier) where table rows may
+      // report an invalid scroll top value. The bug was fixed in Opera 9.5
+      // however as that version supports getBoundingClientRect it won't
+      // trigger this code path. https://bugs.opera.com/show_bug.cgi?id=249965
+      if (!goog.userAgent.OPERA || parent.tagName != 'TR') {
+        pos.y -= parent.scrollTop;
+      }
+    }
+  }
+
+  return pos;
+};
+
+
+/**
+ * Returns the left coordinate of an element relative to the HTML document
+ * @param {Element} el Elements.
+ * @return {number} The left coordinate.
+ */
+goog.style.getPageOffsetLeft = function(el) {
+  return goog.style.getPageOffset(el).x;
+};
+
+
+/**
+ * Returns the top coordinate of an element relative to the HTML document
+ * @param {Element} el Elements.
+ * @return {number} The top coordinate.
+ */
+goog.style.getPageOffsetTop = function(el) {
+  return goog.style.getPageOffset(el).y;
+};
+
+
+/**
+ * Returns a Coordinate object relative to the top-left of an HTML document
+ * in an ancestor frame of this element. Used for measuring the position of
+ * an element inside a frame relative to a containing frame.
+ *
+ * @param {Element} el Element to get the page offset for.
+ * @param {Window} relativeWin The window to measure relative to. If relativeWin
+ *     is not in the ancestor frame chain of the element, we measure relative to
+ *     the top-most window.
+ * @return {!goog.math.Coordinate} The page offset.
+ */
+goog.style.getFramedPageOffset = function(el, relativeWin) {
+  var position = new goog.math.Coordinate(0, 0);
+
+  // Iterate up the ancestor frame chain, keeping track of the current window
+  // and the current element in that window.
+  var currentWin = goog.dom.getWindow(goog.dom.getOwnerDocument(el));
+  var currentEl = el;
+  do {
+    // if we're at the top window, we want to get the page offset.
+    // if we're at an inner frame, we only want to get the window position
+    // so that we can determine the actual page offset in the context of
+    // the outer window.
+    var offset = currentWin == relativeWin ?
+        goog.style.getPageOffset(currentEl) :
+        goog.style.getClientPosition(currentEl);
+
+    position.x += offset.x;
+    position.y += offset.y;
+  } while (currentWin && currentWin != relativeWin &&
+      (currentEl = currentWin.frameElement) &&
+      (currentWin = currentWin.parent));
+
+  return position;
+};
+
+
+/**
+ * Translates the specified rect relative to origBase page, for newBase page.
+ * If origBase and newBase are the same, this function does nothing.
+ *
+ * @param {goog.math.Rect} rect The source rectangle relative to origBase page,
+ *     and it will have the translated result.
+ * @param {goog.dom.DomHelper} origBase The DomHelper for the input rectangle.
+ * @param {goog.dom.DomHelper} newBase The DomHelper for the resultant
+ *     coordinate.  This must be a DOM for an ancestor frame of origBase
+ *     or the same as origBase.
+ */
+goog.style.translateRectForAnotherFrame = function(rect, origBase, newBase) {
+  if (origBase.getDocument() != newBase.getDocument()) {
+    var body = origBase.getDocument().body;
+    var pos = goog.style.getFramedPageOffset(body, newBase.getWindow());
+
+    // Adjust Body's margin.
+    pos = goog.math.Coordinate.difference(pos, goog.style.getPageOffset(body));
+
+    if (goog.userAgent.IE && !origBase.isCss1CompatMode()) {
+      pos = goog.math.Coordinate.difference(pos, origBase.getDocumentScroll());
+    }
+
+    rect.left += pos.x;
+    rect.top += pos.y;
+  }
+};
+
+
+/**
+ * Returns the position of an element relative to another element in the
+ * document.  A relative to B
+ * @param {Element|Event|goog.events.Event} a Element or mouse event whose
+ *     position we're calculating.
+ * @param {Element|Event|goog.events.Event} b Element or mouse event position
+ *     is relative to.
+ * @return {!goog.math.Coordinate} The relative position.
+ */
+goog.style.getRelativePosition = function(a, b) {
+  var ap = goog.style.getClientPosition(a);
+  var bp = goog.style.getClientPosition(b);
+  return new goog.math.Coordinate(ap.x - bp.x, ap.y - bp.y);
+};
+
+
+/**
+ * Returns the position of the event or the element's border box relative to
+ * the client viewport.
+ * @param {Element|Event|goog.events.Event} el Element or a mouse / touch event.
+ * @return {!goog.math.Coordinate} The position.
+ */
+goog.style.getClientPosition = function(el) {
+  var pos = new goog.math.Coordinate;
+  if (el.nodeType == goog.dom.NodeType.ELEMENT) {
+    if (el.getBoundingClientRect) {  // IE and Gecko 1.9+
+      var box = goog.style.getBoundingClientRect_(/** @type {Element} */ (el));
+      pos.x = box.left;
+      pos.y = box.top;
+    } else {
+      var scrollCoord = goog.dom.getDomHelper(/** @type {Element} */ (el))
+          .getDocumentScroll();
+      var pageCoord = goog.style.getPageOffset(/** @type {Element} */ (el));
+      pos.x = pageCoord.x - scrollCoord.x;
+      pos.y = pageCoord.y - scrollCoord.y;
+    }
+  } else {
+    var isAbstractedEvent = goog.isFunction(el.getBrowserEvent);
+    var targetEvent = el;
+
+    if (el.targetTouches) {
+      targetEvent = el.targetTouches[0];
+    } else if (isAbstractedEvent && el.getBrowserEvent().targetTouches) {
+      targetEvent = el.getBrowserEvent().targetTouches[0];
+    }
+
+    pos.x = targetEvent.clientX;
+    pos.y = targetEvent.clientY;
+  }
+
+  return pos;
+};
+
+
+/**
+ * Moves an element to the given coordinates relative to the client viewport.
+ * @param {Element} el Absolutely positioned element to set page offset for.
+ *     It must be in the document.
+ * @param {number|goog.math.Coordinate} x Left position of the element's margin
+ *     box or a coordinate object.
+ * @param {number=} opt_y Top position of the element's margin box.
+ */
+goog.style.setPageOffset = function(el, x, opt_y) {
+  // Get current pageoffset
+  var cur = goog.style.getPageOffset(el);
+
+  if (x instanceof goog.math.Coordinate) {
+    opt_y = x.y;
+    x = x.x;
+  }
+
+  // NOTE(user): We cannot allow strings for x and y. We could but that would
+  // require us to manually transform between different units
+
+  // Work out deltas
+  var dx = x - cur.x;
+  var dy = opt_y - cur.y;
+
+  // Set position to current left/top + delta
+  goog.style.setPosition(el, el.offsetLeft + dx, el.offsetTop + dy);
+};
+
+
+/**
+ * Sets the width/height values of an element.  If an argument is numeric,
+ * or a goog.math.Size is passed, it is assumed to be pixels and will add
+ * 'px' after converting it to an integer in string form. (This just sets the
+ * CSS width and height properties so it might set content-box or border-box
+ * size depending on the box model the browser is using.)
+ *
+ * @param {Element} element Element to set the size of.
+ * @param {string|number|goog.math.Size} w Width of the element, or a
+ *     size object.
+ * @param {string|number=} opt_h Height of the element. Required if w is not a
+ *     size object.
+ */
+goog.style.setSize = function(element, w, opt_h) {
+  var h;
+  if (w instanceof goog.math.Size) {
+    h = w.height;
+    w = w.width;
+  } else {
+    if (opt_h == undefined) {
+      throw Error('missing height argument');
+    }
+    h = opt_h;
+  }
+
+  goog.style.setWidth(element, /** @type {string|number} */ (w));
+  goog.style.setHeight(element, /** @type {string|number} */ (h));
+};
+
+
+/**
+ * Helper function to create a string to be set into a pixel-value style
+ * property of an element. Can round to the nearest integer value.
+ *
+ * @param {string|number} value The style value to be used. If a number,
+ *     'px' will be appended, otherwise the value will be applied directly.
+ * @param {boolean} round Whether to round the nearest integer (if property
+ *     is a number).
+ * @return {string} The string value for the property.
+ * @private
+ */
+goog.style.getPixelStyleValue_ = function(value, round) {
+  if (typeof value == 'number') {
+    value = (round ? Math.round(value) : value) + 'px';
+  }
+
+  return value;
+};
+
+
+/**
+ * Set the height of an element.  Sets the element's style property.
+ * @param {Element} element Element to set the height of.
+ * @param {string|number} height The height value to set.  If a number, 'px'
+ *     will be appended, otherwise the value will be applied directly.
+ */
+goog.style.setHeight = function(element, height) {
+  element.style.height = goog.style.getPixelStyleValue_(height, true);
+};
+
+
+/**
+ * Set the width of an element.  Sets the element's style property.
+ * @param {Element} element Element to set the height of.
+ * @param {string|number} width The width value to set.  If a number, 'px'
+ *     will be appended, otherwise the value will be applied directly.
+ */
+goog.style.setWidth = function(element, width) {
+  element.style.width = goog.style.getPixelStyleValue_(width, true);
+};
+
+
+/**
+ * Gets the height and width of an element, even if its display is none.
+ * Specifically, this returns the height and width of the border box,
+ * irrespective of the box model in effect.
+ * @param {Element} element Element to get size of.
+ * @return {!goog.math.Size} Object with width/height properties.
+ */
+goog.style.getSize = function(element) {
+  if (goog.style.getStyle_(element, 'display') != 'none') {
+    return goog.style.getSizeWithDisplay_(element);
+  }
+
+  var style = element.style;
+  var originalDisplay = style.display;
+  var originalVisibility = style.visibility;
+  var originalPosition = style.position;
+
+  style.visibility = 'hidden';
+  style.position = 'absolute';
+  style.display = 'inline';
+
+  var size = goog.style.getSizeWithDisplay_(element);
+
+  style.display = originalDisplay;
+  style.position = originalPosition;
+  style.visibility = originalVisibility;
+
+  return size;
+};
+
+
+/**
+ * Gets the height and with of an element when the display is not none.
+ * @param {Element} element Element to get size of.
+ * @return {!goog.math.Size} Object with width/height properties.
+ * @private
+ */
+goog.style.getSizeWithDisplay_ = function(element) {
+  var offsetWidth = element.offsetWidth;
+  var offsetHeight = element.offsetHeight;
+  var webkitOffsetsZero =
+      goog.userAgent.WEBKIT && !offsetWidth && !offsetHeight;
+  if ((!goog.isDef(offsetWidth) || webkitOffsetsZero) &&
+      element.getBoundingClientRect) {
+    // Fall back to calling getBoundingClientRect when offsetWidth or
+    // offsetHeight are not defined, or when they are zero in WebKit browsers.
+    // This makes sure that we return for the correct size for SVG elements, but
+    // will still return 0 on Webkit prior to 534.8, see
+    // http://trac.webkit.org/changeset/67252.
+    var clientRect = goog.style.getBoundingClientRect_(element);
+    return new goog.math.Size(clientRect.right - clientRect.left,
+        clientRect.bottom - clientRect.top);
+  }
+  return new goog.math.Size(offsetWidth, offsetHeight);
+};
+
+
+/**
+ * Returns a bounding rectangle for a given element in page space.
+ * @param {Element} element Element to get bounds of.
+ * @return {!goog.math.Rect} Bounding rectangle for the element.
+ */
+goog.style.getBounds = function(element) {
+  var o = goog.style.getPageOffset(element);
+  var s = goog.style.getSize(element);
+  return new goog.math.Rect(o.x, o.y, s.width, s.height);
+};
+
+
+/**
+ * Converts a CSS selector in the form style-property to styleProperty.
+ * @param {*} selector CSS Selector.
+ * @return {string} Camel case selector.
+ * @deprecated Use goog.string.toCamelCase instead.
+ */
+goog.style.toCamelCase = function(selector) {
+  return goog.string.toCamelCase(String(selector));
+};
+
+
+/**
+ * Converts a CSS selector in the form styleProperty to style-property.
+ * @param {string} selector Camel case selector.
+ * @return {string} Selector cased.
+ * @deprecated Use goog.string.toSelectorCase instead.
+ */
+goog.style.toSelectorCase = function(selector) {
+  return goog.string.toSelectorCase(selector);
+};
+
+
+/**
+ * Gets the opacity of a node (x-browser). This gets the inline style opacity
+ * of the node, and does not take into account the cascaded or the computed
+ * style for this node.
+ * @param {Element} el Element whose opacity has to be found.
+ * @return {number|string} Opacity between 0 and 1 or an empty string {@code ''}
+ *     if the opacity is not set.
+ */
+goog.style.getOpacity = function(el) {
+  var style = el.style;
+  var result = '';
+  if ('opacity' in style) {
+    result = style.opacity;
+  } else if ('MozOpacity' in style) {
+    result = style.MozOpacity;
+  } else if ('filter' in style) {
+    var match = style.filter.match(/alpha\(opacity=([\d.]+)\)/);
+    if (match) {
+      result = String(match[1] / 100);
+    }
+  }
+  return result == '' ? result : Number(result);
+};
+
+
+/**
+ * Sets the opacity of a node (x-browser).
+ * @param {Element} el Elements whose opacity has to be set.
+ * @param {number|string} alpha Opacity between 0 and 1 or an empty string
+ *     {@code ''} to clear the opacity.
+ */
+goog.style.setOpacity = function(el, alpha) {
+  var style = el.style;
+  if ('opacity' in style) {
+    style.opacity = alpha;
+  } else if ('MozOpacity' in style) {
+    style.MozOpacity = alpha;
+  } else if ('filter' in style) {
+    // TODO(user): Overwriting the filter might have undesired side effects.
+    if (alpha === '') {
+      style.filter = '';
+    } else {
+      style.filter = 'alpha(opacity=' + alpha * 100 + ')';
+    }
+  }
+};
+
+
+/**
+ * Sets the background of an element to a transparent image in a browser-
+ * independent manner.
+ *
+ * This function does not support repeating backgrounds or alternate background
+ * positions to match the behavior of Internet Explorer. It also does not
+ * support sizingMethods other than crop since they cannot be replicated in
+ * browsers other than Internet Explorer.
+ *
+ * @param {Element} el The element to set background on.
+ * @param {string} src The image source URL.
+ */
+goog.style.setTransparentBackgroundImage = function(el, src) {
+  var style = el.style;
+  // It is safe to use the style.filter in IE only. In Safari 'filter' is in
+  // style object but access to style.filter causes it to throw an exception.
+  // Note: IE8 supports images with an alpha channel.
+  if (goog.userAgent.IE && !goog.userAgent.isVersion('8')) {
+    // See TODO in setOpacity.
+    style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(' +
+        'src="' + src + '", sizingMethod="crop")';
+  } else {
+    // Set style properties individually instead of using background shorthand
+    // to prevent overwriting a pre-existing background color.
+    style.backgroundImage = 'url(' + src + ')';
+    style.backgroundPosition = 'top left';
+    style.backgroundRepeat = 'no-repeat';
+  }
+};
+
+
+/**
+ * Clears the background image of an element in a browser independent manner.
+ * @param {Element} el The element to clear background image for.
+ */
+goog.style.clearTransparentBackgroundImage = function(el) {
+  var style = el.style;
+  if ('filter' in style) {
+    // See TODO in setOpacity.
+    style.filter = '';
+  } else {
+    // Set style properties individually instead of using background shorthand
+    // to prevent overwriting a pre-existing background color.
+    style.backgroundImage = 'none';
+  }
+};
+
+
+/**
+ * Shows or hides an element from the page. Hiding the element is done by
+ * setting the display property to "none", removing the element from the
+ * rendering hierarchy so it takes up no space. To show the element, the default
+ * inherited display property is restored (defined either in stylesheets or by
+ * the browser's default style rules.)
+ *
+ * Caveat 1: if the inherited display property for the element is set to "none"
+ * by the stylesheets, that is the property that will be restored by a call to
+ * showElement(), effectively toggling the display between "none" and "none".
+ *
+ * Caveat 2: if the element display style is set inline (by setting either
+ * element.style.display or a style attribute in the HTML), a call to
+ * showElement will clear that setting and defer to the inherited style in the
+ * stylesheet.
+ * @param {Element} el Element to show or hide.
+ * @param {*} display True to render the element in its default style,
+ * false to disable rendering the element.
+ */
+goog.style.showElement = function(el, display) {
+  el.style.display = display ? '' : 'none';
+};
+
+
+/**
+ * Test whether the given element has been shown or hidden via a call to
+ * {@link #showElement}.
+ *
+ * Note this is strictly a companion method for a call
+ * to {@link #showElement} and the same caveats apply; in particular, this
+ * method does not guarantee that the return value will be consistent with
+ * whether or not the element is actually visible.
+ *
+ * @param {Element} el The element to test.
+ * @return {boolean} Whether the element has been shown.
+ * @see #showElement
+ */
+goog.style.isElementShown = function(el) {
+  return el.style.display != 'none';
+};
+
+
+/**
+ * Installs the styles string into the window that contains opt_element.  If
+ * opt_element is null, the main window is used.
+ * @param {string} stylesString The style string to install.
+ * @param {Node=} opt_node Node whose parent document should have the
+ *     styles installed.
+ * @return {Element|StyleSheet} The style element created.
+ */
+goog.style.installStyles = function(stylesString, opt_node) {
+  var dh = goog.dom.getDomHelper(opt_node);
+  var styleSheet = null;
+
+  if (goog.userAgent.IE) {
+    styleSheet = dh.getDocument().createStyleSheet();
+    goog.style.setStyles(styleSheet, stylesString);
+  } else {
+    var head = dh.getElementsByTagNameAndClass('head')[0];
+
+    // In opera documents are not guaranteed to have a head element, thus we
+    // have to make sure one exists before using it.
+    if (!head) {
+      var body = dh.getElementsByTagNameAndClass('body')[0];
+      head = dh.createDom('head');
+      body.parentNode.insertBefore(head, body);
+    }
+    styleSheet = dh.createDom('style');
+    // NOTE(user): Setting styles after the style element has been appended
+    // to the head results in a nasty Webkit bug in certain scenarios. Please
+    // refer to https://bugs.webkit.org/show_bug.cgi?id=26307 for additional
+    // details.
+    goog.style.setStyles(styleSheet, stylesString);
+    dh.appendChild(head, styleSheet);
+  }
+  return styleSheet;
+};
+
+
+/**
+ * Removes the styles added by {@link #installStyles}.
+ * @param {Element|StyleSheet} styleSheet The value returned by
+ *     {@link #installStyles}.
+ */
+goog.style.uninstallStyles = function(styleSheet) {
+  var node = styleSheet.ownerNode || styleSheet.owningElement ||
+      /** @type {Element} */ (styleSheet);
+  goog.dom.removeNode(node);
+};
+
+
+/**
+ * Sets the content of a style element.  The style element can be any valid
+ * style element.  This element will have its content completely replaced by
+ * the new stylesString.
+ * @param {Element|StyleSheet} element A stylesheet element as returned by
+ *     installStyles.
+ * @param {string} stylesString The new content of the stylesheet.
+ */
+goog.style.setStyles = function(element, stylesString) {
+  if (goog.userAgent.IE) {
+    // Adding the selectors individually caused the browser to hang if the
+    // selector was invalid or there were CSS comments.  Setting the cssText of
+    // the style node works fine and ignores CSS that IE doesn't understand
+    element.cssText = stylesString;
+  } else {
+    var propToSet = goog.userAgent.WEBKIT ? 'innerText' : 'innerHTML';
+    element[propToSet] = stylesString;
+  }
+};
+
+
+/**
+ * Sets 'white-space: pre-wrap' for a node (x-browser).
+ *
+ * There are as many ways of specifying pre-wrap as there are browsers.
+ *
+ * CSS3/IE8: white-space: pre-wrap;
+ * Mozilla:  white-space: -moz-pre-wrap;
+ * Opera:    white-space: -o-pre-wrap;
+ * IE6/7:    white-space: pre; word-wrap: break-word;
+ *
+ * @param {Element} el Element to enable pre-wrap for.
+ */
+goog.style.setPreWrap = function(el) {
+  var style = el.style;
+  if (goog.userAgent.IE && !goog.userAgent.isVersion('8')) {
+    style.whiteSpace = 'pre';
+    style.wordWrap = 'break-word';
+  } else if (goog.userAgent.GECKO) {
+    style.whiteSpace = '-moz-pre-wrap';
+  } else {
+    style.whiteSpace = 'pre-wrap';
+  }
+};
+
+
+/**
+ * Sets 'display: inline-block' for an element (cross-browser).
+ * @param {Element} el Element to which the inline-block display style is to be
+ *    applied.
+ * @see ../demos/inline_block_quirks.html
+ * @see ../demos/inline_block_standards.html
+ */
+goog.style.setInlineBlock = function(el) {
+  var style = el.style;
+  // Without position:relative, weirdness ensues.  Just accept it and move on.
+  style.position = 'relative';
+
+  if (goog.userAgent.IE && !goog.userAgent.isVersion('8')) {
+    // IE8 supports inline-block so fall through to the else
+    // Zoom:1 forces hasLayout, display:inline gives inline behavior.
+    style.zoom = '1';
+    style.display = 'inline';
+  } else if (goog.userAgent.GECKO) {
+    // Pre-Firefox 3, Gecko doesn't support inline-block, but -moz-inline-box
+    // is close enough.
+    style.display = goog.userAgent.isVersion('1.9a') ? 'inline-block' :
+        '-moz-inline-box';
+  } else {
+    // Opera, Webkit, and Safari seem to do OK with the standard inline-block
+    // style.
+    style.display = 'inline-block';
+  }
+};
+
+
+/**
+ * Returns true if the element is using right to left (rtl) direction.
+ * @param {Element} el  The element to test.
+ * @return {boolean} True for right to left, false for left to right.
+ */
+goog.style.isRightToLeft = function(el) {
+  return 'rtl' == goog.style.getStyle_(el, 'direction');
+};
+
+
+/**
+ * The CSS style property corresponding to an element being
+ * unselectable on the current browser platform (null if none).
+ * Opera and IE instead use a DOM attribute 'unselectable'.
+ * @type {?string}
+ * @private
+ */
+goog.style.unselectableStyle_ =
+    goog.userAgent.GECKO ? 'MozUserSelect' :
+    goog.userAgent.WEBKIT ? 'WebkitUserSelect' :
+    null;
+
+
+/**
+ * Returns true if the element is set to be unselectable, false otherwise.
+ * Note that on some platforms (e.g. Mozilla), even if an element isn't set
+ * to be unselectable, it will behave as such if any of its ancestors is
+ * unselectable.
+ * @param {Element} el  Element to check.
+ * @return {boolean}  Whether the element is set to be unselectable.
+ */
+goog.style.isUnselectable = function(el) {
+  if (goog.style.unselectableStyle_) {
+    return el.style[goog.style.unselectableStyle_].toLowerCase() == 'none';
+  } else if (goog.userAgent.IE || goog.userAgent.OPERA) {
+    return el.getAttribute('unselectable') == 'on';
+  }
+  return false;
+};
+
+
+/**
+ * Makes the element and its descendants selectable or unselectable.  Note
+ * that on some platforms (e.g. Mozilla), even if an element isn't set to
+ * be unselectable, it will behave as such if any of its ancestors is
+ * unselectable.
+ * @param {Element} el  The element to alter.
+ * @param {boolean} unselectable  Whether the element and its descendants
+ *     should be made unselectable.
+ * @param {boolean=} opt_noRecurse  Whether to only alter the element's own
+ *     selectable state, and leave its descendants alone; defaults to false.
+ */
+goog.style.setUnselectable = function(el, unselectable, opt_noRecurse) {
+  // TODO(user): Do we need all of TR_DomUtil.makeUnselectable() in Closure?
+  var descendants = !opt_noRecurse ? el.getElementsByTagName('*') : null;
+  var name = goog.style.unselectableStyle_;
+  if (name) {
+    // Add/remove the appropriate CSS style to/from the element and its
+    // descendants.
+    var value = unselectable ? 'none' : '';
+    el.style[name] = value;
+    if (descendants) {
+      for (var i = 0, descendant; descendant = descendants[i]; i++) {
+        descendant.style[name] = value;
+      }
+    }
+  } else if (goog.userAgent.IE || goog.userAgent.OPERA) {
+    // Toggle the 'unselectable' attribute on the element and its descendants.
+    var value = unselectable ? 'on' : '';
+    el.setAttribute('unselectable', value);
+    if (descendants) {
+      for (var i = 0, descendant; descendant = descendants[i]; i++) {
+        descendant.setAttribute('unselectable', value);
+      }
+    }
+  }
+};
+
+
+/**
+ * Gets the border box size for an element.
+ * @param {Element} element  The element to get the size for.
+ * @return {!goog.math.Size} The border box size.
+ */
+goog.style.getBorderBoxSize = function(element) {
+  return new goog.math.Size(element.offsetWidth, element.offsetHeight);
+};
+
+
+/**
+ * Sets the border box size of an element. This is potentially expensive in IE
+ * if the document is CSS1Compat mode
+ * @param {Element} element  The element to set the size on.
+ * @param {goog.math.Size} size  The new size.
+ */
+goog.style.setBorderBoxSize = function(element, size) {
+  var doc = goog.dom.getOwnerDocument(element);
+  var isCss1CompatMode = goog.dom.getDomHelper(doc).isCss1CompatMode();
+
+  if (goog.userAgent.IE &&
+      (!isCss1CompatMode || !goog.userAgent.isVersion('8'))) {
+    var style = element.style;
+    if (isCss1CompatMode) {
+      var paddingBox = goog.style.getPaddingBox(element);
+      var borderBox = goog.style.getBorderBox(element);
+      style.pixelWidth = size.width - borderBox.left - paddingBox.left -
+                         paddingBox.right - borderBox.right;
+      style.pixelHeight = size.height - borderBox.top - paddingBox.top -
+                          paddingBox.bottom - borderBox.bottom;
+    } else {
+      style.pixelWidth = size.width;
+      style.pixelHeight = size.height;
+    }
+  } else {
+    goog.style.setBoxSizingSize_(element, size, 'border-box');
+  }
+};
+
+
+/**
+ * Gets the content box size for an element.  This is potentially expensive in
+ * all browsers.
+ * @param {Element} element  The element to get the size for.
+ * @return {!goog.math.Size} The content box size.
+ */
+goog.style.getContentBoxSize = function(element) {
+  var doc = goog.dom.getOwnerDocument(element);
+  var ieCurrentStyle = goog.userAgent.IE && element.currentStyle;
+  if (ieCurrentStyle &&
+      goog.dom.getDomHelper(doc).isCss1CompatMode() &&
+      ieCurrentStyle.width != 'auto' && ieCurrentStyle.height != 'auto' &&
+      !ieCurrentStyle.boxSizing) {
+    // If IE in CSS1Compat mode than just use the width and height.
+    // If we have a boxSizing then fall back on measuring the borders etc.
+    var width = goog.style.getIePixelValue_(element, ieCurrentStyle.width,
+                                            'width', 'pixelWidth');
+    var height = goog.style.getIePixelValue_(element, ieCurrentStyle.height,
+                                             'height', 'pixelHeight');
+    return new goog.math.Size(width, height);
+  } else {
+    var borderBoxSize = goog.style.getBorderBoxSize(element);
+    var paddingBox = goog.style.getPaddingBox(element);
+    var borderBox = goog.style.getBorderBox(element);
+    return new goog.math.Size(borderBoxSize.width -
+                              borderBox.left - paddingBox.left -
+                              paddingBox.right - borderBox.right,
+                              borderBoxSize.height -
+                              borderBox.top - paddingBox.top -
+                              paddingBox.bottom - borderBox.bottom);
+  }
+};
+
+
+/**
+ * Sets the content box size of an element. This is potentially expensive in IE
+ * if the document is BackCompat mode.
+ * @param {Element} element  The element to set the size on.
+ * @param {goog.math.Size} size  The new size.
+ */
+goog.style.setContentBoxSize = function(element, size) {
+  var doc = goog.dom.getOwnerDocument(element);
+  var isCss1CompatMode = goog.dom.getDomHelper(doc).isCss1CompatMode();
+  if (goog.userAgent.IE &&
+      (!isCss1CompatMode || !goog.userAgent.isVersion('8'))) {
+    var style = element.style;
+    if (isCss1CompatMode) {
+      style.pixelWidth = size.width;
+      style.pixelHeight = size.height;
+    } else {
+      var paddingBox = goog.style.getPaddingBox(element);
+      var borderBox = goog.style.getBorderBox(element);
+      style.pixelWidth = size.width + borderBox.left + paddingBox.left +
+                         paddingBox.right + borderBox.right;
+      style.pixelHeight = size.height + borderBox.top + paddingBox.top +
+                          paddingBox.bottom + borderBox.bottom;
+    }
+  } else {
+    goog.style.setBoxSizingSize_(element, size, 'content-box');
+  }
+};
+
+
+/**
+ * Helper function that sets the box sizing as well as the width and height
+ * @param {Element} element  The element to set the size on.
+ * @param {goog.math.Size} size  The new size to set.
+ * @param {string} boxSizing  The box-sizing value.
+ * @private
+ */
+goog.style.setBoxSizingSize_ = function(element, size, boxSizing) {
+  var style = element.style;
+  if (goog.userAgent.GECKO) {
+    style.MozBoxSizing = boxSizing;
+  } else if (goog.userAgent.WEBKIT) {
+    style.WebkitBoxSizing = boxSizing;
+  } else {
+    // Includes IE8 and Opera 9.50+
+    style.boxSizing = boxSizing;
+  }
+  style.width = size.width + 'px';
+  style.height = size.height + 'px';
+};
+
+
+/**
+ * IE specific function that converts a non pixel unit to pixels.
+ * @param {Element} element  The element to convert the value for.
+ * @param {string} value  The current value as a string. The value must not be
+ *     ''.
+ * @param {string} name  The CSS property name to use for the converstion. This
+ *     should be 'left', 'top', 'width' or 'height'.
+ * @param {string} pixelName  The CSS pixel property name to use to get the
+ *     value in pixels.
+ * @return {number} The value in pixels.
+ * @private
+ */
+goog.style.getIePixelValue_ = function(element, value, name, pixelName) {
+  // Try if we already have a pixel value. IE does not do half pixels so we
+  // only check if it matches a number followed by 'px'.
+  if (/^\d+px?$/.test(value)) {
+    return parseInt(value, 10);
+  } else {
+    var oldStyleValue = element.style[name];
+    var oldRuntimeValue = element.runtimeStyle[name];
+    // set runtime style to prevent changes
+    element.runtimeStyle[name] = element.currentStyle[name];
+    element.style[name] = value;
+    var pixelValue = element.style[pixelName];
+    // restore
+    element.style[name] = oldStyleValue;
+    element.runtimeStyle[name] = oldRuntimeValue;
+    return pixelValue;
+  }
+};
+
+
+/**
+ * Helper function for getting the pixel padding or margin for IE.
+ * @param {Element} element  The element to get the padding for.
+ * @param {string} propName  The property name.
+ * @return {number} The pixel padding.
+ * @private
+ */
+goog.style.getIePixelDistance_ = function(element, propName) {
+  return goog.style.getIePixelValue_(element,
+      goog.style.getCascadedStyle(element, propName),
+      'left', 'pixelLeft');
+};
+
+
+/**
+ * Gets the computed paddings or margins (on all sides) in pixels.
+ * @param {Element} element  The element to get the padding for.
+ * @param {string} stylePrefix  Pass 'padding' to retrieve the padding box,
+ *     or 'margin' to retrieve the margin box.
+ * @return {!goog.math.Box} The computed paddings or margins.
+ * @private
+ */
+goog.style.getBox_ = function(element, stylePrefix) {
+  if (goog.userAgent.IE) {
+    var left = goog.style.getIePixelDistance_(element, stylePrefix + 'Left');
+    var right = goog.style.getIePixelDistance_(element, stylePrefix + 'Right');
+    var top = goog.style.getIePixelDistance_(element, stylePrefix + 'Top');
+    var bottom = goog.style.getIePixelDistance_(
+        element, stylePrefix + 'Bottom');
+    return new goog.math.Box(top, right, bottom, left);
+  } else {
+    // On non-IE browsers, getComputedStyle is always non-null.
+    var left = /** @type {string} */ (
+        goog.style.getComputedStyle(element, stylePrefix + 'Left'));
+    var right = /** @type {string} */ (
+        goog.style.getComputedStyle(element, stylePrefix + 'Right'));
+    var top = /** @type {string} */ (
+        goog.style.getComputedStyle(element, stylePrefix + 'Top'));
+    var bottom = /** @type {string} */ (
+        goog.style.getComputedStyle(element, stylePrefix + 'Bottom'));
+
+    // NOTE(user): Gecko can return floating point numbers for the computed
+    // style values.
+    return new goog.math.Box(parseFloat(top),
+                             parseFloat(right),
+                             parseFloat(bottom),
+                             parseFloat(left));
+  }
+};
+
+
+/**
+ * Gets the computed paddings (on all sides) in pixels.
+ * @param {Element} element  The element to get the padding for.
+ * @return {!goog.math.Box} The computed paddings.
+ */
+goog.style.getPaddingBox = function(element) {
+  return goog.style.getBox_(element, 'padding');
+};
+
+
+/**
+ * Gets the computed margins (on all sides) in pixels.
+ * @param {Element} element  The element to get the margins for.
+ * @return {!goog.math.Box} The computed margins.
+ */
+goog.style.getMarginBox = function(element) {
+  return goog.style.getBox_(element, 'margin');
+};
+
+
+/**
+ * A map used to map the border width keywords to a pixel width.
+ * @type {Object}
+ * @private
+ */
+goog.style.ieBorderWidthKeywords_ = {
+  'thin': 2,
+  'medium': 4,
+  'thick': 6
+};
+
+
+/**
+ * Helper function for IE to get the pixel border.
+ * @param {Element} element  The element to get the pixel border for.
+ * @param {string} prop  The part of the property name.
+ * @return {number} The value in pixels.
+ * @private
+ */
+goog.style.getIePixelBorder_ = function(element, prop) {
+  if (goog.style.getCascadedStyle(element, prop + 'Style') == 'none') {
+    return 0;
+  }
+  var width = goog.style.getCascadedStyle(element, prop + 'Width');
+  if (width in goog.style.ieBorderWidthKeywords_) {
+    return goog.style.ieBorderWidthKeywords_[width];
+  }
+  return goog.style.getIePixelValue_(element, width, 'left', 'pixelLeft');
+};
+
+
+/**
+ * Gets the computed border widths (on all sides) in pixels
+ * @param {Element} element  The element to get the border widths for.
+ * @return {!goog.math.Box} The computed border widths.
+ */
+goog.style.getBorderBox = function(element) {
+  if (goog.userAgent.IE) {
+    var left = goog.style.getIePixelBorder_(element, 'borderLeft');
+    var right = goog.style.getIePixelBorder_(element, 'borderRight');
+    var top = goog.style.getIePixelBorder_(element, 'borderTop');
+    var bottom = goog.style.getIePixelBorder_(element, 'borderBottom');
+    return new goog.math.Box(top, right, bottom, left);
+  } else {
+    // On non-IE browsers, getComputedStyle is always non-null.
+    var left = /** @type {string} */ (
+        goog.style.getComputedStyle(element, 'borderLeftWidth'));
+    var right = /** @type {string} */ (
+        goog.style.getComputedStyle(element, 'borderRightWidth'));
+    var top = /** @type {string} */ (
+        goog.style.getComputedStyle(element, 'borderTopWidth'));
+    var bottom = /** @type {string} */ (
+        goog.style.getComputedStyle(element, 'borderBottomWidth'));
+
+    return new goog.math.Box(parseFloat(top),
+                             parseFloat(right),
+                             parseFloat(bottom),
+                             parseFloat(left));
+  }
+};
+
+
+/**
+ * Returns the font face applied to a given node. Opera and IE should return
+ * the font actually displayed. Firefox returns the author's most-preferred
+ * font (whether the browser is capable of displaying it or not.)
+ * @param {Element} el  The element whose font family is returned.
+ * @return {string} The font family applied to el.
+ */
+goog.style.getFontFamily = function(el) {
+  var doc = goog.dom.getOwnerDocument(el);
+  var font = '';
+  if (doc.body.createTextRange) {
+    var range = doc.body.createTextRange();
+    range.moveToElementText(el);
+    /** @preserveTry */
+    try {
+      font = range.queryCommandValue('FontName');
+    } catch (e) {
+      // This is a workaround for a awkward exception.
+      // On some IE, there is an exception coming from it.
+      // The error description from this exception is:
+      // This window has already been registered as a drop target
+      // This is bogus description, likely due to a bug in ie.
+      font = '';
+    }
+  }
+  if (!font) {
+    // Note if for some reason IE can't derive FontName with a TextRange, we
+    // fallback to using currentStyle
+    font = goog.style.getStyle_(el, 'fontFamily');
+  }
+
+  // Firefox returns the applied font-family string (author's list of
+  // preferred fonts.) We want to return the most-preferred font, in lieu of
+  // the *actually* applied font.
+  var fontsArray = font.split(',');
+  if (fontsArray.length > 1) font = fontsArray[0];
+
+  // Sanitize for x-browser consistency:
+  // Strip quotes because browsers aren't consistent with how they're
+  // applied; Opera always encloses, Firefox sometimes, and IE never.
+  return goog.string.stripQuotes(font, '"\'');
+};
+
+
+/**
+ * Regular expression used for getLengthUnits.
+ * @type {RegExp}
+ * @private
+ */
+goog.style.lengthUnitRegex_ = /[^\d]+$/;
+
+
+/**
+ * Returns the units used for a CSS length measurement.
+ * @param {string} value  A CSS length quantity.
+ * @return {?string} The units of measurement.
+ */
+goog.style.getLengthUnits = function(value) {
+  var units = value.match(goog.style.lengthUnitRegex_);
+  return units && units[0] || null;
+};
+
+
+/**
+ * Map of absolute CSS length units
+ * @type {Object}
+ * @private
+ */
+goog.style.ABSOLUTE_CSS_LENGTH_UNITS_ = {
+  'cm' : 1,
+  'in' : 1,
+  'mm' : 1,
+  'pc' : 1,
+  'pt' : 1
+};
+
+
+/**
+ * Map of relative CSS length units that can be accurately converted to px
+ * font-size values using getIePixelValue_. Only units that are defined in
+ * relation to a font size are convertible (%, small, etc. are not).
+ * @type {Object}
+ * @private
+ */
+goog.style.CONVERTIBLE_RELATIVE_CSS_UNITS_ = {
+  'em' : 1,
+  'ex' : 1
+};
+
+
+/**
+ * Returns the font size, in pixels, of text in an element.
+ * @param {Element} el  The element whose font size is returned.
+ * @return {number} The font size (in pixels).
+ */
+goog.style.getFontSize = function(el) {
+  var fontSize = goog.style.getStyle_(el, 'fontSize');
+  var sizeUnits = goog.style.getLengthUnits(fontSize);
+  if (fontSize && 'px' == sizeUnits) {
+    // NOTE(user): This could be parseFloat instead, but IE doesn't return
+    // decimal fractions in getStyle_ and Firefox reports the fractions, but
+    // ignores them when rendering. Interestingly enough, when we force the
+    // issue and size something to e.g., 50% of 25px, the browsers round in
+    // opposite directions with Firefox reporting 12px and IE 13px. I punt.
+    return parseInt(fontSize, 10);
+  }
+
+  // In IE, we can convert absolute length units to a px value using
+  // goog.style.getIePixelValue_. Units defined in relation to a font size
+  // (em, ex) are applied relative to the element's parentNode and can also
+  // be converted.
+  if (goog.userAgent.IE) {
+    if (sizeUnits in goog.style.ABSOLUTE_CSS_LENGTH_UNITS_) {
+      return goog.style.getIePixelValue_(el,
+                                         fontSize,
+                                         'left',
+                                         'pixelLeft');
+    } else if (el.parentNode &&
+               el.parentNode.nodeType == goog.dom.NodeType.ELEMENT &&
+               sizeUnits in goog.style.CONVERTIBLE_RELATIVE_CSS_UNITS_) {
+      // Check the parent size - if it is the same it means the relative size
+      // value is inherited and we therefore don't want to count it twice.  If
+      // it is different, this element either has explicit style or has a CSS
+      // rule applying to it.
+      var parentElement = /** @type {Element} */ (el.parentNode);
+      var parentSize = goog.style.getStyle_(parentElement, 'fontSize');
+      return goog.style.getIePixelValue_(parentElement,
+                                         fontSize == parentSize ?
+                                             '1em' : fontSize,
+                                         'left',
+                                         'pixelLeft');
+    }
+  }
+
+  // Sometimes we can't cleanly find the font size (some units relative to a
+  // node's parent's font size are difficult: %, smaller et al), so we create
+  // an invisible, absolutely-positioned span sized to be the height of an 'M'
+  // rendered in its parent's (i.e., our target element's) font size. This is
+  // the definition of CSS's font size attribute.
+  var sizeElement = goog.dom.createDom(
+      'span',
+      {'style': 'visibility:hidden;position:absolute;' +
+            'line-height:0;padding:0;margin:0;border:0;height:1em;'});
+  goog.dom.appendChild(el, sizeElement);
+  fontSize = sizeElement.offsetHeight;
+  goog.dom.removeNode(sizeElement);
+
+  return fontSize;
+};
+
+
+/**
+ * Parses a style attribute value.  Converts CSS property names to camel case.
+ * @param {string} value The style attribute value.
+ * @return {!Object} Map of CSS properties to string values.
+ */
+goog.style.parseStyleAttribute = function(value) {
+  var result = {};
+  goog.array.forEach(value.split(/\s*;\s*/), function(pair) {
+    var keyValue = pair.split(/\s*:\s*/);
+    if (keyValue.length == 2) {
+      result[goog.string.toCamelCase(keyValue[0].toLowerCase())] = keyValue[1];
+    }
+  });
+  return result;
+};
+
+
+/**
+ * Reverse of parseStyleAttribute; that is, takes a style object and returns the
+ * corresponding attribute value.  Converts camel case property names to proper
+ * CSS selector names.
+ * @param {Object} obj Map of CSS properties to values.
+ * @return {string} The style attribute value.
+ */
+goog.style.toStyleAttribute = function(obj) {
+  var buffer = [];
+  goog.object.forEach(obj, function(value, key) {
+    buffer.push(goog.string.toSelectorCase(key), ':', value, ';');
+  });
+  return buffer.join('');
+};
+
+
+/**
+ * Sets CSS float property on an element.
+ * @param {Element} el The element to set float property on.
+ * @param {string} value The value of float CSS property to set on this element.
+ */
+goog.style.setFloat = function(el, value) {
+  el.style[goog.userAgent.IE ? 'styleFloat' : 'cssFloat'] = value;
+};
+
+
+/**
+ * Gets value of explicitly-set float CSS property on an element.
+ * @param {Element} el The element to get float property of.
+ * @return {string} The value of explicitly-set float CSS property on this
+ *     element.
+ */
+goog.style.getFloat = function(el) {
+  return el.style[goog.userAgent.IE ? 'styleFloat' : 'cssFloat'] || '';
+};
+
+
+/**
+ * Returns the scroll bar width (represents the width of both horizontal
+ * and vertical scroll).
+ *
+ * @param {string=} opt_className An optional class name (or names) to apply
+ *     to the invisible div created to measure the scrollbar. This is necessary
+ *     if some scrollbars are styled differently than others.
+ * @return {number} The scroll bar width in px.
+ */
+goog.style.getScrollbarWidth = function(opt_className) {
+  // Add two hidden divs.  The child div is larger than the parent and
+  // forces scrollbars to appear on it.
+  // Using overflow:scroll does not work consistently with scrollbars that
+  // are styled with ::-webkit-scrollbar.
+  var outerDiv = goog.dom.createElement('div');
+  if (opt_className) {
+    outerDiv.className = opt_className;
+  }
+  outerDiv.style.cssText = 'visiblity:hidden;overflow:auto;' +
+      'position:absolute;top:0;width:100px;height:100px';
+  var innerDiv = goog.dom.createElement('div');
+  goog.style.setSize(innerDiv, '200px', '200px');
+  outerDiv.appendChild(innerDiv);
+  goog.dom.appendChild(goog.dom.getDocument().body, outerDiv);
+  var width = outerDiv.offsetWidth - outerDiv.clientWidth;
+  goog.dom.removeNode(outerDiv);
+  return width;
+};
+
+// Input 57
+// Copyright 2008 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Utilities for creating and working with iframes
+ * cross-browser.
+ */
+
+
+goog.provide('goog.dom.iframe');
+
+goog.require('goog.dom');
+
+
+/**
+ * Safe source for a blank iframe.
+ *
+ * Intentionally not about:blank, which gives mixed content warnings in IE6
+ * over HTTPS.
+ *
+ * @type {string}
+ */
+goog.dom.iframe.BLANK_SOURCE = 'javascript:""';
+
+
+/**
+ * Styles to help ensure an undecorated iframe.
+ * @type {string}
+ * @private
+ */
+goog.dom.iframe.STYLES_ = 'border:0;vertical-align:bottom;';
+
+
+/**
+ * Creates a completely blank iframe element.
+ *
+ * The iframe will not caused mixed-content warnings for IE6 under HTTPS.
+ * The iframe will also have no borders or padding, so that the styled width
+ * and height will be the actual width and height of the iframe.
+ *
+ * This function currently only attempts to create a blank iframe.  There
+ * are no guarantees to the contents of the iframe or whether it is rendered
+ * in quirks mode.
+ *
+ * @param {goog.dom.DomHelper} domHelper The dom helper to use.
+ * @param {string=} opt_styles CSS styles for the iframe.
+ * @return {!HTMLIFrameElement} A completely blank iframe.
+ */
+goog.dom.iframe.createBlank = function(domHelper, opt_styles) {
+  return /** @type {!HTMLIFrameElement} */ (domHelper.createDom('iframe', {
+    'frameborder': 0,
+    // Since iframes are inline elements, we must align to bottom to
+    // compensate for the line descent.
+    'style': goog.dom.iframe.STYLES_ + (opt_styles || ''),
+    'src': goog.dom.iframe.BLANK_SOURCE
+  }));
+};
+
+
+/**
+ * Writes the contents of a blank iframe that has already been inserted
+ * into the document.
+ * @param {!HTMLIFrameElement} iframe An iframe with no contents, such as
+ *     one created by goog.dom.iframe.createBlank, but already appended to
+ *     a parent document.
+ * @param {string} content Content to write to the iframe, from doctype to
+ *     the HTML close tag.
+ */
+goog.dom.iframe.writeContent = function(iframe, content) {
+  var doc = goog.dom.getFrameContentDocument(iframe);
+  doc.open();
+  doc.write(content);
+  doc.close();
+};
+
+
+// TODO(user): Provide a higher-level API for the most common use case, so
+// that you can just provide a list of stylesheets and some content HTML.
+/**
+ * Creates a same-domain iframe containing preloaded content.
+ *
+ * This is primarily useful for DOM sandboxing.  One use case is to embed
+ * a trusted Javascript app with potentially conflicting CSS styles.  The
+ * second case is to reduce the cost of layout passes by the browser -- for
+ * example, you can perform sandbox sizing of characters in an iframe while
+ * manipulating a heavy DOM in the main window.  The iframe and parent frame
+ * can access each others' properties and functions without restriction.
+ *
+ * @param {!Element} parentElement The parent element in which to append the
+ *     iframe.
+ * @param {string=} opt_headContents Contents to go into the iframe's head.
+ * @param {string=} opt_bodyContents Contents to go into the iframe's body.
+ * @param {string=} opt_styles CSS styles for the iframe itself, before adding
+ *     to the parent element.
+ * @param {boolean=} opt_quirks Whether to use quirks mode (false by default).
+ * @return {HTMLIFrameElement} An iframe that has the specified contents.
+ */
+goog.dom.iframe.createWithContent = function(
+    parentElement, opt_headContents, opt_bodyContents, opt_styles, opt_quirks) {
+  var domHelper = goog.dom.getDomHelper(parentElement);
+  // Generate the HTML content.
+  var contentBuf = [];
+
+  if (!opt_quirks) {
+    contentBuf.push('<!DOCTYPE html>');
+  }
+  contentBuf.push('<html><head>', opt_headContents, '</head><body>',
+      opt_bodyContents, '</body></html>');
+
+  var iframe = goog.dom.iframe.createBlank(domHelper, opt_styles);
+
+  // Cannot manipulate iframe content until it is in a document.
+  parentElement.appendChild(iframe);
+  goog.dom.iframe.writeContent(iframe, contentBuf.join(''));
+
+  return iframe;
+};
+
+// Input 58
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview This event handler allows you to catch focusin and focusout
+ * events on  descendants. Unlike the "focus" and "blur" events which do not
+ * propagate consistently, and therefore must be added to the element that is
+ * focused, this allows you to attach one listener to an ancester and you will
+ * be notified when the focus state changes of ony of its descendants.
+ * @see ../demos/focushandler.html
+ */
+
+goog.provide('goog.events.FocusHandler');
+goog.provide('goog.events.FocusHandler.EventType');
+
+goog.require('goog.events');
+goog.require('goog.events.BrowserEvent');
+goog.require('goog.events.EventTarget');
+goog.require('goog.userAgent');
+
+
+
+/**
+ * This event handler allows you to catch focus events when descendants gain or
+ * loses focus.
+ * @param {Element|Document} element  The node to listen on.
+ * @constructor
+ * @extends {goog.events.EventTarget}
+ */
+goog.events.FocusHandler = function(element) {
+  goog.events.EventTarget.call(this);
+
+  /**
+   * This is the element that we will listen to the real focus events on.
+   * @type {Element|Document}
+   * @private
+   */
+  this.element_ = element;
+
+  // In IE we use focusin/focusout and in other browsers we use a capturing
+  // listner for focus/blur
+  var typeIn = goog.userAgent.IE ? 'focusin' : 'focus';
+  var typeOut = goog.userAgent.IE ? 'focusout' : 'blur';
+
+  /**
+   * Store the listen key so it easier to unlisten in dispose.
+   * @private
+   * @type {number}
+   */
+  this.listenKeyIn_ = (/** @type {number} */
+      goog.events.listen(this.element_, typeIn, this, !goog.userAgent.IE));
+
+  /**
+   * Store the listen key so it easier to unlisten in dispose.
+   * @private
+   * @type {number}
+   */
+  this.listenKeyOut_ = (/** @type {number} */
+      goog.events.listen(this.element_, typeOut, this, !goog.userAgent.IE));
+};
+goog.inherits(goog.events.FocusHandler, goog.events.EventTarget);
+
+
+/**
+ * Enum type for the events fired by the focus handler
+ * @enum {string}
+ */
+goog.events.FocusHandler.EventType = {
+  FOCUSIN: 'focusin',
+  FOCUSOUT: 'focusout'
+};
+
+
+/**
+ * This handles the underlying events and dispatches a new event.
+ * @param {goog.events.BrowserEvent} e  The underlying browser event.
+ */
+goog.events.FocusHandler.prototype.handleEvent = function(e) {
+  var be = e.getBrowserEvent();
+  var event = new goog.events.BrowserEvent(be);
+  event.type = e.type == 'focusin' || e.type == 'focus' ?
+      goog.events.FocusHandler.EventType.FOCUSIN :
+      goog.events.FocusHandler.EventType.FOCUSOUT;
+  try {
+    this.dispatchEvent(event);
+  } finally {
+    event.dispose();
+  }
+};
+
+
+/** @override */
+goog.events.FocusHandler.prototype.disposeInternal = function() {
+  goog.events.FocusHandler.superClass_.disposeInternal.call(this);
+  goog.events.unlistenByKey(this.listenKeyIn_);
+  goog.events.unlistenByKey(this.listenKeyOut_);
+  delete this.element_;
+};
+
+// Input 59
+// Copyright 2008 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Generator for unique element IDs.
+ *
+ */
+
+goog.provide('goog.ui.IdGenerator');
+
+
+
+/**
+ * Creates a new id generator.
+ * @constructor
+ */
+goog.ui.IdGenerator = function() {
+};
+goog.addSingletonGetter(goog.ui.IdGenerator);
+
+
+/**
+ * Next unique ID to use
+ * @type {number}
+ * @private
+ */
+goog.ui.IdGenerator.prototype.nextId_ = 0;
+
+
+/**
+ * Gets the next unique ID.
+ * @return {string} The next unique identifier.
+ */
+goog.ui.IdGenerator.prototype.getNextUniqueId = function() {
+  return ':' + (this.nextId_++).toString(36);
+};
+
+
+/**
+ * Default instance for id generation. Done as an instance instead of statics
+ * so it's possible to inject a mock for unit testing purposes.
+ * @type {goog.ui.IdGenerator}
+ * @deprecated Use goog.ui.IdGenerator.getInstance() instead and do not refer
+ * to goog.ui.IdGenerator.instance anymore.
+ */
+goog.ui.IdGenerator.instance = goog.ui.IdGenerator.getInstance();
+
+// Input 60
+// Copyright 2007 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Abstract class for all UI components. This defines the standard
+ * design pattern that all UI components should follow.
+ *
+ * @see ../demos/samplecomponent.html
+ * @see http://code.google.com/p/closure-library/wiki/IntroToComponents
+ */
+
+goog.provide('goog.ui.Component');
+goog.provide('goog.ui.Component.Error');
+goog.provide('goog.ui.Component.EventType');
+goog.provide('goog.ui.Component.State');
+
+goog.require('goog.array');
+goog.require('goog.array.ArrayLike');
+goog.require('goog.dom');
+goog.require('goog.events.EventHandler');
+goog.require('goog.events.EventTarget');
+goog.require('goog.object');
+goog.require('goog.style');
+goog.require('goog.ui.IdGenerator');
+
+
+
+/**
+ * Default implementation of UI component.
+ *
+ * @param {goog.dom.DomHelper=} opt_domHelper Optional DOM helper.
+ * @constructor
+ * @extends {goog.events.EventTarget}
+ */
+goog.ui.Component = function(opt_domHelper) {
+  goog.events.EventTarget.call(this);
+  this.dom_ = opt_domHelper || goog.dom.getDomHelper();
+
+  // Set the defalt right to left value.
+  this.rightToLeft_ = goog.ui.Component.defaultRightToLeft_;
+};
+goog.inherits(goog.ui.Component, goog.events.EventTarget);
+
+
+/**
+ * Generator for unique IDs.
+ * @type {goog.ui.IdGenerator}
+ * @private
+ */
+goog.ui.Component.prototype.idGenerator_ = goog.ui.IdGenerator.getInstance();
+
+
+/**
+ * The default right to left value.
+ * @type {?boolean}
+ * @private
+ */
+goog.ui.Component.defaultRightToLeft_ = null;
+
+
+/**
+ * Common events fired by components so that event propagation is useful.  Not
+ * all components are expected to dispatch or listen for all event types.
+ * Events dispatched before a state transition should be cancelable to prevent
+ * the corresponding state change.
+ * @enum {string}
+ */
+goog.ui.Component.EventType = {
+  /** Dispatched before the component becomes visible. */
+  BEFORE_SHOW: 'beforeshow',
+
+  /**
+   * Dispatched after the component becomes visible.
+   * NOTE(user): For goog.ui.Container, this actually fires before containers
+   * are shown.  Use goog.ui.Container.EventType.AFTER_SHOW if you want an event
+   * that fires after a goog.ui.Container is shown.
+   */
+  SHOW: 'show',
+
+  /** Dispatched before the component becomes hidden. */
+  HIDE: 'hide',
+
+  /** Dispatched before the component becomes disabled. */
+  DISABLE: 'disable',
+
+  /** Dispatched before the component becomes enabled. */
+  ENABLE: 'enable',
+
+  /** Dispatched before the component becomes highlighted. */
+  HIGHLIGHT: 'highlight',
+
+  /** Dispatched before the component becomes un-highlighted. */
+  UNHIGHLIGHT: 'unhighlight',
+
+  /** Dispatched before the component becomes activated. */
+  ACTIVATE: 'activate',
+
+  /** Dispatched before the component becomes deactivated. */
+  DEACTIVATE: 'deactivate',
+
+  /** Dispatched before the component becomes selected. */
+  SELECT: 'select',
+
+  /** Dispatched before the component becomes un-selected. */
+  UNSELECT: 'unselect',
+
+  /** Dispatched before a component becomes checked. */
+  CHECK: 'check',
+
+  /** Dispatched before a component becomes un-checked. */
+  UNCHECK: 'uncheck',
+
+  /** Dispatched before a component becomes focused. */
+  FOCUS: 'focus',
+
+  /** Dispatched before a component becomes blurred. */
+  BLUR: 'blur',
+
+  /** Dispatched before a component is opened (expanded). */
+  OPEN: 'open',
+
+  /** Dispatched before a component is closed (collapsed). */
+  CLOSE: 'close',
+
+  /** Dispatched after a component is moused over. */
+  ENTER: 'enter',
+
+  /** Dispatched after a component is moused out of. */
+  LEAVE: 'leave',
+
+  /** Dispatched after the user activates the component. */
+  ACTION: 'action',
+
+  /** Dispatched after the external-facing state of a component is changed. */
+  CHANGE: 'change'
+};
+
+
+/**
+ * Errors thrown by the component.
+ * @enum {string}
+ */
+goog.ui.Component.Error = {
+  /**
+   * Error when a method is not supported.
+   */
+  NOT_SUPPORTED: 'Method not supported',
+
+  /**
+   * Error when the given element can not be decorated.
+   */
+  DECORATE_INVALID: 'Invalid element to decorate',
+
+  /**
+   * Error when the component is already rendered and another render attempt is
+   * made.
+   */
+  ALREADY_RENDERED: 'Component already rendered',
+
+  /**
+   * Error when an attempt is made to set the parent of a component in a way
+   * that would result in an inconsistent object graph.
+   */
+  PARENT_UNABLE_TO_BE_SET: 'Unable to set parent component',
+
+  /**
+   * Error when an attempt is made to add a child component at an out-of-bounds
+   * index.  We don't support sparse child arrays.
+   */
+  CHILD_INDEX_OUT_OF_BOUNDS: 'Child component index out of bounds',
+
+  /**
+   * Error when an attempt is made to remove a child component from a component
+   * other than its parent.
+   */
+  NOT_OUR_CHILD: 'Child is not in parent component',
+
+  /**
+   * Error when an operation requiring DOM interaction is made when the
+   * component is not in the document
+   */
+  NOT_IN_DOCUMENT: 'Operation not supported while component is not in document',
+
+  /**
+   * Error when an invalid component state is encountered.
+   */
+  STATE_INVALID: 'Invalid component state'
+};
+
+
+/**
+ * Common component states.  Components may have distinct appearance depending
+ * on what state(s) apply to them.  Not all components are expected to support
+ * all states.
+ * @enum {number}
+ */
+goog.ui.Component.State = {
+  /**
+   * Union of all supported component states.
+   */
+  ALL: 0xFF,
+
+  /**
+   * Component is disabled.
+   * @see goog.ui.Component.EventType.DISABLE
+   * @see goog.ui.Component.EventType.ENABLE
+   */
+  DISABLED: 0x01,
+
+  /**
+   * Component is highlighted.
+   * @see goog.ui.Component.EventType.HIGHLIGHT
+   * @see goog.ui.Component.EventType.UNHIGHLIGHT
+   */
+  HOVER: 0x02,
+
+  /**
+   * Component is active (or "pressed").
+   * @see goog.ui.Component.EventType.ACTIVATE
+   * @see goog.ui.Component.EventType.DEACTIVATE
+   */
+  ACTIVE: 0x04,
+
+  /**
+   * Component is selected.
+   * @see goog.ui.Component.EventType.SELECT
+   * @see goog.ui.Component.EventType.UNSELECT
+   */
+  SELECTED: 0x08,
+
+  /**
+   * Component is checked.
+   * @see goog.ui.Component.EventType.CHECK
+   * @see goog.ui.Component.EventType.UNCHECK
+   */
+  CHECKED: 0x10,
+
+  /**
+   * Component has focus.
+   * @see goog.ui.Component.EventType.FOCUS
+   * @see goog.ui.Component.EventType.BLUR
+   */
+  FOCUSED: 0x20,
+
+  /**
+   * Component is opened (expanded).  Applies to tree nodes, menu buttons,
+   * submenus, zippys (zippies?), etc.
+   * @see goog.ui.Component.EventType.OPEN
+   * @see goog.ui.Component.EventType.CLOSE
+   */
+  OPENED: 0x40
+};
+
+
+/**
+ * Static helper method; returns the type of event components are expected to
+ * dispatch when transitioning to or from the given state.
+ * @param {goog.ui.Component.State} state State to/from which the component
+ *     is transitioning.
+ * @param {boolean} isEntering Whether the component is entering or leaving the
+ *     state.
+ * @return {goog.ui.Component.EventType} Event type to dispatch.
+ */
+goog.ui.Component.getStateTransitionEvent = function(state, isEntering) {
+  switch (state) {
+    case goog.ui.Component.State.DISABLED:
+      return isEntering ? goog.ui.Component.EventType.DISABLE :
+          goog.ui.Component.EventType.ENABLE;
+    case goog.ui.Component.State.HOVER:
+      return isEntering ? goog.ui.Component.EventType.HIGHLIGHT :
+          goog.ui.Component.EventType.UNHIGHLIGHT;
+    case goog.ui.Component.State.ACTIVE:
+      return isEntering ? goog.ui.Component.EventType.ACTIVATE :
+          goog.ui.Component.EventType.DEACTIVATE;
+    case goog.ui.Component.State.SELECTED:
+      return isEntering ? goog.ui.Component.EventType.SELECT :
+          goog.ui.Component.EventType.UNSELECT;
+    case goog.ui.Component.State.CHECKED:
+      return isEntering ? goog.ui.Component.EventType.CHECK :
+          goog.ui.Component.EventType.UNCHECK;
+    case goog.ui.Component.State.FOCUSED:
+      return isEntering ? goog.ui.Component.EventType.FOCUS :
+          goog.ui.Component.EventType.BLUR;
+    case goog.ui.Component.State.OPENED:
+      return isEntering ? goog.ui.Component.EventType.OPEN :
+          goog.ui.Component.EventType.CLOSE;
+    default:
+      // Fall through.
+  }
+
+  // Invalid state.
+  throw Error(goog.ui.Component.Error.STATE_INVALID);
+};
+
+
+/**
+ * Set the default right-to-left value. This causes all component's created from
+ * this point foward to have the given value. This is useful for cases where
+ * a given page is always in one directionality, avoiding unnecessary
+ * right to left determinations.
+ * @param {?boolean} rightToLeft Whether the components should be rendered
+ *     right-to-left. Null iff components should determine their directionality.
+ */
+goog.ui.Component.setDefaultRightToLeft = function(rightToLeft) {
+  goog.ui.Component.defaultRightToLeft_ = rightToLeft;
+};
+
+
+/**
+ * Unique ID of the component, lazily initialized in {@link
+ * goog.ui.Component#getId} if needed.  This property is strictly private and
+ * must not be accessed directly outside of this class!
+ * @type {?string}
+ * @private
+ */
+goog.ui.Component.prototype.id_ = null;
+
+
+/**
+ * DomHelper used to interact with the document, allowing components to be
+ * created in a different window.
+ * @type {!goog.dom.DomHelper}
+ * @protected
+ * @suppress {underscore}
+ */
+goog.ui.Component.prototype.dom_;
+
+
+/**
+ * Whether the component is in the document.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.Component.prototype.inDocument_ = false;
+
+
+// TODO(user): Stop referring to this private field in subclasses.
+/**
+ * The DOM element for the component.
+ * @type {Element}
+ * @private
+ */
+goog.ui.Component.prototype.element_ = null;
+
+
+/**
+ * Event handler.
+ * TODO(user): rename it to handler_ after all component subclasses in
+ * inside Google have been cleaned up.
+ * Code search: http://go/component_code_search
+ * @type {goog.events.EventHandler}
+ * @private
+ */
+goog.ui.Component.prototype.googUiComponentHandler_;
+
+
+/**
+ * Whether the component is rendered right-to-left.  Right-to-left is set
+ * lazily when {@link #isRightToLeft} is called the first time, unless it has
+ * been set by calling {@link #setRightToLeft} explicitly.
+ * @type {?boolean}
+ * @private
+ */
+goog.ui.Component.prototype.rightToLeft_ = null;
+
+
+/**
+ * Arbitrary data object associated with the component.  Such as meta-data.
+ * @type {*}
+ * @private
+ */
+goog.ui.Component.prototype.model_ = null;
+
+
+/**
+ * Parent component to which events will be propagated.  This property is
+ * strictly private and must not be accessed directly outside of this class!
+ * @type {goog.ui.Component?}
+ * @private
+ */
+goog.ui.Component.prototype.parent_ = null;
+
+
+/**
+ * Array of child components.  Lazily initialized on first use.  Must be kept in
+ * sync with {@code childIndex_}.  This property is strictly private and must
+ * not be accessed directly outside of this class!
+ * @type {Array.<goog.ui.Component>?}
+ * @private
+ */
+goog.ui.Component.prototype.children_ = null;
+
+
+/**
+ * Map of child component IDs to child components.  Used for constant-time
+ * random access to child components by ID.  Lazily initialized on first use.
+ * Must be kept in sync with {@code children_}.  This property is strictly
+ * private and must not be accessed directly outside of this class!
+ *
+ * We use a plain Object, not a {@link goog.structs.Map}, for simplicity.
+ * This means components can't have children with IDs such as 'constructor' or
+ * 'valueOf', but this shouldn't really be an issue in practice, and if it is,
+ * we can always fix it later without changing the API.
+ *
+ * @type {Object}
+ * @private
+ */
+goog.ui.Component.prototype.childIndex_ = null;
+
+
+/**
+ * Flag used to keep track of whether a component decorated an already existing
+ * element or whether it created the DOM itself.
+ *
+ * If an element is decorated, dispose will leave the node in the document.
+ * It is up to the app to remove the node.
+ *
+ * If an element was rendered, dispose will remove the node automatically.
+ *
+ * @type {boolean}
+ * @private
+ */
+goog.ui.Component.prototype.wasDecorated_ = false;
+
+
+/**
+ * Gets the unique ID for the instance of this component.  If the instance
+ * doesn't already have an ID, generates one on the fly.
+ * @return {string} Unique component ID.
+ */
+goog.ui.Component.prototype.getId = function() {
+  return this.id_ || (this.id_ = this.idGenerator_.getNextUniqueId());
+};
+
+
+/**
+ * Assigns an ID to this component instance.  It is the caller's responsibility
+ * to guarantee that the ID is unique.  If the component is a child of a parent
+ * component, then the parent component's child index is updated to reflect the
+ * new ID; this may throw an error if the parent already has a child with an ID
+ * that conflicts with the new ID.
+ * @param {string} id Unique component ID.
+ */
+goog.ui.Component.prototype.setId = function(id) {
+  if (this.parent_ && this.parent_.childIndex_) {
+    // Update the parent's child index.
+    goog.object.remove(this.parent_.childIndex_, this.id_);
+    goog.object.add(this.parent_.childIndex_, id, this);
+  }
+
+  // Update the component ID.
+  this.id_ = id;
+};
+
+
+/**
+ * Gets the component's element.
+ * @return {Element} The element for the component.
+ */
+goog.ui.Component.prototype.getElement = function() {
+  return this.element_;
+};
+
+
+/**
+ * Sets the component's root element to the given element.  Considered
+ * protected and final.
+ *
+ * This should generally only be called during createDom. Setting the element
+ * does not actually change which element is rendered, only the element that is
+ * associated with this UI component.
+ *
+ * @param {Element} element Root element for the component.
+ * @protected
+ */
+goog.ui.Component.prototype.setElementInternal = function(element) {
+  this.element_ = element;
+};
+
+
+/**
+ * Returns an array of all the elements in this component's DOM with the
+ * provided className.
+ * @param {string} className The name of the class to look for.
+ * @return {!goog.array.ArrayLike} The items found with the class name provided.
+ */
+goog.ui.Component.prototype.getElementsByClass = function(className) {
+  return this.element_ ?
+      this.dom_.getElementsByClass(className, this.element_) : [];
+};
+
+
+/**
+ * Returns the first element in this component's DOM with the provided
+ * className.
+ * @param {string} className The name of the class to look for.
+ * @return {Element} The first item with the class name provided.
+ */
+goog.ui.Component.prototype.getElementByClass = function(className) {
+  return this.element_ ?
+      this.dom_.getElementByClass(className, this.element_) : null;
+};
+
+
+/**
+ * Returns the event handler for this component, lazily created the first time
+ * this method is called.
+ * @return {!goog.events.EventHandler} Event handler for this component.
+ * @protected
+ */
+goog.ui.Component.prototype.getHandler = function() {
+  return this.googUiComponentHandler_ ||
+         (this.googUiComponentHandler_ = new goog.events.EventHandler(this));
+};
+
+
+/**
+ * Sets the parent of this component to use for event bubbling.  Throws an error
+ * if the component already has a parent or if an attempt is made to add a
+ * component to itself as a child.  Callers must use {@code removeChild}
+ * or {@code removeChildAt} to remove components from their containers before
+ * calling this method.
+ * @see goog.ui.Component#removeChild
+ * @see goog.ui.Component#removeChildAt
+ * @param {goog.ui.Component} parent The parent component.
+ */
+goog.ui.Component.prototype.setParent = function(parent) {
+  if (this == parent) {
+    // Attempting to add a child to itself is an error.
+    throw Error(goog.ui.Component.Error.PARENT_UNABLE_TO_BE_SET);
+  }
+
+  if (parent && this.parent_ && this.id_ && this.parent_.getChild(this.id_) &&
+      this.parent_ != parent) {
+    // This component is already the child of some parent, so it should be
+    // removed using removeChild/removeChildAt first.
+    throw Error(goog.ui.Component.Error.PARENT_UNABLE_TO_BE_SET);
+  }
+
+  this.parent_ = parent;
+  goog.ui.Component.superClass_.setParentEventTarget.call(this, parent);
+};
+
+
+/**
+ * Returns the component's parent, if any.
+ * @return {goog.ui.Component?} The parent component.
+ */
+goog.ui.Component.prototype.getParent = function() {
+  return this.parent_;
+};
+
+
+/**
+ * Overrides {@link goog.events.EventTarget#setParentEventTarget} to throw an
+ * error if the parent component is set, and the argument is not the parent.
+ * @override
+ */
+goog.ui.Component.prototype.setParentEventTarget = function(parent) {
+  if (this.parent_ && this.parent_ != parent) {
+    throw Error(goog.ui.Component.Error.NOT_SUPPORTED);
+  }
+  goog.ui.Component.superClass_.setParentEventTarget.call(this, parent);
+};
+
+
+/**
+ * Returns the dom helper that is being used on this component.
+ * @return {!goog.dom.DomHelper} The dom helper used on this component.
+ */
+goog.ui.Component.prototype.getDomHelper = function() {
+  return this.dom_;
+};
+
+
+/**
+ * Determines whether the component has been added to the document.
+ * @return {boolean} TRUE if rendered. Otherwise, FALSE.
+ */
+goog.ui.Component.prototype.isInDocument = function() {
+  return this.inDocument_;
+};
+
+
+/**
+ * Creates the initial DOM representation for the component.  The default
+ * implementation is to set this.element_ = div.
+ */
+goog.ui.Component.prototype.createDom = function() {
+  this.element_ = this.dom_.createElement('div');
+};
+
+
+/**
+ * Renders the component.  If a parent element is supplied, the component's
+ * element will be appended to it.  If there is no optional parent element and
+ * the element doesn't have a parentNode then it will be appended to the
+ * document body.
+ *
+ * If this component has a parent component, and the parent component is
+ * not in the document already, then this will not call {@code enterDocument}
+ * on this component.
+ *
+ * Throws an Error if the component is already rendered.
+ *
+ * @param {Element=} opt_parentElement Optional parent element to render the
+ *    component into.
+ */
+goog.ui.Component.prototype.render = function(opt_parentElement) {
+  this.render_(opt_parentElement);
+};
+
+
+/**
+ * Renders the component before another element. The other element should be in
+ * the document already.
+ *
+ * Throws an Error if the component is already rendered.
+ *
+ * @param {Node} sibling Node to render the component before.
+ */
+goog.ui.Component.prototype.renderBefore = function(sibling) {
+  this.render_(/** @type {Element} */ (sibling.parentNode),
+               sibling);
+};
+
+
+/**
+ * Renders the component.  If a parent element is supplied, the component's
+ * element will be appended to it.  If there is no optional parent element and
+ * the element doesn't have a parentNode then it will be appended to the
+ * document body.
+ *
+ * If this component has a parent component, and the parent component is
+ * not in the document already, then this will not call {@code enterDocument}
+ * on this component.
+ *
+ * Throws an Error if the component is already rendered.
+ *
+ * @param {Element=} opt_parentElement Optional parent element to render the
+ *    component into.
+ * @param {Node=} opt_beforeNode Node before which the component is to
+ *    be rendered.  If left out the node is appended to the parent element.
+ * @private
+ */
+goog.ui.Component.prototype.render_ = function(opt_parentElement,
+                                               opt_beforeNode) {
+  if (this.inDocument_) {
+    throw Error(goog.ui.Component.Error.ALREADY_RENDERED);
+  }
+
+  if (!this.element_) {
+    this.createDom();
+  }
+
+  if (opt_parentElement) {
+    opt_parentElement.insertBefore(this.element_, opt_beforeNode || null);
+  } else {
+    this.dom_.getDocument().body.appendChild(this.element_);
+  }
+
+  // If this component has a parent component that isn't in the document yet,
+  // we don't call enterDocument() here.  Instead, when the parent component
+  // enters the document, the enterDocument() call will propagate to its
+  // children, including this one.  If the component doesn't have a parent
+  // or if the parent is already in the document, we call enterDocument().
+  if (!this.parent_ || this.parent_.isInDocument()) {
+    this.enterDocument();
+  }
+};
+
+
+/**
+ * Decorates the element for the UI component.
+ * @param {Element} element Element to decorate.
+ */
+goog.ui.Component.prototype.decorate = function(element) {
+  if (this.inDocument_) {
+    throw Error(goog.ui.Component.Error.ALREADY_RENDERED);
+  } else if (element && this.canDecorate(element)) {
+    this.wasDecorated_ = true;
+
+    // Set the DOM helper of the component to match the decorated element.
+    if (!this.dom_ ||
+        this.dom_.getDocument() != goog.dom.getOwnerDocument(element)) {
+      this.dom_ = goog.dom.getDomHelper(element);
+    }
+
+    // Call specific component decorate logic.
+    this.decorateInternal(element);
+    this.enterDocument();
+  } else {
+    throw Error(goog.ui.Component.Error.DECORATE_INVALID);
+  }
+};
+
+
+/**
+ * Determines if a given element can be decorated by this type of component.
+ * This method should be overridden by inheriting objects.
+ * @param {Element} element Element to decorate.
+ * @return {boolean} True if the element can be decorated, false otherwise.
+ */
+goog.ui.Component.prototype.canDecorate = function(element) {
+  return true;
+};
+
+
+/**
+ * @return {boolean} Whether the component was decorated.
+ */
+goog.ui.Component.prototype.wasDecorated = function() {
+  return this.wasDecorated_;
+};
+
+
+/**
+ * Actually decorates the element. Should be overridden by inheriting objects.
+ * This method can assume there are checks to ensure the component has not
+ * already been rendered have occurred and that enter document will be called
+ * afterwards. This method is considered protected.
+ * @param {Element} element Element to decorate.
+ * @protected
+ */
+goog.ui.Component.prototype.decorateInternal = function(element) {
+  this.element_ = element;
+};
+
+
+/**
+ * Called when the component's element is known to be in the document. Anything
+ * using document.getElementById etc. should be done at this stage.
+ *
+ * If the component contains child components, this call is propagated to its
+ * children.
+ */
+goog.ui.Component.prototype.enterDocument = function() {
+  this.inDocument_ = true;
+
+  // Propagate enterDocument to child components that have a DOM, if any.
+  this.forEachChild(function(child) {
+    if (!child.isInDocument() && child.getElement()) {
+      child.enterDocument();
+    }
+  });
+};
+
+
+/**
+ * Called by dispose to clean up the elements and listeners created by a
+ * component, or by a parent component/application who has removed the
+ * component from the document but wants to reuse it later.
+ *
+ * If the component contains child components, this call is propagated to its
+ * children.
+ *
+ * It should be possible for the component to be rendered again once this method
+ * has been called.
+ */
+goog.ui.Component.prototype.exitDocument = function() {
+  // Propagate exitDocument to child components that have been rendered, if any.
+  this.forEachChild(function(child) {
+    if (child.isInDocument()) {
+      child.exitDocument();
+    }
+  });
+
+  if (this.googUiComponentHandler_) {
+    this.googUiComponentHandler_.removeAll();
+  }
+
+  this.inDocument_ = false;
+};
+
+
+/**
+ * Disposes of the component.  Calls {@code exitDocument}, which is expected to
+ * remove event handlers and clean up the component.  Propagates the call to
+ * the component's children, if any. Removes the component's DOM from the
+ * document unless it was decorated.
+ * @override
+ * @protected
+ */
+goog.ui.Component.prototype.disposeInternal = function() {
+  goog.ui.Component.superClass_.disposeInternal.call(this);
+
+  if (this.inDocument_) {
+    this.exitDocument();
+  }
+
+  if (this.googUiComponentHandler_) {
+    this.googUiComponentHandler_.dispose();
+    delete this.googUiComponentHandler_;
+  }
+
+  // Disposes of the component's children, if any.
+  this.forEachChild(function(child) {
+    child.dispose();
+  });
+
+  // Detach the component's element from the DOM, unless it was decorated.
+  if (!this.wasDecorated_ && this.element_) {
+    goog.dom.removeNode(this.element_);
+  }
+
+  this.children_ = null;
+  this.childIndex_ = null;
+  this.element_ = null;
+  this.model_ = null;
+  this.parent_ = null;
+  // TODO(user): delete this.dom_ breaks many unit tests.
+};
+
+
+/**
+ * Helper function for subclasses that gets a unique id for a given fragment,
+ * this can be used by components to generate unique string ids for DOM
+ * elements.
+ * @param {string} idFragment A partial id.
+ * @return {string} Unique element id.
+ */
+goog.ui.Component.prototype.makeId = function(idFragment) {
+  return this.getId() + '.' + idFragment;
+};
+
+
+/**
+ * Makes a collection of ids.  This is a convenience method for makeId.  The
+ * object's values are the id fragments and the new values are the generated
+ * ids.  The key will remain the same.
+ * @param {Object} object The object that will be used to create the ids.
+ * @return {Object} An object of id keys to generated ids.
+ */
+goog.ui.Component.prototype.makeIds = function(object) {
+  var ids = {};
+  for (var key in object) {
+    ids[key] = this.makeId(object[key]);
+  }
+  return ids;
+};
+
+
+/**
+ * Returns the model associated with the UI component.
+ * @return {*} The model.
+ */
+goog.ui.Component.prototype.getModel = function() {
+  return this.model_;
+};
+
+
+/**
+ * Sets the model associated with the UI component.
+ * @param {*} obj The model.
+ */
+goog.ui.Component.prototype.setModel = function(obj) {
+  this.model_ = obj;
+};
+
+
+/**
+ * Helper function for returning the fragment portion of an id generated using
+ * makeId().
+ * @param {string} id Id generated with makeId().
+ * @return {string} Fragment.
+ */
+goog.ui.Component.prototype.getFragmentFromId = function(id) {
+  return id.substring(this.getId().length + 1);
+};
+
+
+/**
+ * Helper function for returning an element in the document with a unique id
+ * generated using makeId().
+ * @param {string} idFragment The partial id.
+ * @return {Element} The element with the unique id, or null if it cannot be
+ *     found.
+ */
+goog.ui.Component.prototype.getElementByFragment = function(idFragment) {
+  if (!this.inDocument_) {
+    throw Error(goog.ui.Component.Error.NOT_IN_DOCUMENT);
+  }
+  return this.dom_.getElement(this.makeId(idFragment));
+};
+
+
+/**
+ * Adds the specified component as the last child of this component.  See
+ * {@link goog.ui.Component#addChildAt} for detailed semantics.
+ *
+ * @see goog.ui.Component#addChildAt
+ * @param {goog.ui.Component} child The new child component.
+ * @param {boolean=} opt_render If true, the child component will be rendered
+ *    into the parent.
+ */
+goog.ui.Component.prototype.addChild = function(child, opt_render) {
+  this.addChildAt(child, this.getChildCount(), opt_render);
+};
+
+
+/**
+ * Adds the specified component as a child of this component at the given
+ * 0-based index.
+ *
+ * Both {@code addChild} and {@code addChildAt} assume the following contract
+ * between parent and child components:
+ *  <ul>
+ *    <li>the child component's element must be a descendant of the parent
+ *        component's element, and
+ *    <li>the DOM state of the child component must be consistent with the DOM
+ *        state of the parent component (see {@code isInDocument}).
+ *  </ul>
+ *
+ * In particular, {@code parent.addChild(child)} will throw an error if the
+ * child component is already in the document, but the parent isn't.
+ *
+ * Clients of this API may call {@code addChild} and {@code addChildAt} with
+ * {@code opt_render} set to true.  If {@code opt_render} is true, calling these
+ * methods will automatically render the child component's element into the
+ * parent component's element.  However, {@code parent.addChild(child, true)}
+ * will throw an error if:
+ *  <ul>
+ *    <li>the parent component has no DOM (i.e. {@code parent.getElement()} is
+ *        null), or
+ *    <li>the child component is already in the document, regardless of the
+ *        parent's DOM state.
+ *  </ul>
+ *
+ * If {@code opt_render} is true and the parent component is not already
+ * in the document, {@code enterDocument} will not be called on this component
+ * at this point.
+ *
+ * Finally, this method also throws an error if the new child already has a
+ * different parent, or the given index is out of bounds.
+ *
+ * @see goog.ui.Component#addChild
+ * @param {goog.ui.Component} child The new child component.
+ * @param {number} index 0-based index at which the new child component is to be
+ *    added; must be between 0 and the current child count (inclusive).
+ * @param {boolean=} opt_render If true, the child component will be rendered
+ *    into the parent.
+ * @return {void} Nada.
+ */
+goog.ui.Component.prototype.addChildAt = function(child, index, opt_render) {
+  if (child.inDocument_ && (opt_render || !this.inDocument_)) {
+    // Adding a child that's already in the document is an error, except if the
+    // parent is also in the document and opt_render is false (e.g. decorate()).
+    throw Error(goog.ui.Component.Error.ALREADY_RENDERED);
+  }
+
+  if (index < 0 || index > this.getChildCount()) {
+    // Allowing sparse child arrays would lead to strange behavior, so we don't.
+    throw Error(goog.ui.Component.Error.CHILD_INDEX_OUT_OF_BOUNDS);
+  }
+
+  // Create the index and the child array on first use.
+  if (!this.childIndex_ || !this.children_) {
+    this.childIndex_ = {};
+    this.children_ = [];
+  }
+
+  // Moving child within component, remove old reference.
+  if (child.getParent() == this) {
+    goog.object.set(this.childIndex_, child.getId(), child);
+    goog.array.remove(this.children_, child);
+
+  // Add the child to this component.  goog.object.add() throws an error if
+  // a child with the same ID already exists.
+  } else {
+    goog.object.add(this.childIndex_, child.getId(), child);
+  }
+
+  // Set the parent of the child to this component.  This throws an error if
+  // the child is already contained by another component.
+  child.setParent(this);
+  goog.array.insertAt(this.children_, child, index);
+
+  if (child.inDocument_ && this.inDocument_ && child.getParent() == this) {
+    // Changing the position of an existing child, move the DOM node.
+    var contentElement = this.getContentElement();
+    contentElement.insertBefore(child.getElement(),
+        (contentElement.childNodes[index] || null));
+
+  } else if (opt_render) {
+    // If this (parent) component doesn't have a DOM yet, call createDom now
+    // to make sure we render the child component's element into the correct
+    // parent element (otherwise render_ with a null first argument would
+    // render the child into the document body, which is almost certainly not
+    // what we want).
+    if (!this.element_) {
+      this.createDom();
+    }
+    // Render the child into the parent at the appropriate location.  Note that
+    // getChildAt(index + 1) returns undefined if inserting at the end.
+    // TODO(user): We should have a renderer with a renderChildAt API.
+    var sibling = this.getChildAt(index + 1);
+    // render_() calls enterDocument() if the parent is already in the document.
+    child.render_(this.getContentElement(), sibling ? sibling.element_ : null);
+  } else {
+    // We don't touch the DOM, but if the parent is in the document, the child
+    // isn't, and the child has a DOM, then we call enterDocument on the child.
+    if (this.inDocument_ && !child.inDocument_ && child.element_) {
+      child.enterDocument();
+    }
+  }
+};
+
+
+/**
+ * Returns the DOM element into which child components are to be rendered,
+ * or null if the component itself hasn't been rendered yet.  This default
+ * implementation returns the component's root element.  Subclasses with
+ * complex DOM structures must override this method.
+ * @return {Element} Element to contain child elements (null if none).
+ */
+goog.ui.Component.prototype.getContentElement = function() {
+  return this.element_;
+};
+
+
+/**
+ * Returns true if the component is rendered right-to-left, false otherwise.
+ * The first time this function is invoked, the right-to-left rendering property
+ * is set if it has not been already.
+ * @return {boolean} Whether the control is rendered right-to-left.
+ */
+goog.ui.Component.prototype.isRightToLeft = function() {
+  if (this.rightToLeft_ == null) {
+    this.rightToLeft_ = goog.style.isRightToLeft(this.inDocument_ ?
+        this.element_ : this.dom_.getDocument().body);
+  }
+  return /** @type {boolean} */(this.rightToLeft_);
+};
+
+
+/**
+ * Set is right-to-left. This function should be used if the component needs
+ * to know the rendering direction during dom creation (i.e. before
+ * {@link #enterDocument} is called and is right-to-left is set).
+ * @param {boolean} rightToLeft Whether the component is rendered
+ *     right-to-left.
+ */
+goog.ui.Component.prototype.setRightToLeft = function(rightToLeft) {
+  if (this.inDocument_) {
+    throw Error(goog.ui.Component.Error.ALREADY_RENDERED);
+  }
+  this.rightToLeft_ = rightToLeft;
+};
+
+
+/**
+ * Returns true if the component has children.
+ * @return {boolean} True if the component has children.
+ */
+goog.ui.Component.prototype.hasChildren = function() {
+  return !!this.children_ && this.children_.length != 0;
+};
+
+
+/**
+ * Returns the number of children of this component.
+ * @return {number} The number of children.
+ */
+goog.ui.Component.prototype.getChildCount = function() {
+  return this.children_ ? this.children_.length : 0;
+};
+
+
+/**
+ * Returns an array containing the IDs of the children of this component, or an
+ * empty array if the component has no children.
+ * @return {Array.<string>} Child component IDs.
+ */
+goog.ui.Component.prototype.getChildIds = function() {
+  var ids = [];
+
+  // We don't use goog.object.getKeys(this.childIndex_) because we want to
+  // return the IDs in the correct order as determined by this.children_.
+  this.forEachChild(function(child) {
+    // addChild()/addChildAt() guarantee that the child array isn't sparse.
+    ids.push(child.getId());
+  });
+
+  return ids;
+};
+
+
+/**
+ * Returns the child with the given ID, or null if no such child exists.
+ * @param {string} id Child component ID.
+ * @return {goog.ui.Component?} The child with the given ID; null if none.
+ */
+goog.ui.Component.prototype.getChild = function(id) {
+  // Use childIndex_ for O(1) access by ID.
+  return (this.childIndex_ && id) ? (/** @type {goog.ui.Component} */
+      goog.object.get(this.childIndex_, id)) || null : null;
+};
+
+
+/**
+ * Returns the child at the given index, or null if the index is out of bounds.
+ * @param {number} index 0-based index.
+ * @return {goog.ui.Component?} The child at the given index; null if none.
+ */
+goog.ui.Component.prototype.getChildAt = function(index) {
+  // Use children_ for access by index.
+  return this.children_ ? this.children_[index] || null : null;
+};
+
+
+/**
+ * Calls the given function on each of this component's children in order.  If
+ * {@code opt_obj} is provided, it will be used as the 'this' object in the
+ * function when called.  The function should take two arguments:  the child
+ * component and its 0-based index.  The return value is ignored.
+ * @param {Function} f The function to call for every child component; should
+ *    take 2 arguments (the child and its index).
+ * @param {Object=} opt_obj Used as the 'this' object in f when called.
+ */
+goog.ui.Component.prototype.forEachChild = function(f, opt_obj) {
+  if (this.children_) {
+    goog.array.forEach(this.children_, f, opt_obj);
+  }
+};
+
+
+/**
+ * Returns the 0-based index of the given child component, or -1 if no such
+ * child is found.
+ * @param {goog.ui.Component?} child The child component.
+ * @return {number} 0-based index of the child component; -1 if not found.
+ */
+goog.ui.Component.prototype.indexOfChild = function(child) {
+  return (this.children_ && child) ? goog.array.indexOf(this.children_, child) :
+      -1;
+};
+
+
+/**
+ * Removes the given child from this component, and returns it.  Throws an error
+ * if the argument is invalid or if the specified child isn't found in the
+ * parent component.  The argument can either be a string (interpreted as the
+ * ID of the child component to remove) or the child component itself.
+ *
+ * If {@code opt_unrender} is true, calls {@link goog.ui.component#exitDocument}
+ * on the removed child, and subsequently detaches the child's DOM from the
+ * document.  Otherwise it is the caller's responsibility to clean up the child
+ * component's DOM.
+ *
+ * @see goog.ui.Component#removeChildAt
+ * @param {string|goog.ui.Component|null} child The ID of the child to remove,
+ *    or the child component itself.
+ * @param {boolean=} opt_unrender If true, calls {@code exitDocument} on the
+ *    removed child component, and detaches its DOM from the document.
+ * @return {goog.ui.Component} The removed component, if any.
+ */
+goog.ui.Component.prototype.removeChild = function(child, opt_unrender) {
+  if (child) {
+    // Normalize child to be the object and id to be the ID string.  This also
+    // ensures that the child is really ours.
+    var id = goog.isString(child) ? child : child.getId();
+    child = this.getChild(id);
+
+    if (id && child) {
+      goog.object.remove(this.childIndex_, id);
+      goog.array.remove(this.children_, child);
+
+      if (opt_unrender) {
+        // Remove the child component's DOM from the document.  We have to call
+        // exitDocument first (see documentation).
+        child.exitDocument();
+        if (child.element_) {
+          goog.dom.removeNode(child.element_);
+        }
+      }
+
+      // Child's parent must be set to null after exitDocument is called
+      // so that the child can unlisten to its parent if required.
+      child.setParent(null);
+    }
+  }
+
+  if (!child) {
+    throw Error(goog.ui.Component.Error.NOT_OUR_CHILD);
+  }
+
+  return /** @type {goog.ui.Component} */(child);
+};
+
+
+/**
+ * Removes the child at the given index from this component, and returns it.
+ * Throws an error if the argument is out of bounds, or if the specified child
+ * isn't found in the parent.  See {@link goog.ui.Component#removeChild} for
+ * detailed semantics.
+ *
+ * @see goog.ui.Component#removeChild
+ * @param {number} index 0-based index of the child to remove.
+ * @param {boolean=} opt_unrender If true, calls {@code exitDocument} on the
+ *    removed child component, and detaches its DOM from the document.
+ * @return {goog.ui.Component} The removed component, if any.
+ */
+goog.ui.Component.prototype.removeChildAt = function(index, opt_unrender) {
+  // removeChild(null) will throw error.
+  return this.removeChild(this.getChildAt(index), opt_unrender);
+};
+
+
+/**
+ * Removes every child component attached to this one.
+ *
+ * @see goog.ui.Component#removeChild
+ * @param {boolean=} opt_unrender If true, calls {@link #exitDocument} on the
+ *    removed child components, and detaches their DOM from the document.
+ */
+goog.ui.Component.prototype.removeChildren = function(opt_unrender) {
+  while (this.hasChildren()) {
+    this.removeChildAt(0, opt_unrender);
+  }
+};
+
+// Input 61
+// Copyright 2011 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview An interface for transition animation. This is a simple
+ * interface that allows for playing and stopping a transition. It adds
+ * a simple event model with BEGIN and END event.
+ *
+ */
+
+goog.provide('goog.fx.Transition');
+goog.provide('goog.fx.Transition.EventType');
+
+
+
+/**
+ * An interface for programmatic transition. Must extend
+ * {@code goog.events.EventTarget}.
+ * @interface
+ */
+goog.fx.Transition = function() {};
+
+
+/**
+ * Transition event types.
+ * @enum {string}
+ */
+goog.fx.Transition.EventType = {
+  /** Dispatched when played for the first time OR when it is resumed. */
+  PLAY: 'play',
+
+  /** Dispatched only when the animation starts from the beginning. */
+  BEGIN: 'begin',
+
+  /** Dispatched only when animation is restarted after a pause. */
+  RESUME: 'resume',
+
+  /**
+   * Dispatched when animation comes to the end of its duration OR stop
+   * is called.
+   */
+  END: 'end',
+
+  /** Dispatched only when stop is called. */
+  STOP: 'stop',
+
+  /** Dispatched only when animation comes to its end naturally. */
+  FINISH: 'finish',
+
+  /** Dispatched when an animation is paused. */
+  PAUSE: 'pause'
+};
+
+
+/**
+ * Plays the transition.
+ */
+goog.fx.Transition.prototype.play;
+
+
+/**
+ * Stops the transition.
+ */
+goog.fx.Transition.prototype.stop;
+
+// Input 62
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Definition of the PopupBase class.
+ *
+ */
+
+goog.provide('goog.ui.PopupBase');
+goog.provide('goog.ui.PopupBase.EventType');
+goog.provide('goog.ui.PopupBase.Type');
+
+goog.require('goog.Timer');
+goog.require('goog.dom');
+goog.require('goog.events.EventHandler');
+goog.require('goog.events.EventTarget');
+goog.require('goog.events.EventType');
+goog.require('goog.events.KeyCodes');
+goog.require('goog.fx.Transition');
+goog.require('goog.fx.Transition.EventType');
+goog.require('goog.style');
+goog.require('goog.userAgent');
+
+
+
+/**
+ * The PopupBase class provides functionality for showing and hiding a generic
+ * container element. It also provides the option for hiding the popup element
+ * if the user clicks outside the popup or the popup loses focus.
+ *
+ * @constructor
+ * @extends {goog.events.EventTarget}
+ * @param {Element=} opt_element A DOM element for the popup.
+ * @param {goog.ui.PopupBase.Type=} opt_type Type of popup.
+ */
+goog.ui.PopupBase = function(opt_element, opt_type) {
+  goog.events.EventTarget.call(this);
+
+  /**
+   * An event handler to manage the events easily
+   * @type {goog.events.EventHandler}
+   * @private
+   */
+  this.handler_ = new goog.events.EventHandler(this);
+
+  this.setElement(opt_element || null);
+  if (opt_type) {
+    this.setType(opt_type);
+  }
+};
+goog.inherits(goog.ui.PopupBase, goog.events.EventTarget);
+
+
+/**
+ * Constants for type of Popup
+ * @enum {string}
+ */
+goog.ui.PopupBase.Type = {
+  TOGGLE_DISPLAY: 'toggle_display',
+  MOVE_OFFSCREEN: 'move_offscreen'
+};
+
+
+/**
+ * The popup dom element that this Popup wraps.
+ * @type {Element}
+ * @private
+ */
+goog.ui.PopupBase.prototype.element_ = null;
+
+
+/**
+ * Whether the Popup dismisses itself it the user clicks outside of it or the
+ * popup loses focus
+ * @type {boolean}
+ * @private
+ */
+goog.ui.PopupBase.prototype.autoHide_ = true;
+
+
+/**
+ * Clicks outside the popup but inside this element will cause the popup to
+ * hide if autoHide_ is true. If this is null, then the entire document is used.
+ * For example, you can use a body-size div so that clicks on the browser
+ * scrollbar do not dismiss the popup.
+ * @type {Element}
+ * @private
+ */
+goog.ui.PopupBase.prototype.autoHideRegion_ = null;
+
+
+/**
+ * Whether the popup is currently being shown.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.PopupBase.prototype.isVisible_ = false;
+
+
+/**
+ * Whether the popup should hide itself asynchrously. This was added because
+ * there are cases where hiding the element in mouse down handler in IE can
+ * cause textinputs to get into a bad state if the element that had focus is
+ * hidden.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.PopupBase.prototype.shouldHideAsync_ = false;
+
+
+/**
+ * The time when the popup was last shown.
+ * @type {number}
+ * @private
+ */
+goog.ui.PopupBase.prototype.lastShowTime_ = -1;
+
+
+/**
+ * The time when the popup was last hidden.
+ * @type {number}
+ * @private
+ */
+goog.ui.PopupBase.prototype.lastHideTime_ = -1;
+
+
+/**
+ * Whether to hide when the escape key is pressed.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.PopupBase.prototype.hideOnEscape_ = false;
+
+
+/**
+ * Whether to enable cross-iframe dismissal.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.PopupBase.prototype.enableCrossIframeDismissal_ = true;
+
+
+/**
+ * The type of popup
+ * @type {goog.ui.PopupBase.Type}
+ * @private
+ */
+goog.ui.PopupBase.prototype.type_ = goog.ui.PopupBase.Type.TOGGLE_DISPLAY;
+
+
+/**
+ * Transition to play on showing the popup.
+ * @type {goog.fx.Transition|undefined}
+ * @private
+ */
+goog.ui.PopupBase.prototype.showTransition_;
+
+
+/**
+ * Transition to play on hiding the popup.
+ * @type {goog.fx.Transition|undefined}
+ * @private
+ */
+goog.ui.PopupBase.prototype.hideTransition_;
+
+
+/**
+ * Constants for event type fired by Popup
+ *
+ * @enum {string}
+ */
+goog.ui.PopupBase.EventType = {
+  BEFORE_SHOW: 'beforeshow',
+  SHOW: 'show',
+  BEFORE_HIDE: 'beforehide',
+  HIDE: 'hide'
+};
+
+
+/**
+ * A time in ms used to debounce events that happen right after each other.
+ *
+ * A note about why this is necessary. There are two cases to consider.
+ * First case, a popup will usually see a focus event right after it's launched
+ * because it's typical for it to be launched in a mouse-down event which will
+ * then move focus to the launching button. We don't want to think this is a
+ * separate user action moving focus. Second case, a user clicks on the
+ * launcher button to close the menu. In that case, we'll close the menu in the
+ * focus event and then show it again because of the mouse down event, even
+ * though the intention is to just close the menu. This workaround appears to
+ * be the least intrusive fix.
+ *
+ * @type {number}
+ */
+goog.ui.PopupBase.DEBOUNCE_DELAY_MS = 150;
+
+
+/**
+ * @return {goog.ui.PopupBase.Type} The type of popup this is.
+ */
+goog.ui.PopupBase.prototype.getType = function() {
+  return this.type_;
+};
+
+
+/**
+ * Specifies the type of popup to use.
+ *
+ * @param {goog.ui.PopupBase.Type} type Type of popup.
+ */
+goog.ui.PopupBase.prototype.setType = function(type) {
+  this.type_ = type;
+};
+
+
+/**
+ * Returns whether the popup should hide itself asynchronously using a timeout
+ * instead of synchronously.
+ * @return {boolean} Whether to hide async.
+ */
+goog.ui.PopupBase.prototype.shouldHideAsync = function() {
+  return this.shouldHideAsync_;
+};
+
+
+/**
+ * Sets whether the popup should hide itself asynchronously using a timeout
+ * instead of synchronously.
+ * @param {boolean} b Whether to hide async.
+ */
+goog.ui.PopupBase.prototype.setShouldHideAsync = function(b) {
+  this.shouldHideAsync_ = b;
+};
+
+
+/**
+ * Returns the dom element that should be used for the popup.
+ *
+ * @return {Element} The popup element.
+ */
+goog.ui.PopupBase.prototype.getElement = function() {
+  return this.element_;
+};
+
+
+/**
+ * Specifies the dom element that should be used for the popup.
+ *
+ * @param {Element} elt A DOM element for the popup.
+ */
+goog.ui.PopupBase.prototype.setElement = function(elt) {
+  this.ensureNotVisible_();
+  this.element_ = elt;
+};
+
+
+/**
+ * Returns whether the Popup dismisses itself when the user clicks outside of
+ * it.
+ * @return {boolean} Whether the Popup autohides on an external click.
+ */
+goog.ui.PopupBase.prototype.getAutoHide = function() {
+  return this.autoHide_;
+};
+
+
+/**
+ * Sets whether the Popup dismisses itself when the user clicks outside of it.
+ * @param {boolean} autoHide Whether to autohide on an external click.
+ */
+goog.ui.PopupBase.prototype.setAutoHide = function(autoHide) {
+  this.ensureNotVisible_();
+  this.autoHide_ = autoHide;
+};
+
+
+/**
+ * @return {boolean} Whether the Popup autohides on the escape key.
+ */
+goog.ui.PopupBase.prototype.getHideOnEscape = function() {
+  return this.hideOnEscape_;
+};
+
+
+/**
+ * Sets whether the Popup dismisses itself on the escape key.
+ * @param {boolean} hideOnEscape Whether to autohide on the escape key.
+ */
+goog.ui.PopupBase.prototype.setHideOnEscape = function(hideOnEscape) {
+  this.ensureNotVisible_();
+  this.hideOnEscape_ = hideOnEscape;
+};
+
+
+/**
+ * @return {boolean} Whether cross iframe dismissal is enabled.
+ */
+goog.ui.PopupBase.prototype.getEnableCrossIframeDismissal = function() {
+  return this.enableCrossIframeDismissal_;
+};
+
+
+/**
+ * Sets whether clicks in other iframes should dismiss this popup.  In some
+ * cases it should be disabled, because it can cause spurious
+ * @param {boolean} enable Whether to enable cross iframe dismissal.
+ */
+goog.ui.PopupBase.prototype.setEnableCrossIframeDismissal = function(enable) {
+  this.enableCrossIframeDismissal_ = enable;
+};
+
+
+/**
+ * Returns the region inside which the Popup dismisses itself when the user
+ * clicks, or null if it's the entire document.
+ * @return {Element} The DOM element for autohide, or null if it hasn't been
+ *     set.
+ */
+goog.ui.PopupBase.prototype.getAutoHideRegion = function() {
+  return this.autoHideRegion_;
+};
+
+
+/**
+ * Sets the region inside which the Popup dismisses itself when the user
+ * clicks.
+ * @param {Element} element The DOM element for autohide.
+ */
+goog.ui.PopupBase.prototype.setAutoHideRegion = function(element) {
+  this.autoHideRegion_ = element;
+};
+
+
+/**
+ * Sets transition animation on showing and hiding the popup.
+ * @param {goog.fx.Transition=} opt_showTransition Transition to play on
+ *     showing the popup.
+ * @param {goog.fx.Transition=} opt_hideTransition Transition to play on
+ *     hiding the popup.
+ */
+goog.ui.PopupBase.prototype.setTransition = function(
+    opt_showTransition, opt_hideTransition) {
+  this.showTransition_ = opt_showTransition;
+  this.hideTransition_ = opt_hideTransition;
+};
+
+
+/**
+ * Returns the time when the popup was last shown.
+ *
+ * @return {number} time in ms since epoch when the popup was last shown, or
+ * -1 if the popup was never shown.
+ */
+goog.ui.PopupBase.prototype.getLastShowTime = function() {
+  return this.lastShowTime_;
+};
+
+
+/**
+ * Returns the time when the popup was last hidden.
+ *
+ * @return {number} time in ms since epoch when the popup was last hidden, or
+ * -1 if the popup was never hidden or is currently showing.
+ */
+goog.ui.PopupBase.prototype.getLastHideTime = function() {
+  return this.lastHideTime_;
+};
+
+
+/**
+ * Helper to throw exception if the popup is showing.
+ * @private
+ */
+goog.ui.PopupBase.prototype.ensureNotVisible_ = function() {
+  if (this.isVisible_) {
+    throw Error('Can not change this state of the popup while showing.');
+  }
+};
+
+
+/**
+ * Returns whether the popup is currently visible.
+ *
+ * @return {boolean} whether the popup is currently visible.
+ */
+goog.ui.PopupBase.prototype.isVisible = function() {
+  return this.isVisible_;
+};
+
+
+/**
+ * Returns whether the popup is currently visible or was visible within about
+ * 150 ms ago. This is used by clients to handle a very specific, but common,
+ * popup scenario. The button that launches the popup should close the popup
+ * on mouse down if the popup is alrady open. The problem is that the popup
+ * closes itself during the capture phase of the mouse down and thus the button
+ * thinks it's hidden and this should show it again. This method provides a
+ * good heuristic for clients. Typically in their event handler they will have
+ * code that is:
+ *
+ * if (menu.isOrWasRecentlyVisible()) {
+ *   menu.setVisible(false);
+ * } else {
+ *   ... // code to position menu and initialize other state
+ *   menu.setVisible(true);
+ * }
+ * @return {boolean} Whether the popup is currently visible or was visible
+ *     within about 150 ms ago.
+ */
+goog.ui.PopupBase.prototype.isOrWasRecentlyVisible = function() {
+  return this.isVisible_ ||
+         (goog.now() - this.lastHideTime_ <
+          goog.ui.PopupBase.DEBOUNCE_DELAY_MS);
+};
+
+
+/**
+ * Sets whether the popup should be visible.
+ *
+ * @param {boolean} visible Desired visibility state.
+ */
+goog.ui.PopupBase.prototype.setVisible = function(visible) {
+  // Make sure that any currently running transition is stopped.
+  if (this.showTransition_) this.showTransition_.stop();
+  if (this.hideTransition_) this.hideTransition_.stop();
+
+  if (visible) {
+    this.show_();
+  } else {
+    this.hide_();
+  }
+};
+
+
+/**
+ * Repositions the popup according to the current state.
+ * Should be overriden by subclases.
+ */
+goog.ui.PopupBase.prototype.reposition = goog.nullFunction;
+
+
+/**
+ * Does the work to show the popup.
+ * @private
+ */
+goog.ui.PopupBase.prototype.show_ = function() {
+  // Ignore call if we are already showing.
+  if (this.isVisible_) {
+    return;
+  }
+
+  // Give derived classes and handlers a chance to customize popup.
+  if (!this.onBeforeShow()) {
+    return;
+  }
+
+  // Allow callers to set the element in the BEFORE_SHOW event.
+  if (!this.element_) {
+    throw Error('Caller must call setElement before trying to show the popup');
+  }
+
+  // Call reposition after onBeforeShow, as it may change the style and/or
+  // content of the popup and thereby affecting the size which is used for the
+  // viewport calculation.
+  this.reposition();
+
+  var doc = goog.dom.getOwnerDocument(this.element_);
+
+  if (this.hideOnEscape_) {
+
+    // Handle the escape keys.  Listen in the capture phase so that we can
+    // stop the escape key from propagating to other elements.  For example,
+    // if there is a popup within a dialog box, we want the popup to be
+    // dismissed first, rather than the dialog.
+    this.handler_.listen(doc, goog.events.EventType.KEYDOWN,
+        this.onDocumentKeyDown_, true);
+  }
+
+  // Set up event handlers.
+  if (this.autoHide_) {
+
+    // Even if the popup is not in the focused document, we want to
+    // close it on mousedowns in the document it's in.
+    this.handler_.listen(doc, goog.events.EventType.MOUSEDOWN,
+        this.onDocumentMouseDown_, true);
+
+    if (goog.userAgent.IE) {
+      // We want to know about deactivates/mousedowns on the document with focus
+      // The top-level document won't get a deactivate event if the focus is
+      // in an iframe and the deactivate fires within that iframe.
+      // The active element in the top-level document will remain the iframe
+      // itself.
+      var activeElement;
+      /** @preserveTry */
+      try {
+        activeElement = doc.activeElement;
+      } catch (e) {
+        // There is an IE browser bug which can cause just the reading of
+        // document.activeElement to throw an Unspecified Error.  This
+        // may have to do with loading a popup within a hidden iframe.
+      }
+      while (activeElement && activeElement.nodeName == 'IFRAME') {
+        /** @preserveTry */
+        try {
+          var tempDoc = goog.dom.getFrameContentDocument(activeElement);
+        } catch (e) {
+          // The frame is on a different domain that its parent document
+          // This way, we grab the lowest-level document object we can get
+          // a handle on given cross-domain security.
+          break;
+        }
+        doc = tempDoc;
+        activeElement = doc.activeElement;
+      }
+
+      // Handle mousedowns in the focused document in case the user clicks
+      // on the activeElement (in which case the popup should hide).
+      this.handler_.listen(doc, goog.events.EventType.MOUSEDOWN,
+          this.onDocumentMouseDown_, true);
+
+      // If the active element inside the focused document changes, then
+      // we probably need to hide the popup.
+      this.handler_.listen(doc, goog.events.EventType.DEACTIVATE,
+          this.onDocumentBlur_);
+
+    } else {
+      this.handler_.listen(doc, goog.events.EventType.BLUR,
+          this.onDocumentBlur_);
+    }
+  }
+
+  // Make the popup visible.
+  if (this.type_ == goog.ui.PopupBase.Type.TOGGLE_DISPLAY) {
+    this.showPopupElement();
+  } else if (this.type_ == goog.ui.PopupBase.Type.MOVE_OFFSCREEN) {
+    this.reposition();
+  }
+  this.isVisible_ = true;
+
+  // If there is transition to play, we play it and fire SHOW event after
+  // the transition is over.
+  if (this.showTransition_) {
+    goog.events.listenOnce(
+        /** @type {goog.events.EventTarget} */ (this.showTransition_),
+        goog.fx.Transition.EventType.END, this.onShow_, false, this);
+    this.showTransition_.play();
+  } else {
+    // Notify derived classes and handlers.
+    this.onShow_();
+  }
+};
+
+
+/**
+ * Hides the popup. This call is idempotent.
+ *
+ * @param {Object=} opt_target Target of the event causing the hide.
+ * @return {boolean} Whether the popup was hidden and not cancelled.
+ * @private
+ */
+goog.ui.PopupBase.prototype.hide_ = function(opt_target) {
+  // Give derived classes and handlers a chance to cancel hiding.
+  if (!this.isVisible_ || !this.onBeforeHide_(opt_target)) {
+    return false;
+  }
+
+  // Remove any listeners we attached when showing the popup.
+  if (this.handler_) {
+    this.handler_.removeAll();
+  }
+
+  // If there is transition to play, we play it and only hide the element
+  // (and fire HIDE event) after the transition is over.
+  if (this.hideTransition_) {
+    goog.events.listenOnce(
+        /** @type {goog.events.EventTarget} */ (this.hideTransition_),
+        goog.fx.Transition.EventType.END,
+        goog.partial(this.continueHidingPopup_, opt_target), false, this);
+    this.hideTransition_.play();
+  } else {
+    this.continueHidingPopup_(opt_target);
+  }
+
+  return true;
+};
+
+
+/**
+ * Continues hiding the popup. This is a continuation from hide_. It is
+ * a separate method so that we can add a transition before hiding.
+ * @param {Object=} opt_target Target of the event causing the hide.
+ * @private
+ */
+goog.ui.PopupBase.prototype.continueHidingPopup_ = function(opt_target) {
+  // Hide the popup.
+  if (this.type_ == goog.ui.PopupBase.Type.TOGGLE_DISPLAY) {
+    if (this.shouldHideAsync_) {
+      goog.Timer.callOnce(this.hidePopupElement_, 0, this);
+    } else {
+      this.hidePopupElement_();
+    }
+  } else if (this.type_ == goog.ui.PopupBase.Type.MOVE_OFFSCREEN) {
+    this.moveOffscreen_();
+  }
+  this.isVisible_ = false;
+
+  // Notify derived classes and handlers.
+  this.onHide_(opt_target);
+};
+
+
+/**
+ * Shows the popup element.
+ * @protected
+ */
+goog.ui.PopupBase.prototype.showPopupElement = function() {
+  this.element_.style.visibility = 'visible';
+  goog.style.showElement(this.element_, true);
+};
+
+
+/**
+ * Hides the popup element.
+ * @private
+ */
+goog.ui.PopupBase.prototype.hidePopupElement_ = function() {
+  this.element_.style.visibility = 'hidden';
+  goog.style.showElement(this.element_, false);
+};
+
+
+/**
+ * Hides the popup by moving it offscreen.
+ *
+ * @private
+ */
+goog.ui.PopupBase.prototype.moveOffscreen_ = function() {
+  this.element_.style.left = '-200px';
+  this.element_.style.top = '-200px';
+};
+
+
+/**
+ * Called before the popup is shown. Derived classes can override to hook this
+ * event but should make sure to call the parent class method.
+ *
+ * @return {boolean} If anyone called preventDefault on the event object (or
+ *     if any of the handlers returns false this will also return false.
+ * @protected
+ */
+goog.ui.PopupBase.prototype.onBeforeShow = function() {
+  return this.dispatchEvent(goog.ui.PopupBase.EventType.BEFORE_SHOW);
+};
+
+
+/**
+ * Called after the popup is shown. Derived classes can override to hook this
+ * event but should make sure to call the parent class method.
+ * @protected
+ * @suppress {underscore}
+ */
+goog.ui.PopupBase.prototype.onShow_ = function() {
+  this.lastShowTime_ = goog.now();
+  this.lastHideTime_ = -1;
+  this.dispatchEvent(goog.ui.PopupBase.EventType.SHOW);
+};
+
+
+/**
+ * Called before the popup is hidden. Derived classes can override to hook this
+ * event but should make sure to call the parent class method.
+ *
+ * @param {Object=} opt_target Target of the event causing the hide.
+ * @return {boolean} If anyone called preventDefault on the event object (or
+ *     if any of the handlers returns false this will also return false.
+ * @private
+ */
+goog.ui.PopupBase.prototype.onBeforeHide_ = function(opt_target) {
+  return this.dispatchEvent({type: goog.ui.PopupBase.EventType.BEFORE_HIDE,
+                             target: opt_target});
+};
+
+
+/**
+ * Called after the popup is hidden. Derived classes can override to hook this
+ * event but should make sure to call the parent class method.
+ * @param {Object=} opt_target Target of the event causing the hide.
+ * @protected
+ * @suppress {underscore}
+ */
+goog.ui.PopupBase.prototype.onHide_ = function(opt_target) {
+  this.lastHideTime_ = goog.now();
+  this.dispatchEvent({type: goog.ui.PopupBase.EventType.HIDE,
+                      target: opt_target});
+};
+
+
+/**
+ * Mouse down handler for the document on capture phase. Used to hide the
+ * popup for auto-hide mode.
+ *
+ * @param {goog.events.BrowserEvent} e The event object.
+ * @private
+ */
+goog.ui.PopupBase.prototype.onDocumentMouseDown_ = function(e) {
+  var target = /** @type {Node} */ (e.target);
+  if (!goog.dom.contains(this.element_, target) &&
+      (!this.autoHideRegion_ || goog.dom.contains(
+      this.autoHideRegion_, target)) &&
+      !this.shouldDebounce_()) {
+    // Mouse click was outside popup, so hide.
+    this.hide_(target);
+  }
+};
+
+
+/**
+ * Handles key-downs on the document to handle the escape key.
+ *
+ * @param {goog.events.BrowserEvent} e The event object.
+ * @private
+ */
+goog.ui.PopupBase.prototype.onDocumentKeyDown_ = function(e) {
+  if (e.keyCode == goog.events.KeyCodes.ESC) {
+    if (this.hide_(e.target)) {
+      // Eat the escape key, but only if this popup was actually closed.
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }
+};
+
+
+/**
+ * Deactivate handler(IE) and blur handler (other browsers) for document.
+ * Used to hide the popup for auto-hide mode.
+ *
+ * @param {goog.events.BrowserEvent} e The event object.
+ * @private
+ */
+goog.ui.PopupBase.prototype.onDocumentBlur_ = function(e) {
+  if (!this.enableCrossIframeDismissal_) {
+    return;
+  }
+
+  var doc = goog.dom.getOwnerDocument(this.element_);
+
+  // Ignore blur events if the active element is still inside the popup or if
+  // there is no longer an active element.  For example, a widget like a
+  // goog.ui.Button might programatically blur itself before losing tabIndex.
+  if (goog.userAgent.IE || goog.userAgent.OPERA) {
+    var activeElement = doc.activeElement;
+    if (!activeElement || goog.dom.contains(this.element_,
+        activeElement) || activeElement.tagName == 'BODY') {
+      return;
+    }
+
+  // Ignore blur events not for the document itself in non-IE browsers.
+  } else if (e.target != doc) {
+    return;
+  }
+
+  // Debounce the initial focus move.
+  if (this.shouldDebounce_()) {
+    return;
+  }
+
+  this.hide_();
+};
+
+
+/**
+ * @return {boolean} Whether the time since last show is less than the debounce
+ *     delay.
+ * @private
+ */
+goog.ui.PopupBase.prototype.shouldDebounce_ = function() {
+  return goog.now() - this.lastShowTime_ < goog.ui.PopupBase.DEBOUNCE_DELAY_MS;
+};
+
+
+/** @override */
+goog.ui.PopupBase.prototype.disposeInternal = function() {
+  goog.base(this, 'disposeInternal');
+  this.handler_.dispose();
+  goog.dispose(this.showTransition_);
+  goog.dispose(this.hideTransition_);
+  delete this.element_;
+  delete this.handler_;
+};
+
+// Input 63
+// Copyright 2011 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Class for showing simple modal popup.
+ */
+
+goog.provide('goog.ui.ModalPopup');
+
+goog.require('goog.Timer');
+goog.require('goog.asserts');
+goog.require('goog.dom');
+goog.require('goog.dom.TagName');
+goog.require('goog.dom.classes');
+goog.require('goog.dom.iframe');
+goog.require('goog.events');
+goog.require('goog.events.EventType');
+goog.require('goog.events.FocusHandler');
+goog.require('goog.style');
+goog.require('goog.ui.Component');
+goog.require('goog.ui.PopupBase.EventType');
+goog.require('goog.userAgent');
+
+
+
+/**
+ * Base class for modal popup UI components. This can also be used as
+ * a standalone component to render a modal popup with an empty div.
+ *
+ * WARNING: goog.ui.ModalPopup is only guaranteed to work when it is rendered
+ * directly in the 'body' element.
+ *
+ * The Html structure of the modal popup is:
+ * <pre>
+ *  Element         Function              Class-name, goog-modalpopup = default
+ * ----------------------------------------------------------------------------
+ * - iframe         Iframe mask           goog-modalpopup-bg
+ * - div            Background mask       goog-modalpopup-bg
+ * - div            Modal popup area      goog-modalpopup
+ * - span           Tab catcher
+ * </pre>
+ * @constructor
+ * @param {boolean=} opt_useIframeMask Work around windowed controls z-index
+ *     issue by using an iframe instead of a div for bg element.
+ * @param {goog.dom.DomHelper=} opt_domHelper Optional DOM helper; see {@link
+ *     goog.ui.Component} for semantics.
+ * @extends {goog.ui.Component}
+ */
+goog.ui.ModalPopup = function(opt_useIframeMask, opt_domHelper) {
+  goog.base(this, opt_domHelper);
+
+  /**
+   * Whether the modal popup should use an iframe as the background
+   * element to work around z-order issues.
+   * @type {boolean}
+   * @private
+   */
+  this.useIframeMask_ = !!opt_useIframeMask;
+};
+goog.inherits(goog.ui.ModalPopup, goog.ui.Component);
+
+
+/**
+ * Focus handler. It will be initialized in enterDocument.
+ * @type {goog.events.FocusHandler}
+ * @private
+ */
+goog.ui.ModalPopup.prototype.focusHandler_ = null;
+
+
+/**
+ * Whether the modal popup is visible.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.ModalPopup.prototype.visible_ = false;
+
+
+/**
+ * Element for the background which obscures the UI and blocks events.
+ * @type {Element}
+ * @private
+ */
+goog.ui.ModalPopup.prototype.bgEl_ = null;
+
+
+/**
+ * Iframe element that is only used for IE as a workaround to keep select-type
+ * elements from burning through background.
+ * @type {Element}
+ * @private
+ */
+goog.ui.ModalPopup.prototype.bgIframeEl_ = null;
+
+
+/**
+ * Element used to catch focus and prevent the user from tabbing out
+ * of the popup.
+ * @type {Element}
+ * @private
+ */
+goog.ui.ModalPopup.prototype.tabCatcherElement_ = null;
+
+
+/**
+ * @return {string} Base CSS class for this component.
+ * @protected
+ */
+goog.ui.ModalPopup.prototype.getCssClass = function() {
+  return goog.getCssName('goog-modalpopup');
+};
+
+
+/**
+ * Returns the background iframe mask element, if any.
+ * @return {Element} The background iframe mask element.
+ * @protected
+ */
+goog.ui.ModalPopup.prototype.getBackgroundIframe = function() {
+  return this.bgIframeEl_;
+};
+
+
+/**
+ * Returns the background mask element.
+ * @return {Element} The background mask element.
+ */
+goog.ui.ModalPopup.prototype.getBackgroundElement = function() {
+  return this.bgEl_;
+};
+
+
+/**
+ * Creates the initial DOM representation for the modal popup.
+ * Overrides {@link goog.ui.Component#createDom}.
+ */
+goog.ui.ModalPopup.prototype.createDom = function() {
+  // Create the modal popup element, and make sure it's hidden.
+  goog.base(this, 'createDom');
+
+  var element = this.getElement();
+  goog.dom.classes.add(element, this.getCssClass());
+  goog.dom.setFocusableTabIndex(element, true);
+  goog.style.showElement(element, false);
+
+  // Manages the DOM for background mask elements.
+  this.manageBackgroundDom_();
+  this.createTabCatcher_();
+};
+
+
+/**
+ * Creates and disposes of the DOM for background mask elements.
+ * @private
+ */
+goog.ui.ModalPopup.prototype.manageBackgroundDom_ = function() {
+  if (this.useIframeMask_ && !this.bgIframeEl_) {
+    // IE renders the iframe on top of the select elements while still
+    // respecting the z-index of the other elements on the page.  See
+    // http://support.microsoft.com/kb/177378 for more information.
+    // Flash and other controls behave in similar ways for other browsers
+    this.bgIframeEl_ = goog.dom.iframe.createBlank(this.getDomHelper());
+    this.bgIframeEl_.className = goog.getCssName(this.getCssClass(), 'bg');
+    goog.style.showElement(this.bgIframeEl_, false);
+    goog.style.setOpacity(this.bgIframeEl_, 0);
+  }
+
+  // Create the backgound mask, initialize its opacity, and make sure it's
+  // hidden.
+  if (!this.bgEl_) {
+    this.bgEl_ = this.getDomHelper().createDom(
+        'div', goog.getCssName(this.getCssClass(), 'bg'));
+    goog.style.showElement(this.bgEl_, false);
+  }
+};
+
+
+/**
+ * Creates the tab catcher element.
+ * @private
+ */
+goog.ui.ModalPopup.prototype.createTabCatcher_ = function() {
+  // Creates tab catcher element.
+  if (!this.tabCatcherElement_) {
+    this.tabCatcherElement_ = this.getDomHelper().createElement('span');
+    goog.style.showElement(this.tabCatcherElement_, false);
+    goog.dom.setFocusableTabIndex(this.tabCatcherElement_, true);
+    this.tabCatcherElement_.style.position = 'absolute';
+  }
+};
+
+
+/**
+ * Renders the background mask.
+ * @private
+ */
+goog.ui.ModalPopup.prototype.renderBackground_ = function() {
+  goog.asserts.assert(!!this.bgEl_, 'Background element must not be null.');
+  if (this.bgIframeEl_) {
+    goog.dom.insertSiblingBefore(this.bgIframeEl_, this.getElement());
+  }
+  goog.dom.insertSiblingBefore(this.bgEl_, this.getElement());
+};
+
+
+/** @override */
+goog.ui.ModalPopup.prototype.canDecorate = function(element) {
+  // Assume we can decorate any DIV.
+  return !!element && element.tagName == goog.dom.TagName.DIV;
+};
+
+
+/** @override */
+goog.ui.ModalPopup.prototype.decorateInternal = function(element) {
+  // Decorate the modal popup area element.
+  goog.base(this, 'decorateInternal', element);
+  goog.dom.classes.add(this.getElement(), this.getCssClass());
+
+  // Create the background mask...
+  this.manageBackgroundDom_();
+  this.createTabCatcher_();
+
+  // Make sure the decorated modal popup is hidden.
+  goog.style.showElement(this.getElement(), false);
+};
+
+
+/** @override */
+goog.ui.ModalPopup.prototype.enterDocument = function() {
+  this.renderBackground_();
+  goog.base(this, 'enterDocument');
+
+  goog.dom.insertSiblingAfter(this.tabCatcherElement_, this.getElement());
+
+  this.focusHandler_ = new goog.events.FocusHandler(
+      this.getDomHelper().getDocument());
+
+  // We need to watch the entire document so that we can detect when the
+  // focus is moved out of this modal popup.
+  this.getHandler().listen(
+      this.focusHandler_, goog.events.FocusHandler.EventType.FOCUSIN,
+      this.onFocus_);
+};
+
+
+/** @override */
+goog.ui.ModalPopup.prototype.exitDocument = function() {
+  if (this.isVisible()) {
+    this.setVisible(false);
+  }
+
+  goog.dispose(this.focusHandler_);
+
+  goog.base(this, 'exitDocument');
+  goog.dom.removeNode(this.bgIframeEl_);
+  goog.dom.removeNode(this.bgEl_);
+  goog.dom.removeNode(this.tabCatcherElement_);
+};
+
+
+/**
+ * Sets the visibility of the modal popup box and focus to the popup.
+ * Lazily renders the component if needed.
+ * @param {boolean} visible Whether the modal popup should be visible.
+ */
+goog.ui.ModalPopup.prototype.setVisible = function(visible) {
+  goog.asserts.assert(
+      this.isInDocument(), 'ModalPopup must be rendered first.');
+  if (visible == this.visible_) {
+    return;
+  }
+
+  if (visible) {
+    this.show_();
+  } else {
+    this.hide_();
+  }
+};
+
+
+/**
+ * Shows the popup.
+ * @private
+ */
+goog.ui.ModalPopup.prototype.show_ = function() {
+  if (!this.dispatchEvent(goog.ui.PopupBase.EventType.BEFORE_SHOW)) {
+    return;
+  }
+
+  this.resizeBackground_();
+  this.reposition();
+
+  // Listen for keyboard and resize events while the modal popup is visible.
+  this.getHandler().listen(
+      this.getDomHelper().getWindow(), goog.events.EventType.RESIZE,
+      this.resizeBackground_);
+
+  this.showPopupElement_(true);
+  this.focus();
+  this.visible_ = true;
+  this.dispatchEvent(goog.ui.PopupBase.EventType.SHOW);
+};
+
+
+/**
+ * Hides the popup.
+ * @private
+ */
+goog.ui.ModalPopup.prototype.hide_ = function() {
+  if (!this.dispatchEvent(goog.ui.PopupBase.EventType.BEFORE_HIDE)) {
+    return;
+  }
+
+  // Stop listening for keyboard and resize events while the modal
+  // popup is hidden.
+  this.getHandler().unlisten(
+      this.getDomHelper().getWindow(), goog.events.EventType.RESIZE,
+      this.resizeBackground_);
+
+  this.showPopupElement_(false);
+  this.visible_ = false;
+  this.dispatchEvent(goog.ui.PopupBase.EventType.HIDE);
+};
+
+
+/**
+ * Shows or hides the popup element.
+ * @param {boolean} visible Shows the popup element if true, hides if false.
+ * @private
+ */
+goog.ui.ModalPopup.prototype.showPopupElement_ = function(visible) {
+  if (this.bgIframeEl_) {
+    goog.style.showElement(this.bgIframeEl_, visible);
+  }
+  if (this.bgEl_) {
+    goog.style.showElement(this.bgEl_, visible);
+  }
+  goog.style.showElement(this.getElement(), visible);
+  goog.style.showElement(this.tabCatcherElement_, visible);
+};
+
+
+/**
+ * @return {boolean} Whether the modal popup is visible.
+ */
+goog.ui.ModalPopup.prototype.isVisible = function() {
+  return this.visible_;
+};
+
+
+/**
+ * Focuses on the modal popup.
+ */
+goog.ui.ModalPopup.prototype.focus = function() {
+  this.focusElement_();
+};
+
+
+/**
+ * Make the background element the size of the document.
+ *
+ * NOTE(user): We must hide the background element before measuring the
+ * document, otherwise the size of the background will stop the document from
+ * shrinking to fit a smaller window.  This does cause a slight flicker in Linux
+ * browsers, but should not be a common scenario.
+ * @private
+ */
+goog.ui.ModalPopup.prototype.resizeBackground_ = function() {
+  if (this.bgIframeEl_) {
+    goog.style.showElement(this.bgIframeEl_, false);
+  }
+  if (this.bgEl_) {
+    goog.style.showElement(this.bgEl_, false);
+  }
+
+  var doc = this.getDomHelper().getDocument();
+  var win = goog.dom.getWindow(doc) || window;
+
+  // Take the max of scroll height and view height for cases in which document
+  // does not fill screen.
+  var viewSize = goog.dom.getViewportSize(win);
+  var w = Math.max(doc.body.scrollWidth, viewSize.width);
+  var h = Math.max(doc.body.scrollHeight, viewSize.height);
+
+  if (this.bgIframeEl_) {
+    goog.style.showElement(this.bgIframeEl_, true);
+    goog.style.setSize(this.bgIframeEl_, w, h);
+  }
+  if (this.bgEl_) {
+    goog.style.showElement(this.bgEl_, true);
+    goog.style.setSize(this.bgEl_, w, h);
+  }
+};
+
+
+/**
+ * Centers the modal popup in the viewport, taking scrolling into account.
+ */
+goog.ui.ModalPopup.prototype.reposition = function() {
+  // TODO(user): Make this use goog.positioning as in goog.ui.PopupBase?
+
+  // Get the current viewport to obtain the scroll offset.
+  var doc = this.getDomHelper().getDocument();
+  var win = goog.dom.getWindow(doc) || window;
+  if (goog.style.getComputedPosition(this.getElement()) == 'fixed') {
+    var x = 0;
+    var y = 0;
+  } else {
+    var scroll = this.getDomHelper().getDocumentScroll();
+    var x = scroll.x;
+    var y = scroll.y;
+  }
+
+  var popupSize = goog.style.getSize(this.getElement());
+  var viewSize = goog.dom.getViewportSize(win);
+
+  // Make sure left and top are non-negatives.
+  var left = Math.max(x + viewSize.width / 2 - popupSize.width / 2, 0);
+  var top = Math.max(y + viewSize.height / 2 - popupSize.height / 2, 0);
+  goog.style.setPosition(this.getElement(), left, top);
+
+  // We place the tab catcher at the same position as the dialog to
+  // prevent IE from scrolling when users try to tab out of the dialog.
+  goog.style.setPosition(this.tabCatcherElement_, left, top);
+};
+
+
+/**
+ * Handles focus events.  Makes sure that if the user tabs past the
+ * elements in the modal popup, the focus wraps back to the beginning.
+ * @param {goog.events.BrowserEvent} e Browser's event object.
+ * @private
+ */
+goog.ui.ModalPopup.prototype.onFocus_ = function(e) {
+  if (e.target == this.tabCatcherElement_) {
+    goog.Timer.callOnce(this.focusElement_, 0, this);
+  }
+};
+
+
+/**
+ * Moves the focus to the modal popup.
+ * @private
+ */
+goog.ui.ModalPopup.prototype.focusElement_ = function() {
+  try {
+    if (goog.userAgent.IE) {
+      // In IE, we must first focus on the body or else focussing on a
+      // sub-element will not work.
+      this.getDomHelper().getDocument().body.focus();
+    }
+    this.getElement().focus();
+  } catch (e) {
+    // Swallow this. IE can throw an error if the element can not be focused.
+  }
+};
+
+// Input 64
+// Copyright 2006 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @fileoverview Class for showing simple modal dialog boxes.
+ *
+ * TODO(user):
+ *   * Standardize CSS class names with other components
+ *   * Add functionality to "host" other components in content area
+ *   * Abstract out ButtonSet and make it more general
+ * @see ../demos/dialog.html
+ */
+
+goog.provide('goog.ui.Dialog');
+goog.provide('goog.ui.Dialog.ButtonSet');
+goog.provide('goog.ui.Dialog.ButtonSet.DefaultButtons');
+goog.provide('goog.ui.Dialog.DefaultButtonCaptions');
+goog.provide('goog.ui.Dialog.DefaultButtonKeys');
+goog.provide('goog.ui.Dialog.Event');
+goog.provide('goog.ui.Dialog.EventType');
+
+goog.require('goog.asserts');
+goog.require('goog.dom');
+goog.require('goog.dom.NodeType');
+goog.require('goog.dom.TagName');
+goog.require('goog.dom.a11y');
+goog.require('goog.dom.classes');
+goog.require('goog.events.Event');
+goog.require('goog.events.EventType');
+goog.require('goog.events.KeyCodes');
+goog.require('goog.fx.Dragger');
+goog.require('goog.math.Rect');
+goog.require('goog.structs');
+goog.require('goog.structs.Map');
+goog.require('goog.style');
+goog.require('goog.ui.ModalPopup');
+goog.require('goog.userAgent');
+
+
+
+/**
+ * Class for showing simple dialog boxes.
+ * The Html structure of the dialog box is:
+ * <pre>
+ *  Element         Function                Class-name, modal-dialog = default
+ * ----------------------------------------------------------------------------
+ * - iframe         Iframe mask              modal-dialog-bg
+ * - div            Background mask          modal-dialog-bg
+ * - div            Dialog area              modal-dialog
+ *     - div        Title bar                modal-dialog-title
+ *        - span                             modal-dialog-title-text
+ *          - text  Title text               N/A
+ *        - span                             modal-dialog-title-close
+ *          - ??    Close box                N/A
+ *     - div        Content area             modal-dialog-content
+ *        - ??      User specified content   N/A
+ *     - div        Button area              modal-dialog-buttons
+ *        - button                           N/A
+ *        - button
+ *        - ...
+ * </pre>
+ * @constructor
+ * @param {string=} opt_class CSS class name for the dialog element, also used
+ *     as a class name prefix for related elements; defaults to modal-dialog.
+ * @param {boolean=} opt_useIframeMask Work around windowed controls z-index
+ *     issue by using an iframe instead of a div for bg element.
+ * @param {goog.dom.DomHelper=} opt_domHelper Optional DOM helper; see {@link
+ *     goog.ui.Component} for semantics.
+ * @extends {goog.ui.ModalPopup}
+ */
+goog.ui.Dialog = function(opt_class, opt_useIframeMask, opt_domHelper) {
+  goog.base(this, opt_useIframeMask, opt_domHelper);
+
+  /**
+   * CSS class name for the dialog element, also used as a class name prefix for
+   * related elements.  Defaults to goog.getCssName('modal-dialog').
+   * @type {string}
+   * @private
+   */
+  this.class_ = opt_class || goog.getCssName('modal-dialog');
+
+  this.buttons_ = goog.ui.Dialog.ButtonSet.createOkCancel();
+};
+goog.inherits(goog.ui.Dialog, goog.ui.ModalPopup);
+
+
+/**
+ * Button set.  Default to Ok/Cancel.
+ * @type {goog.ui.Dialog.ButtonSet}
+ * @private
+ */
+goog.ui.Dialog.prototype.buttons_;
+
+
+/**
+ * Whether the escape key closes this dialog.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.Dialog.prototype.escapeToCancel_ = true;
+
+
+/**
+ * Whether this dialog should include a title close button.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.Dialog.prototype.hasTitleCloseButton_ = true;
+
+
+/**
+ * Whether the dialog is modal. Defaults to true.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.Dialog.prototype.modal_ = true;
+
+
+/**
+ * Whether the dialog is draggable. Defaults to true.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.Dialog.prototype.draggable_ = true;
+
+
+/**
+ * Opacity for background mask.  Defaults to 50%.
+ * @type {number}
+ * @private
+ */
+goog.ui.Dialog.prototype.backgroundElementOpacity_ = 0.50;
+
+
+/**
+ * Dialog's title.
+ * @type {string}
+ * @private
+ */
+goog.ui.Dialog.prototype.title_ = '';
+
+
+/**
+ * Dialog's content (HTML).
+ * @type {string}
+ * @private
+ */
+goog.ui.Dialog.prototype.content_ = '';
+
+
+/**
+ * Dragger.
+ * @type {goog.fx.Dragger}
+ * @private
+ */
+goog.ui.Dialog.prototype.dragger_ = null;
+
+
+/**
+ * Whether the dialog should be disposed when it is hidden.
+ * @type {boolean}
+ * @private
+ */
+goog.ui.Dialog.prototype.disposeOnHide_ = false;
+
+
+/**
+ * Element for the title bar.
+ * @type {Element}
+ * @private
+ */
+goog.ui.Dialog.prototype.titleEl_ = null;
+
+
+/**
+ * Element for the text area of the title bar.
+ * @type {Element}
+ * @private
+ */
+goog.ui.Dialog.prototype.titleTextEl_ = null;
+
+
+/**
+ * Id of element for the text area of the title bar.
+ * @type {?string}
+ * @private
+ */
+goog.ui.Dialog.prototype.titleId_ = null;
+
+
+/**
+ * Element for the close box area of the title bar.
+ * @type {Element}
+ * @private
+ */
+goog.ui.Dialog.prototype.titleCloseEl_ = null;
+
+
+/**
+ * Element for the content area.
+ * @type {Element}
+ * @private
+ */
+goog.ui.Dialog.prototype.contentEl_ = null;
+
+
+/**
+ * Element for the button bar.
+ * @type {Element}
+ * @private
+ */
+goog.ui.Dialog.prototype.buttonEl_ = null;
+
+
+/** @override */
+goog.ui.Dialog.prototype.getCssClass = function() {
+  return this.class_;
+};
+
+
+/**
+ * Sets the title.
+ * @param {string} title The title text.
+ */
+goog.ui.Dialog.prototype.setTitle = function(title) {
+  this.title_ = title;
+  if (this.titleTextEl_) {
+    goog.dom.setTextContent(this.titleTextEl_, title);
+  }
+};
+
+
+/**
+ * Gets the title.
+ * @return {string} The title.
+ */
+goog.ui.Dialog.prototype.getTitle = function() {
+  return this.title_;
+};
+
+
+/**
+ * Allows arbitrary HTML to be set in the content element.
+ * @param {string} html Content HTML.
+ */
+goog.ui.Dialog.prototype.setContent = function(html) {
+  this.content_ = html;
+  if (this.contentEl_) {
+    this.contentEl_.innerHTML = html;
+  }
+};
+
+
+/**
+ * Gets the content HTML of the content element.
+ * @return {string} Content HTML.
+ */
+goog.ui.Dialog.prototype.getContent = function() {
+  return this.content_;
+};
+
+
+/**
+ * Renders if the DOM is not created.
+ * @private
+ */
+goog.ui.Dialog.prototype.renderIfNoDom_ = function() {
+  if (!this.getElement()) {
+    // TODO(user): Ideally we'd only create the DOM, but many applications
+    // are requiring this behavior.  Eventually, it would be best if the
+    // element getters could return null if the elements have not been
+    // created.
+    this.render();
+  }
+};
+
+
+/**
+ * Returns the content element so that more complicated things can be done with
+ * the content area.  Renders if the DOM is not yet created.  Overrides
+ * {@link goog.ui.Component#getContentElement}.
+ * @return {Element} The content element.
+ */
+goog.ui.Dialog.prototype.getContentElement = function() {
+  this.renderIfNoDom_();
+  return this.contentEl_;
+};
+
+
+/**
+ * Returns the title element so that more complicated things can be done with
+ * the title.  Renders if the DOM is not yet created.
+ * @return {Element} The title element.
+ */
+goog.ui.Dialog.prototype.getTitleElement = function() {
+  this.renderIfNoDom_();
+  return this.titleEl_;
+};
+
+
+/**
+ * Returns the title text element so that more complicated things can be done
+ * with the text of the title.  Renders if the DOM is not yet created.
+ * @return {Element} The title text element.
+ */
+goog.ui.Dialog.prototype.getTitleTextElement = function() {
+  this.renderIfNoDom_();
+  return this.titleTextEl_;
+};
+
+
+/**
+ * Returns the title close element so that more complicated things can be done
+ * with the close area of the title.  Renders if the DOM is not yet created.
+ * @return {Element} The close box.
+ */
+goog.ui.Dialog.prototype.getTitleCloseElement = function() {
+  this.renderIfNoDom_();
+  return this.titleCloseEl_;
+};
+
+
+/**
+ * Returns the button element so that more complicated things can be done with
+ * the button area.  Renders if the DOM is not yet created.
+ * @return {Element} The button container element.
+ */
+goog.ui.Dialog.prototype.getButtonElement = function() {
+  this.renderIfNoDom_();
+  return this.buttonEl_;
+};
+
+
+/**
+ * Returns the dialog element so that more complicated things can be done with
+ * the dialog box.  Renders if the DOM is not yet created.
+ * @return {Element} The dialog element.
+ */
+goog.ui.Dialog.prototype.getDialogElement = function() {
+  this.renderIfNoDom_();
+  return this.getElement();
+};
+
+
+/**
+ * Returns the background mask element so that more complicated things can be
+ * done with the background region.  Renders if the DOM is not yet created.
+ * @return {Element} The background mask element.
+ */
+goog.ui.Dialog.prototype.getBackgroundElement = function() {
+  this.renderIfNoDom_();
+  return goog.base(this, 'getBackgroundElement');
+};
+
+
+/**
+ * Gets the opacity of the background mask.
+ * @return {number} Background mask opacity.
+ */
+goog.ui.Dialog.prototype.getBackgroundElementOpacity = function() {
+  return this.backgroundElementOpacity_;
+};
+
+
+/**
+ * Sets the opacity of the background mask.
+ * @param {number} opacity Background mask opacity.
+ */
+goog.ui.Dialog.prototype.setBackgroundElementOpacity = function(opacity) {
+  this.backgroundElementOpacity_ = opacity;
+
+  if (this.getElement()) {
+    var bgEl = this.getBackgroundElement();
+    if (bgEl) {
+      goog.style.setOpacity(bgEl, this.backgroundElementOpacity_);
+    }
+  }
+};
+
+
+/**
+ * Sets the modal property of the dialog. In case the dialog is already
+ * inDocument, renders the modal background elements according to the specified
+ * modal parameter.
+ *
+ * Note that non-modal dialogs cannot use an iframe mask.
+ *
+ * @param {boolean} modal Whether the dialog is modal.
+ */
+goog.ui.Dialog.prototype.setModal = function(modal) {
+  if (modal != this.modal_) {
+    this.setModalInternal_(modal);
+  }
+};
+
+
+/**
+ * Sets the modal property of the dialog.
+ * @param {boolean} modal Whether the dialog is modal.
+ * @private
+ */
+goog.ui.Dialog.prototype.setModalInternal_ = function(modal) {
+  this.modal_ = modal;
+  if (this.isInDocument()) {
+    var dom = this.getDomHelper();
+    var bg = this.getBackgroundElement();
+    var bgIframe = this.getBackgroundIframe();
+    if (modal) {
+      if (bgIframe) {
+        dom.insertSiblingBefore(bgIframe, this.getElement());
+      }
+      dom.insertSiblingBefore(bg, this.getElement());
+    } else {
+      dom.removeNode(bgIframe);
+      dom.removeNode(bg);
+    }
+  }
+};
+
+
+/**
+ * @return {boolean} modal Whether the dialog is modal.
+ */
+goog.ui.Dialog.prototype.getModal = function() {
+  return this.modal_;
+};
+
+
+/**
+ * @return {string} The CSS class name for the dialog element.
+ */
+goog.ui.Dialog.prototype.getClass = function() {
+  return this.getCssClass();
+};
+
+
+/**
+ * Sets whether the dialog can be dragged.
+ * @param {boolean} draggable Whether the dialog can be dragged.
+ */
+goog.ui.Dialog.prototype.setDraggable = function(draggable) {
+  this.draggable_ = draggable;
+  this.setDraggingEnabled_(draggable && this.isInDocument());
+};
+
+
+/**
+ * Returns a dragger for moving the dialog and adds a class for the move cursor.
+ * Defaults to allow dragging of the title only, but can be overridden if
+ * different drag targets or dragging behavior is desired.
+ * @return {!goog.fx.Dragger} The created dragger instance.
+ * @protected
+ */
+goog.ui.Dialog.prototype.createDragger = function() {
+  return new goog.fx.Dragger(this.getElement(), this.titleEl_);
+};
+
+
+/**
+ * @return {boolean} Whether the dialog is draggable.
+ */
+goog.ui.Dialog.prototype.getDraggable = function() {
+  return this.draggable_;
+};
+
+
+/**
+ * Enables or disables dragging.
+ * @param {boolean} enabled Whether to enable it.
+ * @private.
+ */
+goog.ui.Dialog.prototype.setDraggingEnabled_ = function(enabled) {
+  if (this.getElement()) {
+    goog.dom.classes.enable(this.titleEl_,
+        goog.getCssName(this.class_, 'title-draggable'), enabled);
+  }
+
+  if (enabled && !this.dragger_) {
+    this.dragger_ = this.createDragger();
+    goog.dom.classes.add(this.titleEl_,
+        goog.getCssName(this.class_, 'title-draggable'));
+    goog.events.listen(this.dragger_, goog.fx.Dragger.EventType.START,
+        this.setDraggerLimits_, false, this);
+  } else if (!enabled && this.dragger_) {
+    this.dragger_.dispose();
+    this.dragger_ = null;
+  }
+};
+
+
+/** @override */
+goog.ui.Dialog.prototype.createDom = function() {
+  goog.base(this, 'createDom');
+  var element = this.getElement();
+  goog.asserts.assert(element, 'getElement() returns null');
+
+  var dom = this.getDomHelper();
+  this.titleEl_ = dom.createDom('div',
+      {'className': goog.getCssName(this.class_, 'title'), 'id': this.getId()},
+      this.titleTextEl_ = dom.createDom(
+          'span', goog.getCssName(this.class_, 'title-text'), this.title_),
+      this.titleCloseEl_ = dom.createDom(
+          'span', goog.getCssName(this.class_, 'title-close'))),
+  goog.dom.append(element, this.titleEl_,
+      this.contentEl_ = dom.createDom('div',
+          goog.getCssName(this.class_, 'content')),
+      this.buttonEl_ = dom.createDom('div',
+          goog.getCssName(this.class_, 'buttons')));
+
+  this.titleId_ = this.titleEl_.id;
+  goog.dom.a11y.setRole(element, 'dialog');
+  goog.dom.a11y.setState(element, 'labelledby', this.titleId_ || '');
+  // If setContent() was called before createDom(), make sure the inner HTML of
+  // the content element is initialized.
+  if (this.content_) {
+    this.contentEl_.innerHTML = this.content_;
+  }
+  goog.style.showElement(this.titleCloseEl_, this.hasTitleCloseButton_);
+
+  // Render the buttons.
+  if (this.buttons_) {
+    this.buttons_.attachToElement(this.buttonEl_);
+  }
+  goog.style.showElement(this.buttonEl_, !!this.buttons_);
+  this.setBackgroundElementOpacity(this.backgroundElementOpacity_);
+};
+
+
+/** @override */
+goog.ui.Dialog.prototype.decorateInternal = function(element) {
+  goog.base(this, 'decorateInternal', element);
+
+  // Decorate or create the content element.
+  var contentClass = goog.getCssName(this.class_, 'content');
+  this.contentEl_ = goog.dom.getElementsByTagNameAndClass(
+      null, contentClass, this.getElement())[0];
+  if (this.contentEl_) {
+    this.content_ = this.contentEl_.innerHTML;
+  } else {
+    this.contentEl_ = this.getDomHelper().createDom('div', contentClass);
+    if (this.content_) {
+      this.contentEl_.innerHTML = this.content_;
+    }
+    this.getElement().appendChild(this.contentEl_);
+  }
+
+  // Decorate or create the title bar element.
+  var titleClass = goog.getCssName(this.class_, 'title');
+  var titleTextClass = goog.getCssName(this.class_, 'title-text');
+  var titleCloseClass = goog.getCssName(this.class_, 'title-close');
+  this.titleEl_ = goog.dom.getElementsByTagNameAndClass(
+      null, titleClass, this.getElement())[0];
+  if (this.titleEl_) {
+    // Only look for title text & title close elements if a title bar element
+    // was found.  Otherwise assume that the entire title bar has to be
+    // created from scratch.
+    this.titleTextEl_ = goog.dom.getElementsByTagNameAndClass(
+        null, titleTextClass, this.titleEl_)[0];
+    this.titleCloseEl_ = goog.dom.getElementsByTagNameAndClass(
+        null, titleCloseClass, this.titleEl_)[0];
+  } else {
+    // Create the title bar element and insert it before the content area.
+    // This is useful if the element to decorate only includes a content area.
+    this.titleEl_ = this.getDomHelper().createDom('div', titleClass);
+    this.getElement().insertBefore(this.titleEl_, this.contentEl_);
+  }
+
+  // Decorate or create the title text element.
+  if (this.titleTextEl_) {
+    this.title_ = goog.dom.getTextContent(this.titleTextEl_);
+  } else {
+    this.titleTextEl_ = this.getDomHelper().createDom('span', titleTextClass,
+        this.title_);
+    this.titleEl_.appendChild(this.titleTextEl_);
+  }
+  goog.dom.a11y.setState(this.getElement(), 'labelledby', this.titleId_ || '');
+  // Decorate or create the title close element.
+  if (!this.titleCloseEl_) {
+    this.titleCloseEl_ = this.getDomHelper().createDom('span', titleCloseClass);
+    this.titleEl_.appendChild(this.titleCloseEl_);
+  }
+  goog.style.showElement(this.titleCloseEl_, this.hasTitleCloseButton_);
+
+  // Decorate or create the button container element.
+  var buttonsClass = goog.getCssName(this.class_, 'buttons');
+  this.buttonEl_ = goog.dom.getElementsByTagNameAndClass(
+      null, buttonsClass, this.getElement())[0];
+  if (this.buttonEl_) {
+    // Button container element found.  Create empty button set and use it to
+    // decorate the button container.
+    this.buttons_ = new goog.ui.Dialog.ButtonSet(this.getDomHelper());
+    this.buttons_.decorate(this.buttonEl_);
+  } else {
+    // Create new button container element, and render a button set into it.
+    this.buttonEl_ = this.getDomHelper().createDom('div', buttonsClass);
+    this.getElement().appendChild(this.buttonEl_);
+    if (this.buttons_) {
+      this.buttons_.attachToElement(this.buttonEl_);
+    }
+    goog.style.showElement(this.buttonEl_, !!this.buttons_);
+  }
+  this.setBackgroundElementOpacity(this.backgroundElementOpacity_);
+};
+
+
+/** @override */
+goog.ui.Dialog.prototype.enterDocument = function() {
+  goog.base(this, 'enterDocument');
+
+  this.getHandler().listen(this,
+      [goog.ui.PopupBase.EventType.SHOW, goog.ui.PopupBase.EventType.HIDE],
+      this.setVisibleInternal_);
+
+  // Add drag support.
+  this.setDraggingEnabled_(this.draggable_);
+
+  // Add event listeners to the close box and the button container.
+  this.getHandler().listen(
+      this.titleCloseEl_, goog.events.EventType.CLICK,
+      this.onTitleCloseClick_);
+
+  goog.dom.a11y.setRole(this.getElement(), 'dialog');
+  if (this.titleTextEl_.id !== '') {
+    goog.dom.a11y.setState(
+        this.getElement(), 'labelledby', this.titleTextEl_.id);
+  }
+
+  if (!this.modal_) {
+    this.setModalInternal_(false);
+  }
+};
+
+
+/** @override */
+goog.ui.Dialog.prototype.exitDocument = function() {
+  if (this.isVisible()) {
+    this.setVisible(false);
+  }
+
+  // Remove drag support.
+  this.setDraggingEnabled_(false);
+
+  goog.base(this, 'exitDocument');
+};
+
+
+/**
+ * Sets the visibility of the dialog box and moves focus to the default button.
+ * Lazily renders the component if needed.
+ * @param {boolean} visible Whether the dialog should be visible.
+ */
+goog.ui.Dialog.prototype.setVisible = function(visible) {
+  if (visible == this.isVisible()) {
+    return;
+  }
+
+  // If the dialog hasn't been rendered yet, render it now.
+  if (!this.isInDocument()) {
+    this.render();
+  }
+
+  goog.base(this, 'setVisible', visible);
+};
+
+
+/**
+ * Sets visibility after super class setVisible is completed.
+ * @param {goog.events.Event} e The event object.
+ * @private
+ */
+goog.ui.Dialog.prototype.setVisibleInternal_ = function(e) {
+  if (e.target != this) {
+    return;
+  }
+
+  var visible = this.isVisible();
+
+  if (visible) {
+    // Listen for keyboard and resize events while the dialog is visible.
+    this.getHandler().
+        listen(this.getElement(), goog.events.EventType.KEYDOWN, this.onKey_).
+        listen(this.getElement(), goog.events.EventType.KEYPRESS, this.onKey_);
+
+    this.dispatchEvent(goog.ui.Dialog.EventType.AFTER_SHOW);
+    // NOTE: see bug 1163154 for an example of an edge case where making the
+    // dialog visible in response to a KEYDOWN will result in a CLICK event
+    // firing on the default button (immediately closing the dialog) if the key
+    // that fired the KEYDOWN is also normally used to activate controls
+    // (i.e. SPACE/ENTER).
+    //
+    // This could be worked around by attaching the onButtonClick_ handler in a
+    // setTimeout, but that was deemed undesirable.
+    this.getHandler().listen(this.buttonEl_, goog.events.EventType.CLICK,
+        this.onButtonClick_);
+  } else {
+    // Stop listening for keyboard and resize events while the dialog is hidden.
+    this.getHandler().
+        unlisten(this.getElement(), goog.events.EventType.KEYDOWN, this.onKey_).
+        unlisten(this.getElement(), goog.events.EventType.KEYPRESS,
+            this.onKey_).
+        unlisten(this.buttonEl_, goog.events.EventType.CLICK,
+            this.onButtonClick_);
+
+    this.dispatchEvent(goog.ui.Dialog.EventType.AFTER_HIDE);
+    if (this.disposeOnHide_) {
+      this.dispose();
+    }
+  }
+};
+
+
+/**
+ * Focuses the dialog contents and the default dialog button if there is one.
+ */
+goog.ui.Dialog.prototype.focus = function() {
+  goog.base(this, 'focus');
+
+  // Move focus to the default button (if any).
+  if (this.getButtonSet()) {
+    var defaultButton = this.getButtonSet().getDefault();
+    if (defaultButton) {
+      var doc = this.getDomHelper().getDocument();
+      var buttons = this.buttonEl_.getElementsByTagName('button');
+      for (var i = 0, button; button = buttons[i]; i++) {
+        if (button.name == defaultButton) {
+          try {
+            // Reopening a dialog can cause focusing the button to fail in
+            // WebKit and Opera. Shift the focus to a temporary <input>
+            // element to make refocusing the button possible.
+            if (goog.userAgent.WEBKIT || goog.userAgent.OPERA) {
+              var temp = doc.createElement('input');
+              temp.style.cssText =
+                  'position:fixed;width:0;height:0;left:0;top:0;';
+              this.getElement().appendChild(temp);
+              temp.focus();
+              this.getElement().removeChild(temp);
+            }
+            button.focus();
+          } catch (e) {
+            // Swallow this. Could be the button is disabled
+            // and IE6 wishes to throw an error.
+          }
+          break;
+        }
+      }
+    }
+  }
+};
+
+
+/**
+ * Sets dragger limits when dragging is started.
+ * @param {!goog.events.Event} e goog.fx.Dragger.EventType.START event.
+ * @private
+ */
+goog.ui.Dialog.prototype.setDraggerLimits_ = function(e) {
+  var doc = this.getDomHelper().getDocument();
+  var win = goog.dom.getWindow(doc) || window;
+
+  // Take the max of scroll height and view height for cases in which document
+  // does not fill screen.
+  var viewSize = goog.dom.getViewportSize(win);
+  var w = Math.max(doc.body.scrollWidth, viewSize.width);
+  var h = Math.max(doc.body.scrollHeight, viewSize.height);
+
+  var dialogSize = goog.style.getSize(this.getElement());
+  if (goog.style.getComputedPosition(this.getElement()) == 'fixed') {
+    // Ensure position:fixed dialogs can't be dragged beyond the viewport.
+    this.dragger_.setLimits(new goog.math.Rect(0, 0,
+        Math.max(0, viewSize.width - dialogSize.width),
+        Math.max(0, viewSize.height - dialogSize.height)));
+  } else {
+    this.dragger_.setLimits(new goog.math.Rect(0, 0,
+        w - dialogSize.width, h - dialogSize.height));
+  }
+};
+
+
+/**
+ * Handles a click on the title close area.
+ * @param {goog.events.BrowserEvent} e Browser's event object.
+ * @private
+ */
+goog.ui.Dialog.prototype.onTitleCloseClick_ = function(e) {
+  if (!this.hasTitleCloseButton_) {
+    return;
+  }
+
+  var bs = this.getButtonSet();
+  var key = bs && bs.getCancel();
+  // Only if there is a valid cancel button is an event dispatched.
+  if (key) {
+    var caption = /** @type {Element|string} */(bs.get(key));
+    if (this.dispatchEvent(new goog.ui.Dialog.Event(key, caption))) {
+      this.setVisible(false);
+    }
+  } else {
+    this.setVisible(false);
+  }
+};
+
+
+/**
+ * @return {boolean} Whether this dialog has a title close button.
+ */
+goog.ui.Dialog.prototype.getHasTitleCloseButton = function() {
+  return this.hasTitleCloseButton_;
+};
+
+
+/**
+ * Sets whether the dialog should have a close button in the title bar. There
+ * will always be an element for the title close button, but setting this
+ * parameter to false will cause it to be hidden and have no active listener.
+ * @param {boolean} b Whether this dialog should have a title close button.
+ */
+goog.ui.Dialog.prototype.setHasTitleCloseButton = function(b) {
+  this.hasTitleCloseButton_ = b;
+  if (this.titleCloseEl_) {
+    goog.style.showElement(this.titleCloseEl_, this.hasTitleCloseButton_);
+  }
+};
+
+
+/**
+ * @return {boolean} Whether the escape key should close this dialog.
+ */
+goog.ui.Dialog.prototype.isEscapeToCancel = function() {
+  return this.escapeToCancel_;
+};
+
+
+/**
+ * @param {boolean} b Whether the escape key should close this dialog.
+ */
+goog.ui.Dialog.prototype.setEscapeToCancel = function(b) {
+  this.escapeToCancel_ = b;
+};
+
+
+/**
+ * Sets whether the dialog should be disposed when it is hidden.  By default
+ * dialogs are not disposed when they are hidden.
+ * @param {boolean} b Whether the dialog should get disposed when it gets
+ *     hidden.
+ */
+goog.ui.Dialog.prototype.setDisposeOnHide = function(b) {
+  this.disposeOnHide_ = b;
+};
+
+
+/**
+ * @return {boolean} Whether the dialog should be disposed when it is hidden.
+ */
+goog.ui.Dialog.prototype.getDisposeOnHide = function() {
+  return this.disposeOnHide_;
+};
+
+
+/** @override */
+goog.ui.Dialog.prototype.disposeInternal = function() {
+  this.titleCloseEl_ = null;
+  this.buttonEl_ = null;
+  goog.base(this, 'disposeInternal');
+};
+
+
+/**
+ * Sets the button set to use.
+ * Note: Passing in null will cause no button set to be rendered.
+ * @param {goog.ui.Dialog.ButtonSet?} buttons The button set to use.
+ */
+goog.ui.Dialog.prototype.setButtonSet = function(buttons) {
+  this.buttons_ = buttons;
+  if (this.buttonEl_) {
+    if (this.buttons_) {
+      this.buttons_.attachToElement(this.buttonEl_);
+    } else {
+      this.buttonEl_.innerHTML = '';
+    }
+    goog.style.showElement(this.buttonEl_, !!this.buttons_);
+  }
+};
+
+
+/**
+ * Returns the button set being used.
+ * @return {goog.ui.Dialog.ButtonSet?} The button set being used.
+ */
+goog.ui.Dialog.prototype.getButtonSet = function() {
+  return this.buttons_;
+};
+
+
+/**
+ * Handles a click on the button container.
+ * @param {goog.events.BrowserEvent} e Browser's event object.
+ * @private
+ */
+goog.ui.Dialog.prototype.onButtonClick_ = function(e) {
+  var button = this.findParentButton_(/** @type {Element} */ (e.target));
+  if (button && !button.disabled) {
+    var key = button.name;
+    var caption = /** @type {Element|string} */(
+        this.getButtonSet().get(key));
+    if (this.dispatchEvent(new goog.ui.Dialog.Event(key, caption))) {
+      this.setVisible(false);
+    }
+  }
+};
+
+
+/**
+ * Finds the parent button of an element (or null if there was no button
+ * parent).
+ * @param {Element} element The element that was clicked on.
+ * @return {Element} Returns the parent button or null if not found.
+ * @private
+ */
+goog.ui.Dialog.prototype.findParentButton_ = function(element) {
+  var el = element;
+  while (el != null && el != this.buttonEl_) {
+    if (el.tagName == 'BUTTON') {
+      return /** @type {Element} */(el);
+    }
+    el = el.parentNode;
+  }
+  return null;
+};
+
+
+/**
+ * Handles keydown and keypress events, and dismisses the popup if cancel is
+ * pressed.  If there is a cancel action in the ButtonSet, than that will be
+ * fired.  Also prevents tabbing out of the dialog.
+ * @param {goog.events.BrowserEvent} e Browser's event object.
+ * @private
+ */
+goog.ui.Dialog.prototype.onKey_ = function(e) {
+  var close = false;
+  var hasHandler = false;
+  var buttonSet = this.getButtonSet();
+  var target = e.target;
+
+  if (e.type == goog.events.EventType.KEYDOWN) {
+    // Escape and tab can only properly be handled in keydown handlers.
+    if (this.escapeToCancel_ && e.keyCode == goog.events.KeyCodes.ESC) {
+      // Only if there is a valid cancel button is an event dispatched.
+      var cancel = buttonSet && buttonSet.getCancel();
+
+      // Users may expect to hit escape on a SELECT element.
+      var isSpecialFormElement =
+          target.tagName == 'SELECT' && !target.disabled;
+
+      if (cancel && !isSpecialFormElement) {
+        hasHandler = true;
+
+        var caption = buttonSet.get(cancel);
+        close = this.dispatchEvent(
+            new goog.ui.Dialog.Event(cancel,
+                /** @type {Element|null|string} */(caption)));
+      } else if (!isSpecialFormElement) {
+        close = true;
+      }
+    } else if (e.keyCode == goog.events.KeyCodes.TAB && e.shiftKey &&
+        target == this.getElement()) {
+      // Prevent the user from shift-tabbing backwards out of the dialog box.
+      // TODO(user): Instead, we should move the focus to the last tabbable
+      // element inside the dialog.
+      hasHandler = true;
+    }
+  } else if (e.keyCode == goog.events.KeyCodes.ENTER) {
+    // Only handle ENTER in keypress events, in case the action opens a
+    // popup window.
+    var key;
+    if (target.tagName == 'BUTTON') {
+      // If focus was on a button, it must have been enabled, so we can fire
+      // that button's handler.
+      key = target.name;
+    } else if (buttonSet) {
+      // Try to fire the default button's handler (if one exists), but only if
+      // the button is enabled.
+      var defaultKey = buttonSet.getDefault();
+      var defaultButton = defaultKey && buttonSet.getButton(defaultKey);
+
+      // Users may expect to hit enter on a TEXTAREA or a SELECT element.
+      var isSpecialFormElement =
+          (target.tagName == 'TEXTAREA' || target.tagName == 'SELECT') &&
+          !target.disabled;
+
+      if (defaultButton && !defaultButton.disabled && !isSpecialFormElement) {
+        key = defaultKey;
+      }
+    }
+    if (key && buttonSet) {
+      hasHandler = true;
+      close = this.dispatchEvent(
+          new goog.ui.Dialog.Event(key, String(buttonSet.get(key))));
+    }
+  }
+
+  if (close || hasHandler) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  if (close) {
+    this.setVisible(false);
+  }
+};
+
+
+
+/**
+ * Dialog event class.
+ * @param {string} key Key identifier for the button.
+ * @param {string|Element} caption Caption on the button (might be i18nlized).
+ * @constructor
+ * @extends {goog.events.Event}
+ */
+goog.ui.Dialog.Event = function(key, caption) {
+  this.type = goog.ui.Dialog.EventType.SELECT;
+  this.key = key;
+  this.caption = caption;
+};
+goog.inherits(goog.ui.Dialog.Event, goog.events.Event);
+
+
+/**
+ * Event type constant for dialog events.
+ * TODO(user): Change this to goog.ui.Dialog.EventType.SELECT.
+ * @type {string}
+ * @deprecated Use goog.ui.Dialog.EventType.SELECT.
+ */
+goog.ui.Dialog.SELECT_EVENT = 'dialogselect';
+
+
+/**
+ * Events dispatched by dialogs.
+ * @enum {string}
+ */
+goog.ui.Dialog.EventType = {
+  /**
+   * Dispatched when the user closes the dialog.
+   * The dispatched event will always be of type {@link goog.ui.Dialog.Event}.
+   * Canceling the event will prevent the dialog from closing.
+   */
+  SELECT: 'dialogselect',
+
+  /**
+   * Dispatched after the dialog is closed. Not cancelable.
+   * @deprecated Use goog.ui.PopupBase.EventType.HIDE.
+   */
+  AFTER_HIDE: 'afterhide',
+
+  /**
+   * Dispatched after the dialog is shown. Not cancelable.
+   * @deprecated Use goog.ui.PopupBase.EventType.SHOW.
+   */
+  AFTER_SHOW: 'aftershow'
+};
+
+
+
+/**
+ * A button set defines the behaviour of a set of buttons that the dialog can
+ * show.  Uses the {@link goog.structs.Map} interface.
+ * @param {goog.dom.DomHelper=} opt_domHelper Optional DOM helper; see {@link
+ *    goog.ui.Component} for semantics.
+ * @constructor
+ * @extends {goog.structs.Map}
+ */
+goog.ui.Dialog.ButtonSet = function(opt_domHelper) {
+  // TODO(user):  Refactor ButtonSet to extend goog.ui.Component?
+  this.dom_ = opt_domHelper || goog.dom.getDomHelper();
+  goog.structs.Map.call(this);
+};
+goog.inherits(goog.ui.Dialog.ButtonSet, goog.structs.Map);
+
+
+/**
+ * A CSS className for this component.
+ * @type {string}
+ * @private
+ */
+goog.ui.Dialog.ButtonSet.prototype.class_ = goog.getCssName('goog-buttonset');
+
+
+/**
+ * The button that has default focus (references key in buttons_ map).
+ * @type {?string}
+ * @private
+ */
+goog.ui.Dialog.ButtonSet.prototype.defaultButton_ = null;
+
+
+/**
+ * Optional container the button set should be rendered into.
+ * @type {Element}
+ * @private
+ */
+goog.ui.Dialog.ButtonSet.prototype.element_ = null;
+
+
+/**
+ * The button whose action is associated with the escape key and the X button
+ * on the dialog.
+ * @type {?string}
+ * @private
+ */
+goog.ui.Dialog.ButtonSet.prototype.cancelButton_ = null;
+
+
+/**
+ * Adds a button to the button set.  Buttons will be displayed in the order they
+ * are added.
+ *
+ * @param {string} key Key used to identify the button in events.
+ * @param {string|Element} caption A string caption or a DOM node that can be
+ *     appended to a button element.
+ * @param {boolean=} opt_isDefault Whether this button is the default button,
+ *     Dialog will dispatch for this button if enter is pressed.
+ * @param {boolean=} opt_isCancel Whether this button has the same behaviour as
+ *    cancel.  If escape is pressed this button will fire.
+ * @return {!goog.ui.Dialog.ButtonSet} The button set, to make it easy to chain
+ *    "set" calls and build new ButtonSets.
+ */
+goog.ui.Dialog.ButtonSet.prototype.set = function(key, caption,
+    opt_isDefault, opt_isCancel) {
+  goog.structs.Map.prototype.set.call(this, key, caption);
+
+  if (opt_isDefault) {
+    this.defaultButton_ = key;
+  }
+  if (opt_isCancel) {
+    this.cancelButton_ = key;
+  }
+
+  return this;
+};
+
+
+/**
+ * Adds a button (an object with a key and caption) to this button set. Buttons
+ * will be displayed in the order they are added.
+ * @see goog.ui.Dialog.DefaultButtons
+ * @param {!{key: string, caption: string}} button The button key and caption.
+ * @param {boolean=} opt_isDefault Whether this button is the default button.
+ *     Dialog will dispatch for this button if enter is pressed.
+ * @param {boolean=} opt_isCancel Whether this button has the same behavior as
+ *     cancel. If escape is pressed this button will fire.
+ * @return {!goog.ui.Dialog.ButtonSet} The button set, to make it easy to chain
+ *     "addButton" calls and build new ButtonSets.
+ */
+goog.ui.Dialog.ButtonSet.prototype.addButton = function(button, opt_isDefault,
+    opt_isCancel) {
+  return this.set(button.key, button.caption, opt_isDefault, opt_isCancel);
+};
+
+
+/**
+ * Attaches the button set to an element, rendering it inside.
+ * @param {Element} el Container.
+ */
+goog.ui.Dialog.ButtonSet.prototype.attachToElement = function(el) {
+  this.element_ = el;
+  this.render();
+};
+
+
+/**
+ * Renders the button set inside its container element.
+ */
+goog.ui.Dialog.ButtonSet.prototype.render = function() {
+  if (this.element_) {
+    this.element_.innerHTML = '';
+    var domHelper = goog.dom.getDomHelper(this.element_);
+    goog.structs.forEach(this, function(caption, key) {
+      var button = domHelper.createDom('button', {'name': key}, caption);
+      if (key == this.defaultButton_) {
+        button.className = goog.getCssName(this.class_, 'default');
+      }
+      this.element_.appendChild(button);
+    }, this);
+  }
+};
+
+
+/**
+ * Decorates the given element by adding any {@code button} elements found
+ * among its descendants to the button set.  The first button found is assumed
+ * to be the default and will receive focus when the button set is rendered.
+ * If a button with a name of {@link goog.ui.Dialog.DefaultButtonKeys.CANCEL}
+ * is found, it is assumed to have "Cancel" semantics.
+ * TODO(user):  ButtonSet should be a goog.ui.Component.  Really.
+ * @param {Element} element The element to decorate; should contain buttons.
+ */
+goog.ui.Dialog.ButtonSet.prototype.decorate = function(element) {
+  if (!element || element.nodeType != goog.dom.NodeType.ELEMENT) {
+    return;
+  }
+
+  this.element_ = element;
+  var buttons = this.element_.getElementsByTagName('button');
+  for (var i = 0, button, key, caption; button = buttons[i]; i++) {
+    // Buttons should have a "name" attribute and have their caption defined by
+    // their innerHTML, but not everyone knows this, and we should play nice.
+    key = button.name || button.id;
+    caption = goog.dom.getTextContent(button) || button.value;
+    if (key) {
+      var isDefault = i == 0;
+      var isCancel = button.name == goog.ui.Dialog.DefaultButtonKeys.CANCEL;
+      this.set(key, caption, isDefault, isCancel);
+      if (isDefault) {
+        goog.dom.classes.add(button, goog.getCssName(this.class_,
+            'default'));
+      }
+    }
+  }
+};
+
+
+/**
+ * Gets the component's element.
+ * @return {Element} The element for the component.
+ * TODO(user): Remove after refactoring to goog.ui.Component.
+ */
+goog.ui.Dialog.ButtonSet.prototype.getElement = function() {
+  return this.element_;
+};
+
+
+/**
+ * Returns the dom helper that is being used on this component.
+ * @return {!goog.dom.DomHelper} The dom helper used on this component.
+ * TODO(user): Remove after refactoring to goog.ui.Component.
+ */
+goog.ui.Dialog.ButtonSet.prototype.getDomHelper = function() {
+  return this.dom_;
+};
+
+
+/**
+ * Sets the default button.
+ * @param {?string} key The default button.
+ */
+goog.ui.Dialog.ButtonSet.prototype.setDefault = function(key) {
+  this.defaultButton_ = key;
+};
+
+
+/**
+ * Returns the default button.
+ * @return {?string} The default button.
+ */
+goog.ui.Dialog.ButtonSet.prototype.getDefault = function() {
+  return this.defaultButton_;
+};
+
+
+/**
+ * Sets the cancel button.
+ * @param {?string} key The cancel button.
+ */
+goog.ui.Dialog.ButtonSet.prototype.setCancel = function(key) {
+  this.cancelButton_ = key;
+};
+
+
+/**
+ * Returns the cancel button.
+ * @return {?string} The cancel button.
+ */
+goog.ui.Dialog.ButtonSet.prototype.getCancel = function() {
+  return this.cancelButton_;
+};
+
+
+/**
+ * Returns the HTML Button element.
+ * @param {string} key The button to return.
+ * @return {Element} The button, if found else null.
+ */
+goog.ui.Dialog.ButtonSet.prototype.getButton = function(key) {
+  var buttons = this.getAllButtons();
+  for (var i = 0, nextButton; nextButton = buttons[i]; i++) {
+    if (nextButton.name == key || nextButton.id == key) {
+      return nextButton;
+    }
+  }
+  return null;
+};
+
+
+/**
+ * Returns all the HTML Button elements in the button set container.
+ * @return {NodeList} A live NodeList of the buttons.
+ */
+goog.ui.Dialog.ButtonSet.prototype.getAllButtons = function() {
+  return this.element_.getElementsByTagName(goog.dom.TagName.BUTTON);
+};
+
+
+/**
+ * Enables or disables a button in this set by key. If the button is not found,
+ * does nothing.
+ * @param {string} key The button to enable or disable.
+ * @param {boolean} enabled True to enable; false to disable.
+ */
+goog.ui.Dialog.ButtonSet.prototype.setButtonEnabled = function(key, enabled) {
+  var button = this.getButton(key);
+  if (button) {
+    button.disabled = !enabled;
+  }
+};
+
+
+/**
+ * Enables or disables all of the buttons in this set.
+ * @param {boolean} enabled True to enable; false to disable.
+ */
+goog.ui.Dialog.ButtonSet.prototype.setAllButtonsEnabled = function(enabled) {
+  var allButtons = this.getAllButtons();
+  for (var i = 0, button; button = allButtons[i]; i++) {
+    button.disabled = !enabled;
+  }
+};
+
+
+/**
+ * The keys used to identify standard buttons in events.
+ * @enum {string}
+ */
+goog.ui.Dialog.DefaultButtonKeys = {
+  OK: 'ok',
+  CANCEL: 'cancel',
+  YES: 'yes',
+  NO: 'no',
+  SAVE: 'save',
+  CONTINUE: 'continue'
+};
+
+
+/**
+ * @desc Standard caption for the dialog 'OK' button.
+ * @private
+ */
+goog.ui.Dialog.MSG_DIALOG_OK_ = goog.getMsg('OK');
+
+
+/**
+ * @desc Standard caption for the dialog 'Cancel' button.
+ * @private
+ */
+goog.ui.Dialog.MSG_DIALOG_CANCEL_ = goog.getMsg('Cancel');
+
+
+/**
+ * @desc Standard caption for the dialog 'Yes' button.
+ * @private
+ */
+goog.ui.Dialog.MSG_DIALOG_YES_ = goog.getMsg('Yes');
+
+
+/**
+ * @desc Standard caption for the dialog 'No' button.
+ * @private
+ */
+goog.ui.Dialog.MSG_DIALOG_NO_ = goog.getMsg('No');
+
+
+/**
+ * @desc Standard caption for the dialog 'Save' button.
+ * @private
+ */
+goog.ui.Dialog.MSG_DIALOG_SAVE_ = goog.getMsg('Save');
+
+
+/**
+ * @desc Standard caption for the dialog 'Continue' button.
+ * @private
+ */
+goog.ui.Dialog.MSG_DIALOG_CONTINUE_ = goog.getMsg('Continue');
+
+
+/**
+ * The default captions for the default buttons.
+ * @enum {string}
+ */
+goog.ui.Dialog.DefaultButtonCaptions = {
+  OK: goog.ui.Dialog.MSG_DIALOG_OK_,
+  CANCEL: goog.ui.Dialog.MSG_DIALOG_CANCEL_,
+  YES: goog.ui.Dialog.MSG_DIALOG_YES_,
+  NO: goog.ui.Dialog.MSG_DIALOG_NO_,
+  SAVE: goog.ui.Dialog.MSG_DIALOG_SAVE_,
+  CONTINUE: goog.ui.Dialog.MSG_DIALOG_CONTINUE_
+};
+
+
+/**
+ * The standard buttons (keys associated with captions).
+ * @enum {!{key: string, caption: string}}
+ */
+goog.ui.Dialog.ButtonSet.DefaultButtons = {
+  OK: {
+    key: goog.ui.Dialog.DefaultButtonKeys.OK,
+    caption: goog.ui.Dialog.DefaultButtonCaptions.OK
+  },
+  CANCEL: {
+    key: goog.ui.Dialog.DefaultButtonKeys.CANCEL,
+    caption: goog.ui.Dialog.DefaultButtonCaptions.CANCEL
+  },
+  YES: {
+    key: goog.ui.Dialog.DefaultButtonKeys.YES,
+    caption: goog.ui.Dialog.DefaultButtonCaptions.YES
+  },
+  NO: {
+    key: goog.ui.Dialog.DefaultButtonKeys.NO,
+    caption: goog.ui.Dialog.DefaultButtonCaptions.NO
+  },
+  SAVE: {
+    key: goog.ui.Dialog.DefaultButtonKeys.SAVE,
+    caption: goog.ui.Dialog.DefaultButtonCaptions.SAVE
+  },
+  CONTINUE: {
+    key: goog.ui.Dialog.DefaultButtonKeys.CONTINUE,
+    caption: goog.ui.Dialog.DefaultButtonCaptions.CONTINUE
+  }
+};
+
+
+/**
+ * Creates a new ButtonSet with a single 'OK' button, which is also set with
+ * cancel button semantics so that pressing escape will close the dialog.
+ * @return {!goog.ui.Dialog.ButtonSet} The created ButtonSet.
+ */
+goog.ui.Dialog.ButtonSet.createOk = function() {
+  return new goog.ui.Dialog.ButtonSet().
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.OK, true, true);
+};
+
+
+/**
+ * Creates a new ButtonSet with 'OK' (default) and 'Cancel' buttons.
+ * @return {!goog.ui.Dialog.ButtonSet} The created ButtonSet.
+ */
+goog.ui.Dialog.ButtonSet.createOkCancel = function() {
+  return new goog.ui.Dialog.ButtonSet().
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.OK, true).
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.CANCEL, false, true);
+};
+
+
+/**
+ * Creates a new ButtonSet with 'Yes' (default) and 'No' buttons.
+ * @return {!goog.ui.Dialog.ButtonSet} The created ButtonSet.
+ */
+goog.ui.Dialog.ButtonSet.createYesNo = function() {
+  return new goog.ui.Dialog.ButtonSet().
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.YES, true).
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.NO, false, true);
+};
+
+
+/**
+ * Creates a new ButtonSet with 'Yes', 'No' (default), and 'Cancel' buttons.
+ * @return {!goog.ui.Dialog.ButtonSet} The created ButtonSet.
+ */
+goog.ui.Dialog.ButtonSet.createYesNoCancel = function() {
+  return new goog.ui.Dialog.ButtonSet().
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.YES).
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.NO, true).
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.CANCEL, false, true);
+};
+
+
+/**
+ * Creates a new ButtonSet with 'Continue', 'Save', and 'Cancel' (default)
+ * buttons.
+ * @return {!goog.ui.Dialog.ButtonSet} The created ButtonSet.
+ */
+goog.ui.Dialog.ButtonSet.createContinueSaveCancel = function() {
+  return new goog.ui.Dialog.ButtonSet().
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.CONTINUE).
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.SAVE).
+      addButton(goog.ui.Dialog.ButtonSet.DefaultButtons.CANCEL, true, true);
+};
+
+
+// TODO(user): These shared instances should be phased out.
+(function() {
+  if (typeof document != 'undefined') {
+    /** @deprecated Use goog.ui.Dialog.ButtonSet#createOk. */
+    goog.ui.Dialog.ButtonSet.OK = goog.ui.Dialog.ButtonSet.createOk();
+
+    /** @deprecated Use goog.ui.Dialog.ButtonSet#createOkCancel. */
+    goog.ui.Dialog.ButtonSet.OK_CANCEL =
+        goog.ui.Dialog.ButtonSet.createOkCancel();
+
+    /** @deprecated Use goog.ui.Dialog.ButtonSet#createYesNo. */
+    goog.ui.Dialog.ButtonSet.YES_NO = goog.ui.Dialog.ButtonSet.createYesNo();
+
+    /** @deprecated Use goog.ui.Dialog.ButtonSet#createYesNoCancel. */
+    goog.ui.Dialog.ButtonSet.YES_NO_CANCEL =
+        goog.ui.Dialog.ButtonSet.createYesNoCancel();
+
+    /** @deprecated Use goog.ui.Dialog.ButtonSet#createContinueSaveCancel. */
+    goog.ui.Dialog.ButtonSet.CONTINUE_SAVE_CANCEL =
+        goog.ui.Dialog.ButtonSet.createContinueSaveCancel();
+  }
+})();
+
+// Input 65
 goog.require('goog.events.EventType');
 goog.require('goog.events');
 goog.require('goog.net.XhrLite');
+goog.require('goog.ui.Dialog');
 
 function Draw(element) {
 	"use strict";
@@ -16288,7 +28276,11 @@ function main() {
 	goog.events.listen(canvas, goog.events.EventType.MOUSEOUT, draw.mouseUp, true, draw);
 
 	goog.events.listen(document.getElementById("help"), goog.events.EventType.CLICK, function () {
-		$('#help span').dialog();
+		var d = new goog.ui.Dialog();
+		d.setTitle('Draw!');
+		d.setContent('<strong>Draw!</strong> is HTML5 application which gives you the ability to share your drawing skills with the world. Whatever your draw on the screen is in realtime displayed in browsers of all other connected users.');
+		d.setButtonSet(goog.ui.Dialog.ButtonSet.OK);
+		d.setVisible(true);
 	}, true, this);
 
 	goog.net.XhrLite.send("./config.json", function (event) {

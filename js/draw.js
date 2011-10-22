@@ -1,6 +1,7 @@
 goog.require('goog.events.EventType');
 goog.require('goog.events');
 goog.require('goog.net.XhrLite');
+goog.require('goog.ui.Dialog');
 
 function Draw(element) {
 	"use strict";
@@ -116,7 +117,11 @@ function main() {
 	goog.events.listen(canvas, goog.events.EventType.MOUSEOUT, draw.mouseUp, true, draw);
 
 	goog.events.listen(document.getElementById("help"), goog.events.EventType.CLICK, function () {
-		$('#help span').dialog();
+		var d = new goog.ui.Dialog();
+		d.setTitle('Draw!');
+		d.setContent('<strong>Draw!</strong> is HTML5 application which gives you the ability to share your drawing skills with the world. Whatever your draw on the screen is in realtime displayed in browsers of all other connected users.');
+		d.setButtonSet(goog.ui.Dialog.ButtonSet.OK);
+		d.setVisible(true);
 	}, true, this);
 
 	goog.net.XhrLite.send("./config.json", function (event) {

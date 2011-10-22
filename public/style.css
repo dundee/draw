@@ -48,3 +48,7 @@ a {
 #help span {
 	display: none;
 }
+
+.modal-dialog {
+	width: 430px;
+}
