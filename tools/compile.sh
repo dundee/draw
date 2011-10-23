@@ -4,13 +4,17 @@ BASE_PATH=~/workspace/js/closure
 CALCDEPS_PATH=$BASE_PATH/closure-library/closure/bin/  #directory containing calcdeps.py
 JAR_PATH=$BASE_PATH                                    #directory containing compiler.jar
 CLOSURE_PATH=$BASE_PATH/closure-library                #path to closure-library
-#COMPILER_FLAGS='--compiler_flags --compilation_level=ADVANCED_OPTIMIZATIONS'
-COMPILE=0
+COMPILER_FLAGS='--compiler_flags --compilation_level=ADVANCED_OPTIMIZATIONS'
+COMPILE=1
 
 if [ -z $1 ]; then
 	echo "Usage:" $0 "file.js"
 	exit 1
 fi
+
+EXTERNS=$1
+COMPILER_FLAGS="$COMPILER_FLAGS --compiler_flags --externs=$EXTERNS"
+shift
 
 INPUTS=""
 for IN in $@; do

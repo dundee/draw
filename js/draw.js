@@ -130,3 +130,5 @@ function main() {
 		draw.setSocket(socket);
 	});
 };
+
+window['main'] = main;
