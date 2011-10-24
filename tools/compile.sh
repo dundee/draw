@@ -12,6 +12,9 @@ if [ -z $1 ]; then
 	exit 1
 fi
 
+OUTPUT=$1
+shift
+
 EXTERNS=$1
 COMPILER_FLAGS="$COMPILER_FLAGS --compiler_flags --externs=$EXTERNS"
 shift
@@ -25,8 +28,8 @@ if [ $COMPILE -eq 1 ]; then
 	$CALCDEPS_PATH/calcdeps.py $INPUTS \
 		-p $CLOSURE_PATH -o compiled \
 		$COMPILER_FLAGS \
-		-c $JAR_PATH/compiler.jar > compiled-$1
+		-c $JAR_PATH/compiler.jar > $OUTPUT
 else
 	$CALCDEPS_PATH/calcdeps.py $INPUTS \
-		-p $CLOSURE_PATH -o script > compiled-$1
+		-p $CLOSURE_PATH -o script > $OUTPUT
 fi

@@ -1,7 +1,4 @@
-goog.require('goog.events.EventType');
-goog.require('goog.events');
-goog.require('goog.net.XhrLite');
-goog.require('goog.ui.Dialog');
+goog.provide('draw.draw');
 
 function Draw(element) {
 	"use strict";
@@ -11,8 +8,6 @@ function Draw(element) {
 	self.socket = false;
 	self.isDown = false;
 	self.line = [];
-
-	self.init();
 }
 
 Draw.prototype.init = function () {
@@ -105,30 +100,3 @@ Draw.prototype.mouseUp = function (event) {
 	self.line = [];
 	self.lastPoint = {};
 };
-
-function main() {
-	"use strict";
-	var canvas = document.getElementById("canvas");
-	var draw = new Draw(canvas);
-
-	goog.events.listen(canvas, goog.events.EventType.MOUSEDOWN, draw.mouseDown, true, draw);
-	goog.events.listen(canvas, goog.events.EventType.MOUSEMOVE, draw.mouseMove, true, draw);
-	goog.events.listen(canvas, goog.events.EventType.MOUSEUP, draw.mouseUp, true, draw);
-	goog.events.listen(canvas, goog.events.EventType.MOUSEOUT, draw.mouseUp, true, draw);
-
-	goog.events.listen(document.getElementById("help"), goog.events.EventType.CLICK, function () {
-		var d = new goog.ui.Dialog();
-		d.setTitle('Draw!');
-		d.setContent('<strong>Draw!</strong> is HTML5 application which gives you the ability to share your drawing skills with the world. Whatever your draw on the screen is in realtime displayed in browsers of all other connected users.');
-		d.setButtonSet(goog.ui.Dialog.ButtonSet.OK);
-		d.setVisible(true);
-	}, true, this);
-
-	goog.net.XhrLite.send("./config.json", function (event) {
-		var config = event.target.getResponseJson();
-		var socket = io.connect("http://" + window.location.hostname + ':' + config.port);
-		draw.setSocket(socket);
-	});
-};
-
-window['main'] = main;
