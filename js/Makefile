@@ -1,7 +1,12 @@
 COMPILE=../tools/compile.sh
 
+SOURCES=toolbox.js draw.js main.js
+
 build: compiled-draw.js
 	@cp compiled-draw.js ../public/
 
-compiled-draw.js: externs.js toolbox.js draw.js main.js
+compiled-draw.js: externs.js ${SOURCES}
 	${COMPILE} $@ $^
+
+run-linter: ${SOURCES}
+	gjslint ${SOURCES} | grep -v "Illegal tab"
