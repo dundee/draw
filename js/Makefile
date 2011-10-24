@@ -3,7 +3,7 @@ COMPILE=../tools/compile.sh
 SOURCES=toolbox.js socket-storage.js canvas.js main.js
 
 build: compiled-draw.js
-	@cp compiled-draw.js ../public/
+	@cp compiled-draw.js ../public/js
 
 compiled-draw.js: externs.js ${SOURCES}
 	${COMPILE} $@ $^
