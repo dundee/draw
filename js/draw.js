@@ -1,5 +1,8 @@
 goog.provide('draw.draw');
 
+/**
+ * @constructor
+ */
 function Draw(element) {
 	"use strict";
 	var self = this;

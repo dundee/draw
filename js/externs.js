@@ -1,6 +1,7 @@
 var io;
 var socket;
-io.connect = function(){};
+var url;
+io.connect = function(url){};
 socket.on = function(){};
 socket.emit = function(){};
 var data;

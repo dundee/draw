@@ -4,7 +4,10 @@ BASE_PATH=~/workspace/js/closure
 CALCDEPS_PATH=$BASE_PATH/closure-library/closure/bin/  #directory containing calcdeps.py
 JAR_PATH=$BASE_PATH                                    #directory containing compiler.jar
 CLOSURE_PATH=$BASE_PATH/closure-library                #path to closure-library
-COMPILER_FLAGS='--compiler_flags --compilation_level=ADVANCED_OPTIMIZATIONS'
+COMPILER_FLAGS="--compiler_flags --compilation_level=ADVANCED_OPTIMIZATIONS"
+COMPILER_FLAGS="$COMPILER_FLAGS --compiler_flags --warning_level=VERBOSE"
+COMPILER_FLAGS="$COMPILER_FLAGS --compiler_flags --manage_closure_dependencies"
+COMPILER_FLAGS="$COMPILER_FLAGS --compiler_flags --closure_entry_point=draw.main"
 COMPILE=1
 
 if [ -z $1 ]; then
