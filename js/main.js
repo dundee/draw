@@ -13,11 +13,11 @@ goog.require('goog.ui.Dialog');
 
 function main() {
 	var canvasElement = document.getElementById('canvas');
-	var canvas = new Canvas(canvasElement);
+	var canvas = new draw.Canvas(canvasElement);
 	canvas.init();
 
-	var colorPicker = new ColorPicker(canvas);
-	var toolbox = new Toolbox(colorPicker);
+	var colorPicker = new draw.ColorPicker(canvas);
+	var toolbox = new draw.Toolbox(colorPicker);
 	toolbox.render(document.getElementById('toolbox'));
 
 	goog.events.listen(canvasElement, goog.events.EventType.MOUSEDOWN, canvas.mouseDown, true, canvas);
@@ -37,7 +37,7 @@ function main() {
 	goog.net.XhrIo.send('./config.json', function(event) {
 		var config = event.target.getResponseJson();
 		var socket = io.connect('http://' + window.location.hostname + ':' + config.port);
-		var storage = new SocketStorage(socket);
+		var storage = new draw.SocketStorage(socket);
 		canvas.setStorage(storage);
 	});
 }

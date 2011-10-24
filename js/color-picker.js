@@ -4,19 +4,19 @@ goog.provide('draw.colorpicker');
 
 /**
  * @constructor
- * @param {Canvas} canvas Canvas instance.
+ * @param {draw.Canvas} canvas Canvas instance.
  */
-function ColorPicker(canvas) {
+draw.ColorPicker = function(canvas) {
 	var self = this;
 
 	self.canvas = canvas;
-}
+};
 
 /**
  * Render toolbox
  * @param {Element} element Element to render the toolbox into.
  */
-ColorPicker.prototype.render = function(element) {
+draw.ColorPicker.prototype.render = function(element) {
 	var self = this;
 	self.cp = new goog.ui.ColorPicker();
 	self.cp.setSize(7);

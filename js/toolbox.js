@@ -2,19 +2,19 @@ goog.provide('draw.toolbox');
 
 /**
  * @constructor
- * @param {ColorPicker} colorPicker ColorPicker instance.
+ * @param {draw.ColorPicker} colorPicker ColorPicker instance.
  */
-function Toolbox(colorPicker) {
+draw.Toolbox = function(colorPicker) {
 	var self = this;
 
 	self.colorPicker = colorPicker;
-}
+};
 
 /**
  * Render toolbox
  * @param {Element} element Element to render the toolbox into.
  */
-Toolbox.prototype.render = function(element) {
+draw.Toolbox.prototype.render = function(element) {
 	var self = this;
 
 	self.colorPicker.render(element);
