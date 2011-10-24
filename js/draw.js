@@ -2,9 +2,9 @@ goog.provide('draw.draw');
 
 /**
  * @constructor
+ * @param {Element} element to render the canvas into.
  */
 function Draw(element) {
-	"use strict";
 	var self = this;
 
 	self.element = element;
@@ -13,50 +13,62 @@ function Draw(element) {
 	self.line = [];
 }
 
-Draw.prototype.init = function () {
-	"use strict";
+/**
+ * inits canvas
+ */
+Draw.prototype.init = function() {
 	var self = this;
 
-	self.ctx = self.element.getContext("2d");
-	self.ctx.canvas.width  = window.innerWidth;
+	self.ctx = self.element.getContext('2d');
+	self.ctx.canvas.width = window.innerWidth;
 	self.ctx.canvas.height = window.innerHeight;
 	self.lastPoint = {};
 };
 
-Draw.prototype.getX = function (event) {
-	"use strict";
+/**
+ * @param {goog.events.BrowserEvent} event Event.
+ * @return {number} X-coordinate.
+ */
+Draw.prototype.getX = function(event) {
 	var self = this;
 
 	return event.offsetX;
 };
 
-Draw.prototype.getY = function (event) {
-	"use strict";
+/**
+ * @param {goog.events.BrowserEvent} event Event.
+ * @return {number} Y-coordinate.
+ */
+Draw.prototype.getY = function(event) {
 	var self = this;
 
 	return event.offsetY;
 };
 
-Draw.prototype.setSocket = function (socket) {
-	"use strict";
+/**
+ * @param {Object} socket Socket instance.
+ */
+Draw.prototype.setSocket = function(socket) {
 	var self = this;
 
 	self.socket = socket;
 
-	self.socket.on('add', function (data) {
-		data.lines.forEach(function (line) {
+	self.socket.on('add', function(data) {
+		data.lines.forEach(function(line) {
 			self.ctx.beginPath();
-			line.points.forEach(function (item) {
+			line.points.forEach(function(item) {
 				self.ctx.lineTo(item.x, item.y);
 			});
-			self.ctx.strokeStyle = "#555";
+			self.ctx.strokeStyle = '#555';
 			self.ctx.stroke();
 		});
 	});
 };
 
-Draw.prototype.mouseDown = function (event) {
-	"use strict";
+/**
+ * @param {goog.events.BrowserEvent} event Event.
+ */
+Draw.prototype.mouseDown = function(event) {
 	var self = this, x, y;
 
 	self.isDown = true;
@@ -69,8 +81,10 @@ Draw.prototype.mouseDown = function (event) {
 	self.line = [{x: x, y: y}];
 };
 
-Draw.prototype.mouseMove = function (event) {
-	"use strict";
+/**
+ * @param {goog.events.BrowserEvent} event Event.
+ */
+Draw.prototype.mouseMove = function(event) {
 	var self = this, x, y;
 
 	if (!self.isDown) {
@@ -83,7 +97,7 @@ Draw.prototype.mouseMove = function (event) {
 	self.ctx.beginPath();
 	self.ctx.moveTo(self.lastPoint.x, self.lastPoint.y);
 	self.ctx.lineTo(x, y);
-	self.ctx.strokeStyle = "#000";
+	self.ctx.strokeStyle = '#000';
 	self.ctx.stroke();
 
 	self.lastPoint = {x: x, y: y};
@@ -91,8 +105,10 @@ Draw.prototype.mouseMove = function (event) {
 	self.line.push({x: x, y: y});
 };
 
-Draw.prototype.mouseUp = function (event) {
-	"use strict";
+/**
+ * @param {goog.events.BrowserEvent} event Event.
+ */
+Draw.prototype.mouseUp = function(event) {
 	var self = this;
 
 	if (self.line.length && self.socket) {
