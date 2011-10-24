@@ -1,6 +1,6 @@
 COMPILE=../tools/compile.sh
 
-SOURCES=toolbox.js socket-storage.js canvas.js main.js
+SOURCES=toolbox.js socket-storage.js color-picker.js canvas.js main.js
 
 build: compiled-draw.js
 	@cp compiled-draw.js ../public/js

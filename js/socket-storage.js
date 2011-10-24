@@ -13,11 +13,12 @@ function SocketStorage(socket) {
 /**
  * Add line to storage
  * @param {Object} line Line.
+ * @param {string} color Color of line.
  */
-SocketStorage.prototype.add = function(line) {
+SocketStorage.prototype.add = function(line, color) {
 	var self = this;
 
-	self.socket.emit('add', {lines: [{points: line}]});
+	self.socket.emit('add', {lines: [{points: line, color: color}]});
 };
 
 /**

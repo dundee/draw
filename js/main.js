@@ -1,6 +1,7 @@
 goog.provide('draw.main');
 
 goog.require('draw.canvas');
+goog.require('draw.colorpicker');
 goog.require('draw.storage.socket');
 goog.require('draw.toolbox');
 goog.require('goog.Uri');
@@ -15,7 +16,8 @@ function main() {
 	var canvas = new Canvas(canvasElement);
 	canvas.init();
 
-	var toolbox = new Toolbox();
+	var colorPicker = new ColorPicker(canvas);
+	var toolbox = new Toolbox(colorPicker);
 	toolbox.render(document.getElementById('toolbox'));
 
 	goog.events.listen(canvasElement, goog.events.EventType.MOUSEDOWN, canvas.mouseDown, true, canvas);

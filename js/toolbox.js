@@ -1,12 +1,13 @@
-goog.require('goog.ui.ColorPicker');
-
 goog.provide('draw.toolbox');
 
 /**
  * @constructor
+ * @param {ColorPicker} colorPicker ColorPicker instance.
  */
-function Toolbox() {
+function Toolbox(colorPicker) {
 	var self = this;
+
+	self.colorPicker = colorPicker;
 }
 
 /**
@@ -15,11 +16,6 @@ function Toolbox() {
  */
 Toolbox.prototype.render = function(element) {
 	var self = this;
-	self.cp = new goog.ui.ColorPicker();
-	self.cp.setSize(7);
-	self.cp.setColors(goog.ui.ColorPicker.SIMPLE_GRID_COLORS);
-	self.cp.addEventListener(goog.ui.ColorPicker.EventType.CHANGE, function(e) {
-		alert(e.target.getSelectedColor());
-	});
-	self.cp.render(element);
+
+	self.colorPicker.render(element);
 };

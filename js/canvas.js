@@ -11,6 +11,7 @@ function Canvas(element) {
 	self.socket = false;
 	self.isDown = false;
 	self.line = [];
+	self.color = '#000';
 }
 
 /**
@@ -23,6 +24,15 @@ Canvas.prototype.init = function() {
 	self.ctx.canvas.width = window.innerWidth;
 	self.ctx.canvas.height = window.innerHeight;
 	self.lastPoint = {};
+};
+
+/**
+ * @param {string} color Color.
+ */
+Canvas.prototype.setColor = function(color) {
+	var self = this;
+
+	this.color = color;
 };
 
 /**
@@ -55,7 +65,7 @@ Canvas.prototype.drawLine = function(line) {
 	line.points.forEach(function(item) {
 		self.ctx.lineTo(item.x, item.y);
 	});
-	self.ctx.strokeStyle = '#555';
+	self.ctx.strokeStyle = line.color;
 	self.ctx.stroke();
 };
 
@@ -106,7 +116,7 @@ Canvas.prototype.mouseMove = function(event) {
 	self.ctx.beginPath();
 	self.ctx.moveTo(self.lastPoint.x, self.lastPoint.y);
 	self.ctx.lineTo(x, y);
-	self.ctx.strokeStyle = '#000';
+	self.ctx.strokeStyle = self.color;
 	self.ctx.stroke();
 
 	self.lastPoint = {x: x, y: y};
@@ -121,7 +131,7 @@ Canvas.prototype.mouseUp = function(event) {
 	var self = this;
 
 	if (self.line.length && self.storage) {
-		self.storage.add(self.line);
+		self.storage.add(self.line, self.color);
 	}
 
 	self.isDown = false;
