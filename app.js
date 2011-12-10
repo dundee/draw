@@ -1,7 +1,7 @@
 "use strict";
 
 var io = require('socket.io').listen(8000);
-var sys = require('sys');
+var sys = require('util');
 var mongodb = require('mongodb');
 
 var collection;
