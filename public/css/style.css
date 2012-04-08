@@ -1,73 +1,21 @@
-body, html {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	font: normal 1em sans-serif;
-}
-
-a {
-	color: #326600;
-	font-weight: bold;
-}
-
-#canvas {
-	cursor: crosshair;
-}
-
-#footer {
-	position: fixed;
-	bottom: 0px;
-	height: 45px;
-	width: 100%;
-	text-align: center;
-	background: #aaa;
-	border-top: 1px dashed #555;
-	padding-top: 5px;
-}
-
-#help {
-	background-color: rgba(0, 255, 0, 0.2);
-	padding: 2px 5px;
-	position: fixed;
-	top: 10px;
-	right: 10px;
-	color: #99000B;
-	font-weight: bold;
-	font-size: 4em;
-	text-align: center;
-	cursor: help;
-	-webkit-box-shadow: 10px 10px 5px #aaa;
-	-moz-box-shadow: 10px 10px 5px #aaa;
-	box-shadow: 5px 5px 5px #aaa;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 15px;
-}
-
-#help span {
-	display: none;
-}
-
-#toolbox {
-	position: absolute;
-	top: 10px;
-	left: 0px;
-	width: 130px;
-	height: 150px;
-	padding: 10px;
-	background: #DDD;
-	-webkit-box-shadow: 10px 10px 5px #aaa;
-	-moz-box-shadow: 10px 10px 5px #aaa;
-	box-shadow: 5px 5px 5px #aaa;
-	-webkit-border-top-right-radius: 5px;
-	-webkit-border-bottom-right-radius: 5px;
-	-moz-border-top-right-radius: 5px;
-	-moz-border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-}
-
-.modal-dialog {
-	width: 430px;
-}
+.goog-palette{outline:none;-moz-outline:none;cursor:default}
+.goog-palette-table{border:1px solid #666;border-collapse:collapse}
+.goog-palette-cell{height:13px;width:15px;margin:0;border:0;text-align:center;vertical-align:middle;border-right:1px solid #666;font-size:1px}
+.goog-palette-colorswatch{position:relative;height:13px;width:15px;border:1px solid #666}
+.goog-palette-cell-hover .goog-palette-colorswatch{border:1px solid #fff}
+.goog-palette-cell-selected .goog-palette-colorswatch{border:1px solid #000;color:#fff}
+.modal-dialog{background:#c1d9ff;border:1px solid #3a5774;color:#000;padding:4px;position:absolute}
+.modal-dialog a,.modal-dialog a:link,.modal-dialog a:visited{color:#06c;cursor:pointer}
+.modal-dialog-bg{background:#666;left:0;position:absolute;top:0}
+.modal-dialog-title{background:#e0edfe;color:#000;cursor:pointer;font-size:120%;font-weight:bold;padding:8px 31px 8px 8px;position:relative;_zoom:1}
+.modal-dialog-title-close{background:#e0edfe url("//ssl.gstatic.com/editor/editortoolbar.png") no-repeat -528px 0;cursor:default;height:15px;position:absolute;right:10px;top:8px;width:15px;vertical-align:middle}
+.modal-dialog-buttons,.modal-dialog-content{background-color:#fff;padding:8px}
+.goog-buttonset-default{font-weight:bold}
+body,html{width:100%;height:100%;margin:0;padding:0;font:normal 1em sans-serif}
+a{color:#326600;font-weight:bold}
+#canvas{cursor:crosshair}
+#footer{position:fixed;bottom:0;height:45px;width:100%;text-align:center;background:#aaa;border-top:1px dashed #555;padding-top:5px}
+#help{background-color:rgba(0,255,0,0.20);padding:2px 5px;position:fixed;top:10px;right:10px;color:#99000b;font-weight:bold;font-size:4em;text-align:center;cursor:help;-webkit-box-shadow:10px 10px 5px #aaa;-moz-box-shadow:10px 10px 5px #aaa;box-shadow:10px 10px 5px #aaa;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px}
+#help span{display:none}
+#toolbox{position:absolute;top:10px;left:0;width:130px;height:150px;padding:10px;background:#ddd;-webkit-box-shadow:10px 10px 5px #aaa;-moz-box-shadow:10px 10px 5px #aaa;box-shadow:10px 10px 5px #aaa;-webkit-border-radius:0 5px 5px 0;-moz-border-radius:0 5px 5px 0;border-radius:0 5px 5px 0}
+.modal-dialog{width:430px}

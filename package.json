@@ -4,6 +4,7 @@
   , "private": true
   , "dependencies": {
       "socket.io": ">= 0.8",
-      "mongodb": ">= 0.9.6"
+      "mongodb": ">= 0.9.6",
+      "stylus": ">= 0.25.0"
   }
 }
