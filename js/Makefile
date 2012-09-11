@@ -10,3 +10,7 @@ compiled-draw.js: externs.js ${SOURCES}
 
 run-linter: ${SOURCES}
 	gjslint ${SOURCES} | grep -v "Illegal tab"
+
+clean:
+	rm compiled-draw.js
+	rm ../public/js/compiled-draw.js
