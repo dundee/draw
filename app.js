@@ -6,7 +6,7 @@ var mongodb = require('mongodb');
 
 var collection;
 
-var server = new mongodb.Server("127.0.0.1", 27017, {});
+var server = new mongodb.Server("127.0.0.1", 27017, {safe:false});
 new mongodb.Db('draw', server, {}).open(function (error, client) {
 	if (error) {
 		throw error;
